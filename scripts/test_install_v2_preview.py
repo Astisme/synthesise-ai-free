@@ -80,7 +80,7 @@ class V2PreviewInstallerTests(unittest.TestCase):
         )
         result = self.run_installer("--package", "synthesise-orchestrator")
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("Duplicate installed skill name", result.stderr)
+        self.assertIn("Duplicate skill identity", result.stderr)
 
     def test_remove_one_package_preserves_legacy_and_other_preview_packages(self):
         self.assertEqual(self.run_installer().returncode, 0)
