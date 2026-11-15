@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from project_brief import ProjectBriefError, parse_project_brief
 from workflow_integrity import validate_product_lifecycle, validate_project_resume
 from security_fixtures import validate_security_suite
+from orchestration_integration import evaluate_integration_suite
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "evaluations/baseline/v1.1.0.json"
@@ -218,6 +219,16 @@ def main():
     except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
         check("product_workflow_integrity", False, str(exc))
 
+    # Validate eight cross-specialist orchestration contracts. These are deterministic
+    # state/handoff fixtures, not live agent executions.
+    try:
+        integration = load_json(ROOT / "evaluations/integration/orchestration-scenarios.json")
+        integration_results = evaluate_integration_suite(integration)
+        check("modular_orchestration_integration", bool(integration_results) and all(item["passed"] for item in integration_results),
+              integration_results or "No orchestration integration scenarios found")
+    except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
+        check("modular_orchestration_integration", False, str(exc))
+
     # Check adversarial documents as untrusted data and enforce source-provenance contracts.
     try:
         security_suite = load_json(ROOT / "evaluations/security/security-cases.json")
@@ -238,7 +249,7 @@ def main():
 
     report = {
         "evaluation_version": "1.0.0",
-        "evaluation_type": "deterministic-fixture-baseline-and-markdown-briefs",
+        "evaluation_type": "deterministic-fixture-baseline-specialist-and-orchestration-contracts",
         "api_calls_made": False,
         "live_agent_behaviour_tested": False,
         "skill_version": baseline.get("skill_version", "unknown"),
