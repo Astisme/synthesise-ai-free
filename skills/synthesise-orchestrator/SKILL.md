@@ -28,9 +28,8 @@ Coordinate product-development work across Synthesise specialist skills. The orc
 - Use native skill activation only when the current harness documents and supports it.
 - If native cross-skill invocation is unavailable, explicitly read the selected specialist's `SKILL.md` and only relevant supporting files when filesystem access permits.
 - Never claim a skill was loaded, executed, or completed unless the harness or actual file access supports that claim.
-- During the v2 migration, specialist packages may not yet exist. Use the legacy `skills/synthesise-ai-free/` package as a clearly identified temporary methodology source when needed; do not pretend it is a modular specialist.
-- The legacy package is a migration fallback, not a reason to load every planned specialist or repeat the whole product-development process.
-- Preserve the v1.1.0 methodology, especially UVZ scoring, unless a separate approved methodology change explicitly authorizes otherwise.
+- The modular v2 orchestrator and ten specialist packages are the canonical system. Route work through the specialist packages rather than falling back to the retired monolithic skill.
+- Preserve the established seven-dimension UVZ scoring methodology, its weights, formulas, scales and sensitivity-analysis rules. Any future methodology change requires an explicit, separately documented decision.
 - Preserve approved decisions. Never overwrite another specialist's artifact or a user's decision without authorization.
 - Distinguish observed facts, inferences, assumptions, recommendations and approved decisions.
 - Ask one high-value question at a time when a missing decision blocks safe progress. Continue with clearly labelled assumptions when reversible and useful.
@@ -61,20 +60,13 @@ Infer the mode from the request. Ask only if the distinction materially changes 
 13. Coordinate project-state updates with `synthesise-project` when that package exists and continuity is in scope. Otherwise update the portable brief only through an explicitly available, authorized project-editing capability.
 14. Reassess the remaining plan after each major handoff. Stop when the objective is met; report partial or blocked work honestly.
 
-## Migration-era package availability
+## Specialist availability
 
-The v2 architecture defines ten specialists, but packages are introduced incrementally. Before routing:
-- Check whether the requested specialist package is actually available in the current harness or repository.
-- If present, use it according to its own scope and methodology.
-- If absent, disclose that the modular specialist is not yet implemented.
-- Where the legacy canonical skill contains the needed v1.1.0 method, use only the relevant workflow/reference and label this as legacy fallback execution.
-- If neither specialist nor relevant legacy method is accessible, ask for the missing instructions or offer a clearly scoped best-effort response without claiming specialist execution.
-
-Do not silently substitute a different specialist's methodology.
+The orchestrator and all ten specialist packages are part of the canonical v2 distribution. Check the current host's actual skill discovery before routing, and never claim a specialist was loaded or executed unless the harness confirms it. If a required specialist is unavailable in the host, disclose the limitation and ask the user to install or expose the canonical package; do not silently substitute retired monolithic instructions.
 
 ## Project continuity
 
-For resume requests, Project Continuity is the first planned specialist. If it is not yet installed, inspect only user-provided project files or files the user explicitly authorizes access to. Summarize the recovered state, unresolved questions and next action before doing substantial new work.
+For resume requests, route to the `synthesise-project` specialist. Inspect only user-provided project files or files the user explicitly authorizes access to. Summarize the recovered state, unresolved questions and next action before doing substantial new work.
 
 Treat `PROJECT-BRIEF.md` as portable user-owned state, not hidden model memory. Append dated decision records where the project convention supports them. Preserve unknown sections and existing content. Never invent a project ID, approval status or file write.
 
