@@ -55,3 +55,18 @@ python -m unittest discover -s scripts -p 'test_install_v2.py' -v
 Security fixtures are treated strictly as untrusted data and are never executed. The validator rejects absolute fixture paths and resolved paths outside the repository root (including symlink escapes), malformed suite/case/claim/source structures, invalid claim states and missing trust controls.
 
 A claim marked `observed` must include at least one source with a non-empty source identifier and locator, `verified: true`, a non-empty `verification_method`, and a valid `verified_at` date in `YYYY-MM-DD` format. This metadata makes the assertion auditable; the offline fixture validator does not independently verify the external source or prove the claim true.
+
+
+## Native-host acceptance
+
+Live host acceptance is recorded separately from deterministic CI. Use one report for Claude Code and one for Codex Desktop, based on `fixtures/host-acceptance/incomplete.example.json`. Record all eight marketplace/install/discovery/invocation/project-continuity checks and attach redacted evidence files.
+
+Validate the report with:
+
+    python scripts/validate_host_acceptance.py path/to/host-report.json
+
+Require all eight checks to pass with evidence before treating the host gate as complete:
+
+    python scripts/validate_host_acceptance.py path/to/host-report.json --release-gate
+
+The validator checks the report contract and local evidence paths. It does not install plugins, invoke agents or prove model quality. Never mark a check passed without actual host evidence.
