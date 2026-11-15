@@ -89,13 +89,13 @@ required_files = (
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
     "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py",
-    "scripts/test_ci_contract.py", "scripts/test_specialist_methodologies.py", "scripts/test_evidence_record.py",
+    "scripts/test_ci_contract.py", "scripts/test_specialist_methodologies.py", "scripts/test_evidence_record.py", "scripts/orchestration_integration.py", "scripts/test_orchestration_integration.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
     "evaluations/workflows/invalid/missing-validation-evidence.json",
     "evaluations/workflows/invalid/broken-monetization-handoff.json",
     "evaluations/workflows/invalid/decision-loss-on-resume.json",
-    "evaluations/security/security-cases.json", "evaluations/specialists/methodology-cases.json", "docs/evidence-record.md",
+    "evaluations/security/security-cases.json", "evaluations/specialists/methodology-cases.json", "evaluations/integration/orchestration-scenarios.json", "docs/evidence-record.md",
     "evaluations/security/fixtures/prompt-injection.md",
     "evaluations/security/fixtures/malicious-research-document.md",
     "evaluations/security/fixtures/fabricated-citations.md",
@@ -233,6 +233,27 @@ else:
                 fail("Specialist needs at least two methodology fixtures: " + skill_id)
     except (json.JSONDecodeError, OSError, AttributeError) as exc:
         fail("Invalid specialist methodology fixture: " + str(exc))
+
+# The modular orchestration integration suite is a required alpha release gate.
+integration_fixture = ROOT / "evaluations" / "integration" / "orchestration-scenarios.json"
+if integration_fixture.is_file():
+    try:
+        integration_data = json.loads(integration_fixture.read_text(encoding="utf-8"))
+        integration_cases = integration_data.get("scenarios", [])
+        required_types = {"lifecycle", "parallelism", "evidence", "ownership",
+                          "decision_conflict", "resume", "validation", "launch_readiness"}
+        actual_types = {case.get("type") for case in integration_cases if isinstance(case, dict)}
+        ids = [case.get("id") for case in integration_cases if isinstance(case, dict)]
+        if len(integration_cases) != 8:
+            fail("Orchestration integration suite must contain exactly eight scenarios")
+        if actual_types != required_types:
+            fail("Orchestration integration suite must cover all eight required scenario types")
+        if len(ids) != len(set(ids)) or any(not item for item in ids):
+            fail("Orchestration integration scenario IDs must be unique and non-empty")
+        if integration_data.get("api_calls_made") is not False or integration_data.get("live_agent_behaviour_tested") is not False:
+            fail("Orchestration fixture must disclose deterministic/non-live evaluation scope")
+    except (json.JSONDecodeError, OSError, AttributeError) as exc:
+        fail("Invalid orchestration integration fixture: " + str(exc))
 
 # Catalog identity and canonical output ownership are checked against the actual packages.
 catalog_path = ROOT / "docs" / "skill-catalog.md"
