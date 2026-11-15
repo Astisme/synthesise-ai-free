@@ -45,3 +45,10 @@
 - Harden deterministic scenario validation against malformed JSON, non-object roots, duplicate/empty IDs and invalid contract field types.
 - Add evaluator infrastructure unit tests for valid and malformed scenarios, duplicate IDs, missing baseline inputs and schema type edge cases.
 - Keep the existing dependency-free CI pipeline, JSON/Markdown reports and artifact upload; no methodology or canonical skill files are changed.
+
+## Unreleased — v1.2.5 Installation and update regression tests
+
+- Add automated Bash and PowerShell installer tests for fresh installs, safe refusal to overwrite, forced updates, complete nested skill copies and paths containing spaces.
+- Run the PowerShell installer suite on Windows CI and the Bash installer suite on the existing Ubuntu CI job.
+- Extend structural validation to require the installer regression suite.
+- No new runtime dependencies and no changes to canonical product methodology.
