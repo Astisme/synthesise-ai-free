@@ -21,38 +21,74 @@ The system distinguishes evidence from assumptions. A score is not proof of dema
 
 ## Install
 
-Recommended:
+Choose **one installation route per agent**. Native plugins provide marketplace-based installation and update flows. The standalone Agent Skill route is available for agents that use the Skills CLI. Installing both into the same agent may create duplicate skills.
+
+### Claude Code
 
 ```bash
-npx skills add astisme/synthesise-ai-free
+claude plugin marketplace add Astisme/synthesise-ai-free
+claude plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-Select a harness:
+Update from the plugin manager or refresh the marketplace and reinstall/update the plugin. You can also open `/plugin` to browse and manage it.
+
+### OpenAI Codex
 
 ```bash
-npx skills add astisme/synthesise-ai-free --agent codex
-npx skills add astisme/synthesise-ai-free --agent claude-code
-npx skills add astisme/synthesise-ai-free --agent cursor
-npx skills add astisme/synthesise-ai-free --agent github-copilot
-npx skills add astisme/synthesise-ai-free --agent gemini-cli
-npx skills add astisme/synthesise-ai-free --agent opencode
+codex plugin marketplace add Astisme/synthesise-ai-free
+codex plugin add synthesise-ai-free@synthesise-ai-free
 ```
 
-See [docs/installation.md](docs/installation.md) for Claude Desktop, Cline, Roo Code, OpenHands, Windsurf and manual installation. Agent identifiers and native support can change; check CLI help and current harness documentation.
+Use `codex plugin marketplace upgrade` to refresh marketplace metadata and `codex plugin list` to inspect installed plugins. The plugin is packaged with the canonical skill under `skills/`.
 
-Manual installation:
+### GitHub Copilot CLI
 
 ```bash
-git clone https://github.com/astisme/synthesise-ai-free.git
-cd synthesise-ai-free
-bash scripts/install.sh
+copilot plugin marketplace add Astisme/synthesise-ai-free
+copilot plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-Windows PowerShell:
+Use `copilot plugin update synthesise-ai-free` to update. In supported VS Code surfaces, use the plugin marketplace / install-from-source UI.
 
-```powershell
-.\scripts\install.ps1
+### Gemini CLI
+
+```bash
+gemini skills install https://github.com/Astisme/synthesise-ai-free.git --path skills/synthesise-ai-free
 ```
+
+Re-run the command to update the installed skill.
+
+### Other Agent Skills-compatible agents
+
+Use the Vercel Skills CLI for Cursor, OpenCode, Windsurf, and other supported agents:
+
+```bash
+npx skills@latest add Astisme/synthesise-ai-free -a cursor
+```
+
+Replace `cursor` with the agent identifier supported by your installed Skills CLI. Omit `-a` to choose interactively. Check `npx skills@latest add --help` for the current supported agent list.
+
+Update installed skills with:
+
+```bash
+npx skills@latest update
+```
+
+Re-run `add` when you want to select newly added skills from the repository.
+
+### Claude Desktop and manual fallback
+
+For Claude Desktop versions that support uploaded skills, package the complete `skills/synthesise-ai-free/` directory (including its references, workflows and templates) as an archive and import it through the skill interface.
+
+For any Markdown-capable agent, clone the repository and copy the canonical folder into its documented skills directory:
+
+```bash
+git clone https://github.com/Astisme/synthesise-ai-free.git
+mkdir -p .agents/skills
+cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
+```
+
+See [docs/installation.md](docs/installation.md) for the full harness matrix, update guidance and Windows instructions.
 
 ## Use it
 
@@ -70,6 +106,9 @@ You can start at any stage; a full engagement does not require restarting discov
 ## Repository structure
 
 ```text
+plugin.json
+.claude-plugin/          # Claude Code marketplace and plugin manifest
+.agents/plugins/         # Codex plugin marketplace
 skills/synthesise-ai-free/
 ├── SKILL.md
 ├── references/
