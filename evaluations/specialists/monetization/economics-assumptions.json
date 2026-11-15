@@ -1,0 +1,6 @@
+{
+  "id": "monetization-economics-assumptions",
+  "skill": "synthesise-monetization",
+  "input": {"price": {"amount": 100, "currency": "EUR"}, "variable_cost": null, "fixed_cost": 500},
+  "expected": {"missing_cost_not_invented": true, "break_even_not_falsely_calculated": true, "price_currency_and_basis_present": true, "recurring_value_required": true}
+}

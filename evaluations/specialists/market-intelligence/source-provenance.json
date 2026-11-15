@@ -1,0 +1,6 @@
+{
+  "id": "market-source-provenance",
+  "skill": "synthesise-market-intelligence",
+  "input": {"competitor_price": "public page", "price_date": "2026-11-15", "competitor_revenue": "not supplied"},
+  "expected": {"price_currency_and_date_required": true, "revenue_not_inferred": true, "source_url_required": true, "observations_separated_from_interpretation": true}
+}

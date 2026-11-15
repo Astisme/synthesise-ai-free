@@ -1,0 +1,6 @@
+{
+  "id": "validation-predeclared-thresholds",
+  "skill": "synthesise-validation",
+  "input": {"experiment": "paid pilot", "status": "planned", "thresholds_defined_before_run": true},
+  "expected": {"planned_not_reported_as_run": true, "segment_and_sample_defined": true, "decision_rule_predeclared": true, "limitations_disclosed": true}
+}
