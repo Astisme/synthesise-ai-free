@@ -65,8 +65,8 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         if relative in ("plugin.json", ".claude-plugin/plugin.json"):
             if data.get("name") != "synthesise-ai-free":
                 fail("Canonical plugin name must be synthesise-ai-free in: " + relative)
-            if data.get("version") != "2.0.0-beta.1":
-                fail("Canonical plugin version must be 2.0.0-beta.1 in: " + relative)
+            if data.get("version") != "2.0.0":
+                fail("Canonical plugin version must be 2.0.0 in: " + relative)
             if data.get("skills") != EXPECTED_PLUGIN_SKILLS:
                 fail("Canonical plugin must expose exactly the eleven modular v2 skills: " + relative)
         else:
