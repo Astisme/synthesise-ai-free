@@ -1,53 +1,47 @@
-# Native plugin distribution — modular v2 preview
+# Native plugin distribution — canonical modular v2
 
-**Channel:** `synthesise-v2-preview`  
+**Plugin identity:** `synthesise-ai-free`  
 **Package version:** `2.0.0-alpha.4`  
-**Status:** Marketplace manifests and package contracts are committed for review. Manual installation in the native host applications remains a release acceptance gate; CI does not claim a live harness install or successful agent execution.
+**Distribution:** one root plugin for Codex-compatible and Claude Code marketplaces.
+
+The modular architecture is the canonical product. The marketplace does not expose a separate legacy monolith or a preview-only alternative. The current package version remains alpha.4; this document does not claim stable-release readiness or verified live-host execution.
 
 ## Package layout
 
-The existing repository-root plugin remains the stable v1.1.0 package:
+The repository root is the only plugin root:
 
-- `plugin.json` — stable Codex-compatible plugin manifest, now explicitly scoped to `./skills/synthesise-ai-free` so it cannot also expose v2 preview skills
-- `.claude-plugin/plugin.json` — stable Claude Code plugin manifest
-- `skills/synthesise-ai-free/` — canonical v1.1.0 skill
+- `plugin.json` — Codex-compatible plugin manifest.
+- `.claude-plugin/plugin.json` — Claude Code plugin manifest.
+- `skills/synthesise-orchestrator/` — default entry point.
+- Ten specialist packages under `skills/synthesise-*/`: discovery, audience, UVZ, market intelligence, validation, product architecture, curriculum, monetization, launch and project continuity.
 
-The modular preview uses `skills/` as a separate plugin root:
+Both root manifests enumerate exactly these eleven skill directories. There is no nested `skills/plugin.json` package root.
 
-- `skills/plugin.json` — Codex portable plugin manifest
-- `skills/.claude-plugin/plugin.json` — Claude Code plugin manifest
-- `skills/synthesise-orchestrator/`
-- ten specialist directories under `skills/synthesise-*/`
+## Claude Code
 
-Both preview manifests explicitly enumerate the orchestrator and ten specialists. They do not include `synthesise-ai-free`. This allows the stable and preview plugins to be discovered and installed independently.
+The root `.claude-plugin/marketplace.json` contains one plugin entry, `synthesise-ai-free`, sourced from `./`.
 
-## Marketplace entries
-
-### Claude Code
-
-The root `.claude-plugin/marketplace.json` retains the stable `synthesise-ai-free` entry and adds `synthesise-v2-preview` with source `./skills`.
-
-Add the marketplace and install the preview:
+Add the marketplace and install:
 
 ```bash
 claude plugin marketplace add Astisme/synthesise-ai-free
-claude plugin install synthesise-v2-preview@synthesise-ai-free
+claude plugin install synthesise-ai-free@synthesise-ai-free
 claude plugin list
 ```
 
-Invoke the orchestrator skill in Claude Code using its plugin-qualified skill name:
+Use the orchestrator as the default entry point:
 
 ```text
-/synthesise-v2-preview:synthesise-orchestrator
+/synthesise-ai-free:synthesise-orchestrator
 ```
 
-To use the stable plugin instead, install `synthesise-ai-free@synthesise-ai-free`. Do not install both versions into the same workflow unless you intentionally want both skill sets available.
+Then confirm it can discover and invoke a specialist skill. Do not claim that a specialist ran unless the host actually loaded it and the task execution supports that statement.
 
-### OpenAI Codex / ChatGPT desktop app
+## OpenAI Codex / ChatGPT desktop app
 
-The root `.agents/plugins/marketplace.json` retains the stable root plugin and adds a Git-backed `git-subdir` entry. Its plugin root is `./skills`, selected from the repository's `main` branch.
+The root `.agents/plugins/marketplace.json` contains one plugin entry, `synthesise-ai-free`, sourced from the repository root.
 
-Add or refresh the marketplace:
+Register or refresh the marketplace:
 
 ```bash
 codex plugin marketplace add Astisme/synthesise-ai-free
@@ -55,46 +49,46 @@ codex plugin marketplace upgrade
 codex plugin marketplace list
 ```
 
-Then use the ChatGPT desktop app:
+Then:
 
-1. Open the Plugins Directory.
+1. Open the Plugins Directory in the ChatGPT desktop app.
 2. Select the **Synthesise AI Free** repository marketplace.
-3. Install **synthesise-v2-preview**.
+3. Install **synthesise-ai-free**.
 4. Confirm the plugin is enabled.
-5. Start a new conversation and ask it to use `synthesise-orchestrator` for a small routing task.
-6. Confirm the orchestrator identifies available specialist skills and does not claim a specialist was invoked unless the host actually makes it available.
+5. Ask the host to use `synthesise-orchestrator` for a narrow routing task.
+6. Confirm that at least one relevant specialist can be discovered and used.
 
-The documented Codex repository-marketplace workflow uses the desktop Plugins Directory for installation. Marketplace registration in the CLI is not itself proof that the plugin was installed or loaded.
+Marketplace registration in the CLI is not itself proof that the plugin is installed or loaded.
 
 ## Manual acceptance checklist
 
-Record the host, host version, OS, date and observed result when running this checklist on real installations.
+Record the host, host version, OS, date and observed result.
 
 | Check | Claude Code | Codex desktop |
 |---|---|---|
 | Marketplace can be added/refreshed | `claude plugin marketplace add` | `codex plugin marketplace add` |
-| Preview appears as separate entry | `claude plugin list` | Plugins Directory |
-| Preview plugin installs | `claude plugin install` | Install from Plugins Directory |
-| Orchestrator skill is discoverable | Invoke plugin-qualified skill name | Ask the host to use `synthesise-orchestrator` |
-| Specialist skills are discoverable | Inspect/invoke a selected specialist | Ask the host to use a selected specialist |
-| Stable v1 remains a separate option | `synthesise-ai-free` entry | `synthesise-ai-free` entry |
+| Canonical plugin appears | `claude plugin list` | Plugins Directory |
+| Plugin installs and enables | `claude plugin install` | Install from Plugins Directory |
+| Orchestrator is discoverable | Invoke plugin-qualified orchestrator | Ask host to use orchestrator |
+| At least one specialist is discoverable and invoked | Invoke a selected specialist | Ask host to use a selected specialist |
+| Project brief can be inspected/resumed | Test with a copied project | Test with a copied project |
 | Uninstall/reinstall works | Plugin manager / CLI | Plugins Directory |
 
-A successful marketplace add is not sufficient. At minimum, verify install, discovery, one orchestrator invocation and one specialist invocation in each supported host before describing native integration as verified.
+A successful marketplace add is not sufficient. Verify installation, discovery, orchestrator use and at least one specialist invocation in each supported host before describing native integration as verified.
 
 ## CI coverage and limitations
 
-The deterministic test suite validates:
+The deterministic suite checks:
 
-- JSON syntax and plugin identities;
-- explicit inclusion of exactly the eleven v2 skill paths;
-- existence of each referenced `SKILL.md`;
-- separate stable and preview marketplace entries;
-- Codex `git-subdir` source path and required install policy;
-- unchanged root v1 plugin identity/version and canonical skill presence.
+- JSON syntax and canonical plugin identity/version;
+- exact inclusion of the orchestrator and ten specialists in both root manifests;
+- existence of every referenced `SKILL.md`;
+- one canonical marketplace entry in each marketplace catalog;
+- root plugin source paths and package layout;
+- absence of nested preview plugin manifests.
 
-CI does not currently install Claude Code or the Codex desktop application, authenticate a host session, or execute a live model. These package-contract tests therefore do not substitute for the manual acceptance checklist above. No native harness installation is claimed as completed by this PR.
+CI does not install Claude Code or the Codex desktop application, authenticate a host session, or execute a live model. Contract tests are not a substitute for the manual acceptance checklist.
 
-## Methodology and release boundaries
+## Methodology boundaries
 
-This preview distribution does not change the frozen v1.1.0 methodology, UVZ scoring dimensions, weights, formulas or sensitivity rules. It does not mark v2 stable. Keep the local preview installer and native plugin marketplace paths separate from the stable v1 install route until cross-harness migration and live-install acceptance have passed.
+The modular v2 package uses the established seven-dimension UVZ scoring rubric, including its weights, formulas, scales and sensitivity-analysis rules. Changes to that methodology require an explicit, separately reviewed change. The orchestrator owns routing and coordination; specialists own their respective methodology and canonical outputs.
