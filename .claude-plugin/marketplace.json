@@ -1,0 +1,17 @@
+{
+  "name": "synthesise-ai-free",
+  "owner": {
+    "name": "Astisme",
+    "url": "https://github.com/Astisme"
+  },
+  "description": "Synthesise AI Free — an end-to-end digital product development skill.",
+  "plugins": [
+    {
+      "name": "synthesise-ai-free",
+      "source": "./",
+      "description": "Discover, validate, architect, price and launch differentiated digital products.",
+      "category": "productivity",
+      "keywords": ["product-development", "UVZ", "market-research", "validation"]
+    }
+  ]
+}
