@@ -1,6 +1,6 @@
 # Synthesise v2.0 Skill Catalog
 
-**Status:** v2.0.0-alpha.4 modular preview. All eleven packages (one orchestrator and ten specialists) are present in this revision. Structural validation and deterministic contract fixtures cover package metadata, local references and specialist methodology depth and eight cross-specialist orchestration scenarios. This is not a stable or default installation release.  
+**Status:** Canonical modular v2 package, currently version 2.0.0-alpha.4. All eleven packages (one orchestrator and ten specialists) are present and exposed by the root plugin manifests. Structural validation and deterministic contract fixtures cover package metadata, local references, specialist methodology depth and eight cross-specialist orchestration scenarios. The package is the default and only active distribution. Live host execution acceptance remains separate from CI contract coverage.  
 **Default entry point:** `synthesise-orchestrator`
 
 ## Package conventions
@@ -49,7 +49,7 @@ The catalog describes the packages present in this revision. Package presence do
 
 - **Inputs:** expertise profile; audience intelligence; relevant constraints; prior UVZ decisions and evidence.
 - **Outputs:** distinct opportunity hypotheses, complete scorecards, sensitivity analysis, ranked portfolio, recommended opportunity, rationale and unresolved assumptions.
-- **Quality:** preserve v1.1.0 scoring methodology exactly; show evidence and confidence; unknowns are not confirmed neutral facts.
+- **Quality:** preserve the established seven-dimension UVZ scoring methodology exactly; show evidence and confidence; unknowns are not confirmed neutral facts.
 
 ### Market Intelligence
 
