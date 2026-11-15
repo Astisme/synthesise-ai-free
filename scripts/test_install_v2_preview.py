@@ -99,6 +99,51 @@ class V2PreviewInstallerTests(unittest.TestCase):
         self.assertFalse(self.manifest.exists())
         self.assertEqual([p for p in self.target.iterdir() if p.is_dir()], [self.legacy])
 
+    def test_verify_full_install_is_read_only_and_accepts_v1_coexistence(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        before = {p.name: p.read_bytes() for p in self.target.iterdir() if p.is_file()}
+        verified = self.run_installer("--verify")
+        self.assertEqual(verified.returncode, 0, verified.stderr)
+        self.assertIn("Install verification passed (read-only).", verified.stdout)
+        after = {p.name: p.read_bytes() for p in self.target.iterdir() if p.is_file()}
+        self.assertEqual(before, after)
+        self.assertIn("legacy user data", (self.legacy / "SKILL.md").read_text(encoding="utf-8"))
+
+    def test_verify_detects_missing_package_directory(self):
+        self.assertEqual(self.run_installer().returncode, 0)
+        import shutil
+        shutil.rmtree(self.target / "synthesise-launch")
+        verified = self.run_installer("--verify")
+        self.assertNotEqual(verified.returncode, 0)
+        self.assertIn("synthesise-launch: installed package or SKILL.md is missing", verified.stderr)
+
+    def test_verify_detects_identity_and_version_drift(self):
+        self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)
+        skill = self.target / "synthesise-discovery" / "SKILL.md"
+        content = skill.read_text(encoding="utf-8")
+        skill.write_text(content.replace("version: 2.0.0-alpha.4", "version: 2.0.0-alpha.3"), encoding="utf-8")
+        verified = self.run_installer("--package", "synthesise-discovery", "--verify")
+        self.assertNotEqual(verified.returncode, 0)
+        self.assertIn("manifest version 2.0.0-alpha.4 does not match installed version 2.0.0-alpha.3", verified.stderr)
+
+    def test_verify_rejects_untracked_v2_package_directory(self):
+        self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)
+        untracked = self.target / "synthesise-launch"
+        untracked.mkdir()
+        (untracked / "SKILL.md").write_text("---\nname: synthesise-launch\nmetadata:\n  version: \"2.0.0-alpha.4\"\n---\n", encoding="utf-8")
+        verified = self.run_installer("--verify")
+        self.assertNotEqual(verified.returncode, 0)
+        self.assertIn("synthesise-launch: directory exists but is not tracked", verified.stderr)
+
+    def test_verify_requires_manifest_and_does_not_create_target(self):
+        absent_target = self.root / "missing-target"
+        result = subprocess.run(
+            [sys.executable, str(INSTALLER), "--target", str(absent_target), "--verify"],
+            cwd=self.root, text=True, capture_output=True, check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(absent_target.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
