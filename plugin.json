@@ -11,5 +11,5 @@
   "repository": "https://github.com/Astisme/synthesise-ai-free",
   "license": "MIT",
   "keywords": ["product-development", "discovery", "UVZ", "validation", "market-research", "digital-products"],
-  "skills": "./skills/"
+  "skills": ["./skills/synthesise-ai-free"]
 }

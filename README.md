@@ -23,9 +23,9 @@ The system distinguishes evidence from assumptions. A score is not proof of dema
 
 The modular v2 architecture is implemented in the repository as eleven Agent Skill packages: one orchestrator and ten specialists. Each specialist has a concise `SKILL.md`, a detailed progressive-disclosure methodology reference, shared evidence/handoff requirements and deterministic methodology fixtures. The catalog and architecture document describe the current package state.
 
-**Distribution remains transitional.** The existing published installation routes and manifests continue to install the stable v1.1.0 canonical skill. The modular v2.0.0-alpha.4 package set is an explicit development preview; it is not the default plugin/marketplace installation and is not production-ready. Use the separate `scripts/install_v2_preview.py` installer for a managed preview installation. It installs alongside v1 and never replaces the stable v1 package. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
+**Distribution remains transitional.** The stable v1.1.0 plugin remains separately available. The modular v2.0.0-alpha.4 preview is now exposed as a separate `synthesise-v2-preview` entry in the Claude Code and Codex repository marketplaces, and through `scripts/install_v2_preview.py` for filesystem-based installs. The preview is not production-ready; install it explicitly and do not replace the stable v1 package. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
 
-The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric or existing installation manifests.
+The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric, stable v1 plugin identities or v1 installer routes.
 
 ## Install
 
@@ -38,16 +38,16 @@ claude plugin marketplace add Astisme/synthesise-ai-free
 claude plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-Update from the plugin manager or refresh the marketplace and reinstall/update the plugin. You can also open `/plugin` to browse and manage it.
+For the modular v2 preview, install `synthesise-v2-preview@synthesise-ai-free` instead. The stable and preview plugins are separate choices. Update from the plugin manager or refresh the marketplace and update the selected plugin.
 
 ### OpenAI Codex
 
 ```bash
 codex plugin marketplace add Astisme/synthesise-ai-free
-codex plugin add synthesise-ai-free@synthesise-ai-free
+codex plugin marketplace upgrade
 ```
 
-Use `codex plugin marketplace upgrade` to refresh marketplace metadata and `codex plugin list` to inspect installed plugins. The plugin is packaged with the canonical skill under `skills/`.
+Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace, and install either `synthesise-ai-free` (stable v1) or `synthesise-v2-preview` (modular preview). The documented repo-marketplace flow uses the desktop Plugins Directory for installation; marketplace registration in the CLI is not proof that a plugin is installed.
 
 ### GitHub Copilot CLI
 
@@ -96,7 +96,7 @@ mkdir -p .agents/skills
 cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
 ```
 
-For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills`. See [docs/installation.md](docs/installation.md) for preview install, upgrade, recovery and removal guidance, plus the stable harness matrix.
+For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills`. See [docs/installation.md](docs/installation.md) for native preview marketplace installs, install verification, upgrade, recovery and removal guidance. See [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and the harness smoke-test checklist.
 
 ## Use it
 

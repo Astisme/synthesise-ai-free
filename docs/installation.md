@@ -13,25 +13,17 @@ claude plugin install synthesise-ai-free@synthesise-ai-free
 
 Or run `/plugin marketplace add Astisme/synthesise-ai-free` and then `/plugin install synthesise-ai-free@synthesise-ai-free` inside a Claude Code session.
 
-Manage it with `claude plugin list`, `claude plugin update synthesise-ai-free@synthesise-ai-free`, and `claude plugin uninstall synthesise-ai-free@synthesise-ai-free`. The plugin marketplace manifest lives in `.claude-plugin/marketplace.json`.
+Manage it with `claude plugin list`, `claude plugin update synthesise-ai-free@synthesise-ai-free`, and `claude plugin uninstall synthesise-ai-free@synthesise-ai-free`. For the modular preview, install `synthesise-v2-preview@synthesise-ai-free` instead. The stable and preview entries remain separate. The plugin marketplace manifest lives in `.claude-plugin/marketplace.json`.
 
 ## OpenAI Codex — native plugin marketplace
 
 ```bash
 codex plugin marketplace add Astisme/synthesise-ai-free
-codex plugin add synthesise-ai-free@synthesise-ai-free
+codex plugin marketplace upgrade
+codex plugin marketplace list
 ```
 
-Refresh marketplace metadata with `codex plugin marketplace upgrade`; inspect installations with `codex plugin list`. The Codex marketplace catalog is `.agents/plugins/marketplace.json`, and the portable plugin manifest is at the repository root in `plugin.json`.
-
-## GitHub Copilot CLI — native plugin marketplace
-
-```bash
-copilot plugin marketplace add Astisme/synthesise-ai-free
-copilot plugin install synthesise-ai-free@synthesise-ai-free
-```
-
-Update with `copilot plugin update synthesise-ai-free`. Inspect with `copilot plugin list`. Supported VS Code surfaces can also install plugins from a marketplace or source through their plugin UI. Copilot reads the portable root `plugin.json` and the marketplace catalog in `.claude-plugin/marketplace.json`.
+Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace, and install either `synthesise-ai-free` (stable v1) or `synthesise-v2-preview` (modular preview). The repository catalog is `.agents/plugins/marketplace.json`; the v2 package is a Git subdirectory at `skills/` with its own portable `plugin.json`. The current documented repo-marketplace flow uses the desktop Plugins Directory for installation rather than a `codex plugin add` CLI command.
 
 ## Gemini CLI — native skill install
 
@@ -130,7 +122,7 @@ The validator checks the canonical skill structure and its local references.
 
 ## Modular v2.0.0 alpha preview (separate install channel)
 
-The modular packages are available as a manual preview installation. This route does not change the native plugin/marketplace manifests or the stable v1.1.0 installer scripts.
+The modular packages are available as a manual preview installation. This route does not change the stable v1.1.0 plugin identities or installer scripts.
 
 From a repository clone, install all eleven v2 packages alongside any existing v1 installation:
 
@@ -152,3 +144,13 @@ python scripts/install_v2_preview.py --target .agents/skills --package synthesis
 ```
 
 The preview installer is cross-platform Python and never deletes or upgrades `synthesise-ai-free/`. The original `scripts/install.sh` and `scripts/install.ps1` remain v1-only. This installer is a local file-copy mechanism; it does not register native plugins, prove that a harness discovers the skills, or enable automatic cross-skill invocation.
+
+
+## Native modular v2 preview packages
+
+The v2 preview is published as a separate plugin entry; it does not replace the v1 plugin:
+
+- Claude Code: `claude plugin install synthesise-v2-preview@synthesise-ai-free`
+- Codex: add/upgrade the repository marketplace, then install `synthesise-v2-preview` from the ChatGPT desktop Plugins Directory
+
+The Codex Git-backed marketplace entry uses `git-subdir` to resolve the plugin root at `./skills`. The plugin manifest explicitly lists the orchestrator and ten specialist directories, excluding the v1 canonical skill. The Claude Code plugin manifest uses the same package root and explicit skill paths. See [native plugin distribution](native-plugin-distribution.md) for the layout, verification steps and current limitations.

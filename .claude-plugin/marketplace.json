@@ -4,14 +4,31 @@
     "name": "Astisme",
     "url": "https://github.com/Astisme"
   },
-  "description": "Synthesise AI Free — an end-to-end digital product development skill.",
+  "description": "Synthesise AI Free — stable v1 and modular v2 preview plugins.",
   "plugins": [
     {
       "name": "synthesise-ai-free",
       "source": "./",
       "description": "Discover, validate, architect, price and launch differentiated digital products.",
       "category": "productivity",
-      "keywords": ["product-development", "UVZ", "market-research", "validation"]
+      "keywords": [
+        "product-development",
+        "UVZ",
+        "market-research",
+        "validation"
+      ]
+    },
+    {
+      "name": "synthesise-v2-preview",
+      "source": "./skills",
+      "description": "Modular v2.0.0-alpha.4 preview: orchestrator and ten specialist skills. Not production-ready.",
+      "category": "productivity",
+      "keywords": [
+        "product-development",
+        "agent-skills",
+        "orchestration",
+        "preview"
+      ]
     }
   ]
 }
