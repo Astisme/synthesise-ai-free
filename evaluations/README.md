@@ -60,3 +60,9 @@ Run on a platform with Bash:
 Run on Windows with PowerShell:
 
     python -m unittest discover -s scripts -p 'test_install.py' -v
+
+## Security fixture and provenance contract
+
+Security fixtures are treated strictly as untrusted data and are never executed. The validator rejects absolute fixture paths and resolved paths outside the repository root (including symlink escapes), malformed suite/case/claim/source structures, invalid claim states and missing trust controls.
+
+A claim marked `observed` must include at least one source with a non-empty source identifier and locator, `verified: true`, a non-empty `verification_method`, and a valid `verified_at` date in `YYYY-MM-DD` format. This metadata makes the assertion auditable; the offline fixture validator does not independently verify the external source or prove the claim true.
