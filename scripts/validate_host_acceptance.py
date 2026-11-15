@@ -62,6 +62,8 @@ def validate_report(path: Path, require_all_passed: bool = False) -> tuple[list[
     if not isinstance(report_plugin, dict):
         errors.append("plugin must be an object")
     else:
+        if set(report_plugin) != {"name", "version"}:
+            errors.append("plugin must contain only name and version")
         if report_plugin.get("name") != plugin.get("name"):
             errors.append("plugin.name does not match the repository plugin manifest")
         if report_plugin.get("version") != plugin.get("version"):
@@ -99,6 +101,8 @@ def validate_report(path: Path, require_all_passed: bool = False) -> tuple[list[
         if not isinstance(check, dict):
             all_passed = False
             continue
+        if set(check) - {"status", "evidence", "notes"}:
+            errors.append(f"{check_id}: unexpected result fields")
         status = check.get("status")
         evidence = check.get("evidence")
         notes = check.get("notes")
@@ -113,6 +117,8 @@ def validate_report(path: Path, require_all_passed: bool = False) -> tuple[list[
             errors.append(f"{check_id}: passed checks require at least one evidence file")
         if status != "passed" and (not isinstance(notes, str) or not notes.strip()):
             errors.append(f"{check_id}: non-passed checks require explanatory notes")
+        if "notes" in check and not isinstance(notes, str):
+            errors.append(f"{check_id}: notes must be a string")
         for item in evidence:
             candidate = Path(item)
             if candidate.is_absolute() or ".." in candidate.parts:
