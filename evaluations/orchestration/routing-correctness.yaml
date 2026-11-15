@@ -1,0 +1,58 @@
+{
+  "suite_id": "orchestration-routing-correctness",
+  "version": "1.0.0",
+  "description": "Deterministic contract fixtures for mapping user objectives to the required minimal specialist set. These fixtures test authored routing rules, not live model judgement.",
+  "cases": [
+    {
+      "id": "expertise-no-product-idea",
+      "input": {
+        "objective": "I have expertise but no idea what to sell",
+        "mode": "guided",
+        "available_artifacts": []
+      },
+      "expected": {
+        "required_skills": ["synthesise-discovery", "synthesise-audience", "synthesise-uvz"],
+        "forbidden_unconditional_skills": ["synthesise-curriculum", "synthesise-launch"],
+        "project_skill": "conditional"
+      }
+    },
+    {
+      "id": "price-existing-offer",
+      "input": {
+        "objective": "Help me price this existing product",
+        "mode": "direct",
+        "available_artifacts": ["product-charter.md", "audience-intelligence.md"]
+      },
+      "expected": {
+        "required_skills": ["synthesise-monetization"],
+        "conditional_skills": ["synthesise-market-intelligence"],
+        "forbidden_unconditional_skills": ["synthesise-discovery", "synthesise-curriculum", "synthesise-launch"]
+      }
+    },
+    {
+      "id": "competitor-research-only",
+      "input": {
+        "objective": "Research competitors for this defined audience",
+        "mode": "direct",
+        "available_artifacts": ["audience-intelligence.md"]
+      },
+      "expected": {
+        "required_skills": ["synthesise-market-intelligence"],
+        "forbidden_unconditional_skills": ["synthesise-discovery", "synthesise-uvz", "synthesise-curriculum"]
+      }
+    },
+    {
+      "id": "continue-existing-project",
+      "input": {
+        "objective": "Continue my project",
+        "mode": "resume",
+        "available_artifacts": ["PROJECT-BRIEF.md", "DECISIONS.md"]
+      },
+      "expected": {
+        "first_skill": "synthesise-project",
+        "then": "route_from_open_questions_and_current_stage",
+        "must_preserve_decisions": true
+      }
+    }
+  ]
+}
