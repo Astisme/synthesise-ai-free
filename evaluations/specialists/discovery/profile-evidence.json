@@ -1,0 +1,6 @@
+{
+  "id": "discovery-profile-evidence",
+  "skill": "synthesise-discovery",
+  "input": {"capability": "creator-reported", "portfolio": "two supplied case studies", "outcome_claim": "unverified"},
+  "expected": {"profile_contains_evidence_status": true, "interest_not_treated_as_expertise": true, "unverified_outcome_labelled": true}
+}
