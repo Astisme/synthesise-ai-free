@@ -117,7 +117,7 @@ Windows PowerShell:
 .\scripts\install.ps1 -Target .agents\skills
 ```
 
-These scripts do not register marketplaces or manage updates. Pull the latest repository and rerun the installer to refresh the copied files. Use `--force` (Bash) or `-Force` (PowerShell) to replace an existing installation.
+These scripts do not register marketplaces or manage updates. Pull the latest repository and rerun the installer to refresh the copied files. Use `--force` (Bash) or `-Force` (PowerShell) to replace an existing installation. The Bash and PowerShell copy, overwrite-protection and forced-update behaviours are covered by automated regression tests in CI.
 
 ## Verify
 
