@@ -8,7 +8,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Discovery
@@ -67,6 +67,10 @@ Include:
 - Evidence includes source/context and date where available.
 - Missing evidence remains unknown, not neutral or positive.
 - Constraints and privacy boundaries are explicit.
+
+## Progressive methodology reference
+
+Load `references/expertise-discovery-methodology.md` whenever performing substantive discovery work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 
