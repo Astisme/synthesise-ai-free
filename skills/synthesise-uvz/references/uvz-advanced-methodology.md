@@ -1,6 +1,6 @@
 # UVZ advanced methodology
 
-This reference deepens interpretation and evidence discipline around the canonical v1.1.0 rubric. It does not replace `uvz-scoring.md`.
+This reference deepens interpretation and evidence discipline around the canonical seven-dimension UVZ rubric. It does not replace `uvz-scoring.md`.
 
 ## 1. Establish a traceable opportunity portfolio
 
