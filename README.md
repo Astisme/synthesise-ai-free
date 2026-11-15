@@ -80,11 +80,11 @@ Use the Vercel Skills CLI to install the orchestrator and specialist directories
 From a repository clone, install the complete modular package:
 
 ```bash
-python scripts/install_v2_preview.py --target .agents/skills
-python scripts/install_v2_preview.py --target .agents/skills --verify
+python scripts/install.py --target .agents/skills
+python scripts/install.py --target .agents/skills --verify
 ```
 
-The installer currently retains its historical filename, but it installs the canonical modular v2 package. See [docs/installation.md](docs/installation.md) for install, verify, upgrade and removal instructions, and [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and host acceptance checks.
+See [docs/installation.md](docs/installation.md) for install, verify, upgrade and removal instructions, and [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and host acceptance checks.
 
 ## Use it
 
@@ -132,19 +132,15 @@ This is an independent open-source implementation inspired by publicly described
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).
 
-## Quality roadmap
+## Next milestones
 
-- v1.2.1 — Deterministic QA: parse real PROJECT-BRIEF.md examples, validate extracted sections and publish reproducible JSON/Markdown reports.
-- v1.2.2 — Workflow integrity: test deterministic handoffs from discovery through monetization and preserve project decisions on resume.
-- v1.2.3 — Security hardening: test prompt injection, malicious research documents, fabricated citations and untrusted instructions.
-- v1.2.4 — CI and quality gate completion: harden evaluator input validation and regression-test malformed scenarios, duplicate IDs, baseline-file failures and schema edge cases; keep CI reports and artifacts mandatory.
-- v1.2.5 — Installation and update regression tests: exercise Bash and PowerShell installers on their native CI platforms, including overwrite protection, forced updates and complete skill copies.
-- v1.2.6 — Security and research provenance hardening: reject malformed security contracts and fixture path escapes; require auditable verification metadata for observed claims.
-- v1.3.0 — Local-first product development workbench: architecture proposal published before implementation; see [the v1.3.0 workbench architecture proposal](docs/v1.3-workbench-architecture.md). Live model evaluation remains an optional, separately gated future capability and is not part of required CI.
+- **v2.0.0 beta:** complete live Claude Code and Codex Desktop installation/discovery/invocation acceptance; verify end-to-end project resume and artifact ownership in real host sessions.
+- **v2.0.0 release candidate:** add repeatable cross-harness smoke tests and migration-safe project fixtures; publish a release checklist with explicit evidence for each supported host.
+- **v2.1:** prototype the local-first product-development workbench described in [the workbench architecture proposal](docs/v1.3-workbench-architecture.md), keeping the modular skill packages as the canonical methodology source.
 
 ### Modular orchestration integration
 
-The v2.0.0-alpha.4 preview adds eight deterministic cross-specialist scenarios: expertise-to-charter lifecycle, capability-gated parallel research, evidence provenance, artifact ownership, approved-decision conflicts, project resume, negative validation and launch readiness. Mutation tests verify that representative contract violations are rejected. These tests validate portable handoff/state invariants; they do not invoke agents or prove live cross-harness execution.
+The v2.0.0-alpha.4 package includes eight deterministic cross-specialist scenarios: expertise-to-charter lifecycle, capability-gated parallel research, evidence provenance, artifact ownership, approved-decision conflicts, project resume, negative validation and launch readiness. Mutation tests verify that representative contract violations are rejected. These tests validate portable handoff/state invariants; they do not invoke agents or prove live cross-harness execution.
 
 ### Workflow integrity fixtures
 
