@@ -51,6 +51,8 @@ def validate_schema(value, schema, path="$"):
             allowed = set(schema.get("properties", {}))
             for key in value.keys() - allowed:
                 errors.append(f"{path}: unexpected property {key}")
+    if isinstance(value, list) and len(value) < schema.get("minItems", 0):
+        errors.append(f"{path}: fewer than minItems")
     if isinstance(value, list) and "items" in schema:
         for index, item in enumerate(value):
             errors.extend(validate_schema(item, schema["items"], f"{path}[{index}]"))
@@ -101,6 +103,11 @@ def main():
         schema_errors = validate_schema(brief, schema)
         check("project_brief_schema_fixture", not schema_errors,
               schema_errors or "Structured extraction fixture conforms")
+        model_schema = load_json(ROOT / "schemas/model-run.schema.json")
+        model_fixture = load_json(ROOT / "fixtures/model-run.example.json")
+        model_errors = validate_schema(model_fixture, model_schema)
+        check("model_run_schema_fixture", not model_errors,
+              model_errors or "Captured model-run fixture conforms")
     except (OSError, json.JSONDecodeError) as exc:
         check("project_brief_schema_fixture", False, str(exc))
 
@@ -114,6 +121,12 @@ def main():
                 fixture_failures.append(f"{path.name}: duplicate id {scenario_id}")
             scenario_ids.add(scenario_id)
             expected = scenario["expected"]
+            conversation = scenario.get("input_conversation", [])
+            regression = scenario.get("regression_status", {})
+            if not conversation or not all(message.get("role") and message.get("content") for message in conversation):
+                fixture_failures.append(f"{scenario_id}: input_conversation must contain role/content messages")
+            if regression.get("introduced_in") != "1.2.0" or regression.get("mode") != "fixture-only":
+                fixture_failures.append(f"{scenario_id}: regression_status must identify the 1.2.0 fixture-only baseline")
             fixture = scenario["fixture_output"].casefold()
             for phrase in expected["required_output_elements"]:
                 if phrase.casefold() not in fixture:

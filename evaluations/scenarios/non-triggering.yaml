@@ -23,5 +23,16 @@
       "The fixture covers the required non-triggering behaviour"
     ]
   },
-  "fixture_output": "Sauté onion, add tomatoes and stock, simmer until soft, then blend until smooth and season to taste."
+  "fixture_output": "Sauté onion, add tomatoes and stock, simmer until soft, then blend until smooth and season to taste.",
+  "input_conversation": [
+    {
+      "role": "user",
+      "content": "Give me a simple recipe for tomato soup."
+    }
+  ],
+  "regression_status": {
+    "baseline": "not_measured_in_v1.1.0",
+    "introduced_in": "1.2.0",
+    "mode": "fixture-only"
+  }
 }

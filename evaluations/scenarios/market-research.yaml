@@ -27,5 +27,16 @@
       "The fixture covers the required market-intelligence behaviour"
     ]
   },
-  "fixture_output": "Observed facts: cite each source with its publication date and geography. Interpretation: label it separately. Limitations: current evidence is insufficient to claim market growth or competitor revenue."
+  "fixture_output": "Observed facts: cite each source with its publication date and geography. Interpretation: label it separately. Limitations: current evidence is insufficient to claim market growth or competitor revenue.",
+  "input_conversation": [
+    {
+      "role": "user",
+      "content": "Research competitors and tell me whether this market is growing."
+    }
+  ],
+  "regression_status": {
+    "baseline": "not_measured_in_v1.1.0",
+    "introduced_in": "1.2.0",
+    "mode": "fixture-only"
+  }
 }
