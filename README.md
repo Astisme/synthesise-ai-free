@@ -96,7 +96,7 @@ mkdir -p .agents/skills
 cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
 ```
 
-For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills`. See [docs/installation.md](docs/installation.md) for native preview marketplace installs, install verification, upgrade, recovery and removal guidance. See [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and the harness smoke-test checklist.
+For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills\npython scripts/install_v2_preview.py --target .agents/skills --verify`. See [docs/installation.md](docs/installation.md) for native preview marketplace installs, install verification, upgrade, recovery and removal guidance. See [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and the harness smoke-test checklist.
 
 ## Use it
 
