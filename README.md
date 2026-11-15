@@ -139,6 +139,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 - v1.2.3 — Security hardening: test prompt injection, malicious research documents, fabricated citations and untrusted instructions.
 - v1.2.4 — CI and quality gate completion: harden evaluator input validation and regression-test malformed scenarios, duplicate IDs, baseline-file failures and schema edge cases; keep CI reports and artifacts mandatory.
 - v1.2.5 — Installation and update regression tests: exercise Bash and PowerShell installers on their native CI platforms, including overwrite protection, forced updates and complete skill copies.
+- v1.2.6 — Security and research provenance hardening: reject malformed security contracts and fixture path escapes; require auditable verification metadata for observed claims.
 - v1.3.0 — Optional live model evaluation: only when explicitly enabled and credentials/budget are available. No provider SDK or API key is required by v1.2.x.
 
 ### Workflow integrity fixtures
