@@ -93,6 +93,10 @@ The catalog describes the packages present in this revision. Package presence do
 - **Outputs:** synchronized portable project brief, append-only decision entries, status/milestone updates, artifact inventory and recovery report.
 - **Quality:** never silently rewrite approved decisions; detect conflicts and missing files; keep paths portable; preserve provenance and unresolved questions.
 
+## Shared evidence record
+
+All specialists preserve evidence identity, claim status, confidence, scope and limitations when reusing findings. See [the shared evidence-record contract](evidence-record.md) and its machine-readable [JSON Schema](../schemas/evidence-record.schema.json). Reuse must never silently upgrade evidence strength.
+
 ## Cross-skill ownership rules
 
 - Each canonical artifact has exactly one owner as listed above.
