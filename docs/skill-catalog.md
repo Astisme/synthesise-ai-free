@@ -1,6 +1,6 @@
 # Synthesise v2.0 Skill Catalog
 
-**Status:** Proposed catalog for v2.0.0; packages are not yet implemented.  
+**Status:** v2.0.0 modular catalog. The orchestrator is present on `main`; specialist packages are being introduced in staged alpha pull requests. Treat only packages present in the checked-out revision as implemented.  
 **Default entry point:** `synthesise-orchestrator`
 
 ## Package conventions
@@ -104,4 +104,4 @@ The catalog defines intended boundaries. It does not assert that these packages 
 
 ## Package maturity
 
-All entries above are **planned** until their package exists, passes structural validation and has at least one specialist evaluation. Installation availability must be verified per harness before it is advertised.
+The orchestrator is implemented on `main`. Each specialist becomes implemented only when its package is merged and passes structural validation. Specialist evaluation fixtures are deterministic contracts, not proof of live-agent behaviour. Installation availability must be verified per harness before it is advertised.
