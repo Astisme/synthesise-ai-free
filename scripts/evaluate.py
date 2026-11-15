@@ -19,7 +19,7 @@ from security_fixtures import validate_security_suite
 from orchestration_integration import evaluate_integration_suite
 
 ROOT = Path(__file__).resolve().parents[1]
-BASELINE = ROOT / "evaluations/baseline/v1.1.0.json"
+BASELINE = ROOT / "evaluations/baseline/v2.0.0-alpha.4.json"
 CHECKSUMS = ROOT / "evaluations/baseline/checksums.json"
 SCENARIOS = ROOT / "evaluations/scenarios"
 SCHEMA = ROOT / "schemas/project-brief.schema.json"
@@ -151,10 +151,10 @@ def main():
             actual = git_blob_sha1(path.read_bytes())
             if actual != expected:
                 changed.append({"path": relative, "expected": expected, "actual": actual})
-        check("frozen_v1_1_skill", not missing and not changed,
-              {"pinned_files": len(pinned), "missing": missing, "changed": changed})
+        check("canonical_v2_package_baseline", not missing and not changed,
+              {"pinned_files": len(pinned), "package_paths": baseline.get("canonical_package_paths", []), "missing": missing, "changed": changed})
     except (OSError, KeyError, json.JSONDecodeError) as exc:
-        check("frozen_v1_1_skill", False, str(exc))
+        check("canonical_v2_package_baseline", False, str(exc))
 
     try:
         schema, brief = load_json(SCHEMA), load_json(BRIEF_FIXTURE)
