@@ -75,7 +75,7 @@ class V2InstallerTests(unittest.TestCase):
         duplicate = self.target / "duplicate-copy"
         duplicate.mkdir()
         (duplicate / "SKILL.md").write_text(
-            "---\nname: synthesise-orchestrator\nmetadata:\n  version: \"2.0.0-alpha.4\"\n---\n",
+            "---\nname: synthesise-orchestrator\nmetadata:\n  version: \"2.0.0\"\n---\n",
             encoding="utf-8",
         )
         result = self.run_installer("--package", "synthesise-orchestrator")
@@ -121,16 +121,16 @@ class V2InstallerTests(unittest.TestCase):
         self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)
         skill = self.target / "synthesise-discovery" / "SKILL.md"
         content = skill.read_text(encoding="utf-8")
-        skill.write_text(content.replace('version: "2.0.0-alpha.4"', 'version: "2.0.0-alpha.3"'), encoding="utf-8")
+        skill.write_text(content.replace('version: "2.0.0"', 'version: "2.0.0-alpha.3"'), encoding="utf-8")
         verified = self.run_installer("--package", "synthesise-discovery", "--verify")
         self.assertNotEqual(verified.returncode, 0)
-        self.assertIn("manifest version 2.0.0-alpha.4 does not match installed version 2.0.0-alpha.3", verified.stderr)
+        self.assertIn("manifest version 2.0.0 does not match installed version 2.0.0-alpha.3", verified.stderr)
 
     def test_verify_rejects_untracked_v2_package_directory(self):
         self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)
         untracked = self.target / "synthesise-launch"
         untracked.mkdir()
-        (untracked / "SKILL.md").write_text("---\nname: synthesise-launch\nmetadata:\n  version: \"2.0.0-alpha.4\"\n---\n", encoding="utf-8")
+        (untracked / "SKILL.md").write_text("---\nname: synthesise-launch\nmetadata:\n  version: \"2.0.0\"\n---\n", encoding="utf-8")
         verified = self.run_installer("--verify")
         self.assertNotEqual(verified.returncode, 0)
         self.assertIn("synthesise-launch: directory exists but is not tracked", verified.stderr)
