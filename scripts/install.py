@@ -127,7 +127,7 @@ def main() -> int:
     parser.add_argument("--package", choices=PACKAGES, help="Install/verify/remove one package; default is the complete v2 set")
     parser.add_argument("--force", action="store_true", help="Replace an existing managed or unmanaged package")
     actions = parser.add_mutually_exclusive_group()
-    actions.add_argument("--remove", action="store_true", help="Remove selected v2 preview package(s)")
+    actions.add_argument("--remove", action="store_true", help="Remove selected v2 package(s)")
     actions.add_argument("--verify", action="store_true", help="Verify installed package identities and versions without writing files")
     args = parser.parse_args()
 
