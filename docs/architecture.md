@@ -4,7 +4,7 @@
 
 The canonical product is the modular v2 package under `skills/`: one orchestrator and ten specialist skills. The root plugin manifests enumerate these eleven skill directories explicitly. The orchestrator owns intent interpretation, routing, dependency-aware execution plans, handoffs, reconciliation and project-state coordination. Specialists own their domain methodologies and canonical artifacts.
 
-The former monolithic skill directory is retained only as historical repository material; it is not included in the active plugin manifests or current installation instructions. New work must target the modular v2 packages.
+The former monolithic skill package has been removed from the active repository tree. New work targets only the modular v2 packages.
 
 ## Progressive disclosure
 
