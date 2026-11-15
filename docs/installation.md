@@ -122,7 +122,7 @@ The validator checks the canonical skill structure and its local references.
 
 ## Modular v2.0.0 alpha preview (separate install channel)
 
-The modular packages are available as a manual preview installation. This route does not change the native plugin/marketplace manifests or the stable v1.1.0 installer scripts.
+The modular packages are available as a manual preview installation. This route does not change the stable v1.1.0 plugin identities or installer scripts.
 
 From a repository clone, install all eleven v2 packages alongside any existing v1 installation:
 
