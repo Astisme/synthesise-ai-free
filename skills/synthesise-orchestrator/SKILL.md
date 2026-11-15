@@ -74,7 +74,7 @@ Treat `PROJECT-BRIEF.md` as portable user-owned state, not hidden model memory. 
 
 For substantial coordinated work, report:
 - objective and mode;
-- specialists actually loaded/executed, distinguishing legacy fallback;
+- specialists actually loaded/executed;
 - outputs created or proposed;
 - decisions approved and decisions still required;
 - assumptions, evidence gaps and limitations;
