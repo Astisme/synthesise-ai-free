@@ -21,10 +21,14 @@ jobs:
         run: python scripts/validate.py
       - name: Run deterministic baseline and fixture evaluation
         run: python scripts/evaluate.py --report evaluations/reports/deterministic.json
-      - name: Upload deterministic report
+      - name: Smoke-test captured-run evaluator with authored fixture (not a live model run)
+        run: python scripts/evaluate_model.py fixtures/model-run.example.json --report evaluations/reports/model-evaluation-example.json
+      - name: Upload evaluation reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: synthesise-deterministic-evaluation
-          path: evaluations/reports/deterministic.json
+          name: synthesise-evaluation-reports
+          path: |
+            evaluations/reports/deterministic.json
+            evaluations/reports/model-evaluation-example.json
           if-no-files-found: ignore
