@@ -65,8 +65,8 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         if relative in ("plugin.json", ".claude-plugin/plugin.json"):
             if data.get("name") != "synthesise-ai-free":
                 fail("Canonical plugin name must be synthesise-ai-free in: " + relative)
-            if data.get("version") != "2.0.0-alpha.4":
-                fail("Canonical plugin version must be 2.0.0-alpha.4 in: " + relative)
+            if data.get("version") != "2.0.0-beta.1":
+                fail("Canonical plugin version must be 2.0.0-beta.1 in: " + relative)
             if data.get("skills") != EXPECTED_PLUGIN_SKILLS:
                 fail("Canonical plugin must expose exactly the eleven modular v2 skills: " + relative)
         else:
@@ -88,7 +88,7 @@ if (ROOT / "skills" / "plugin.json").exists() or (ROOT / "skills" / ".claude-plu
 required_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/host-acceptance.schema.json",
     "scripts/validate_host_acceptance.py", "scripts/test_host_acceptance.py", "scripts/validate_all_host_acceptance.py", "scripts/test_all_host_acceptance.py", "fixtures/host-acceptance/incomplete.example.json",
-    "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
+    "evaluations/baseline/v2.0.0-beta.1.json", "evaluations/baseline/checksums.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
@@ -114,7 +114,7 @@ for relative in required_files:
 json_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/host-acceptance.schema.json",
     "fixtures/host-acceptance/incomplete.example.json",
-    "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
+    "evaluations/baseline/v2.0.0-beta.1.json", "evaluations/baseline/checksums.json",
     "plugin.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json",
     "evaluations/specialists/methodology-cases.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
