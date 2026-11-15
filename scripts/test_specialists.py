@@ -48,7 +48,7 @@ class SpecialistPackageTests(unittest.TestCase):
             with self.subTest(weight=weight):
                 self.assertIn(weight, scoring)
         self.assertIn("sum(weight × rating / 5)", scoring)
-        self.assertIn("Unknown", scoring)
+        self.assertIn("missing evidence", scoring)
 
 
 if __name__ == "__main__":
