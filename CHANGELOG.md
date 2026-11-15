@@ -52,3 +52,11 @@
 - Run the PowerShell installer suite on Windows CI and the Bash installer suite on the existing Ubuntu CI job.
 - Extend structural validation to require the installer regression suite.
 - No new runtime dependencies and no changes to canonical product methodology.
+
+## Unreleased — v1.2.6 Security and research provenance hardening
+
+- Reject malformed suite, case, claim and source structures without uncaught type errors.
+- Resolve security fixture paths and reject absolute paths or paths escaping the repository root, including symlink escapes.
+- Require explicit verification method and ISO date metadata for observed claims in addition to a verified source ID and locator.
+- Add regression tests for path traversal, malformed contracts, invalid claim statuses and positive/negative provenance cases.
+- Keep fixture handling offline and data-only; no external scanners, network calls, model calls or third-party dependencies.
