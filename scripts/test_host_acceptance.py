@@ -22,7 +22,7 @@ class HostAcceptanceReportTests(unittest.TestCase):
     def complete_report(self, evidence_status="passed"):
         return {
             "schema_version": "1.0.0",
-            "plugin": {"name": "synthesise-ai-free", "version": "2.0.0-alpha.4"},
+            "plugin": {"name": "synthesise-ai-free", "version": "2.0.0-beta.1"},
             "host": "claude-code",
             "host_version": "2.1.0",
             "os": "Ubuntu 26.04",
