@@ -8,7 +8,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Audience
@@ -60,6 +60,10 @@ Include segment comparison, ICP hypotheses, JTBD map, pain/outcome map, buying c
 - Observations and interpretations are distinguishable.
 - Problem intensity and willingness to pay are not conflated.
 - Reachability is grounded in identifiable channels or explicitly labelled as a hypothesis.
+
+## Progressive methodology reference
+
+Load `references/audience-intelligence-methodology.md` whenever performing substantive audience work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 
