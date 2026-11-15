@@ -161,3 +161,5 @@ The v2 preview is published as a separate plugin entry; it does not replace the 
 - Codex: add/upgrade the repository marketplace, then install `synthesise-v2-preview` from the ChatGPT desktop Plugins Directory
 
 The Codex Git-backed marketplace entry uses `git-subdir` to resolve the plugin root at `./skills`. The plugin manifest explicitly lists the orchestrator and ten specialist directories, excluding the v1 canonical skill. The Claude Code plugin manifest uses the same package root and explicit skill paths. See [native plugin distribution](native-plugin-distribution.md) for the layout, verification steps and current limitations.
+
+For a controlled evaluation alongside an existing v1 installation, see the [v1-to-v2 preview migration guide](v2-migration-guide.md). It covers project continuity, acceptance checks and rollback without implying automatic project conversion.
