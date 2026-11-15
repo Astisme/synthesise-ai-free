@@ -94,6 +94,16 @@ class HostAcceptanceReportTests(unittest.TestCase):
             errors, _ = validate_report(path)
         self.assertTrue(any("plugin.version does not match" in item for item in errors))
 
+    def test_malformed_host_and_status_types_are_rejected_without_crashing(self):
+        report = self.complete_report()
+        report["host"] = ["claude-code"]
+        report["results"]["plugin_install"]["status"] = ["passed"]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.write_report(Path(tmp), report)
+            errors, _ = validate_report(path)
+        self.assertTrue(any("host must be" in item for item in errors))
+        self.assertTrue(any("plugin_install: invalid status" in item for item in errors))
+
     def test_all_required_checks_must_be_present(self):
         report = self.complete_report()
         del report["results"]["artifact_ownership"]
