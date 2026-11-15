@@ -10,11 +10,11 @@
   "results": [
     {
       "scenario_id": "discovery",
-      "output": "Replace with the captured agent response.",
+      "output": "Let's map your capability, evidence, and constraints first. Next question: which problem do people already ask you to solve, and what evidence shows you can solve it?",
       "scores": {
-        "methodology": 3,
-        "evidence-quality": 3,
-        "output-quality": 3
+        "methodology": 4,
+        "evidence-quality": 4,
+        "output-quality": 5
       }
     }
   ]
