@@ -2,7 +2,7 @@
 
 An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-**v1.1.0** · MIT · Canonical skill: \`skills/synthesise-ai-free/\`
+**v1.1.0** · MIT · Canonical skill: `skills/synthesise-ai-free/`
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
@@ -15,7 +15,7 @@ Inspired by publicly described product-development concepts, including the Uniqu
 5. **Product architect** — generate product charters, curricula, workbooks, templates and delivery plans.
 6. **Commercial strategist** — design positioning, pricing hypotheses, tiers, offers and unit economics.
 7. **Launch strategist** — produce landing-page strategy, campaigns, roadmaps and metrics.
-8. **Project memory** — maintain a portable \`PROJECT-BRIEF.md\` across sessions and harnesses.
+8. **Project memory** — maintain a portable `PROJECT-BRIEF.md` across sessions and harnesses.
 
 The system distinguishes evidence from assumptions. A score is not proof of demand, and no commercial outcome is guaranteed.
 
@@ -23,36 +23,36 @@ The system distinguishes evidence from assumptions. A score is not proof of dema
 
 Recommended:
 
-\`\`\`bash
+```bash
 npx skills add astisme/synthesise-ai-free
-\`\`\`
+```
 
 Select a harness:
 
-\`\`\`bash
+```bash
 npx skills add astisme/synthesise-ai-free --agent codex
 npx skills add astisme/synthesise-ai-free --agent claude-code
 npx skills add astisme/synthesise-ai-free --agent cursor
 npx skills add astisme/synthesise-ai-free --agent github-copilot
 npx skills add astisme/synthesise-ai-free --agent gemini-cli
 npx skills add astisme/synthesise-ai-free --agent opencode
-\`\`\`
+```
 
 See [docs/installation.md](docs/installation.md) for Claude Desktop, Cline, Roo Code, OpenHands, Windsurf and manual installation. Agent identifiers and native support can change; check CLI help and current harness documentation.
 
 Manual installation:
 
-\`\`\`bash
+```bash
 git clone https://github.com/astisme/synthesise-ai-free.git
 cd synthesise-ai-free
 bash scripts/install.sh
-\`\`\`
+```
 
 Windows PowerShell:
 
-\`\`\`powershell
-.\\scripts\\install.ps1
-\`\`\`
+```powershell
+.\scripts\install.ps1
+```
 
 ## Use it
 
@@ -69,7 +69,7 @@ You can start at any stage; a full engagement does not require restarting discov
 
 ## Repository structure
 
-\`\`\`text
+```text
 skills/synthesise-ai-free/
 ├── SKILL.md
 ├── references/
@@ -79,21 +79,21 @@ skills/synthesise-ai-free/
 docs/
 scripts/
 .github/workflows/
-\`\`\`
+```
 
 ## Validate
 
 Requires Python 3; no third-party dependencies:
 
-\`\`\`bash
+```bash
 python scripts/validate.py
-\`\`\`
+```
 
 GitHub Actions runs the same check on pushes and pull requests.
 
 ## Project memory
 
-For ongoing work, ask the agent to create/update a \`PROJECT-BRIEF.md\` in your project. It stores audience, evidence, UVZ ranking, decisions, product architecture, commercial assumptions and next actions in portable Markdown. Keep secrets and unnecessary personal data out.
+For ongoing work, ask the agent to create/update a `PROJECT-BRIEF.md` in your project. It stores audience, evidence, UVZ ranking, decisions, product architecture, commercial assumptions and next actions in portable Markdown. Keep secrets and unnecessary personal data out.
 
 ## Design principles
 
