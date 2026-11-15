@@ -1,6 +1,6 @@
 {
   "algorithm": "git-blob-sha1",
-  "source_commit": "ff1b3b664acb9e8835c3a85cabf5619d61c979f4",
+  "source_commit": "6585984e08159d4d09ea64d4403b106af1aa0ac4",
   "files": {
     "skills/synthesise-orchestrator/SKILL.md": "4e38a6a7fc685652ea1522418af13685de17c1c7",
     "skills/synthesise-orchestrator/references/routing-matrix.md": "0dd73783494d3146c1bcabedb8f1ed4e8f6eb47b",
@@ -13,8 +13,8 @@
     "skills/synthesise-discovery/references/expertise-discovery-methodology.md": "bf9155805cbb314b26547625b9c5f08cf50088b6",
     "skills/synthesise-audience/SKILL.md": "b2e33d6b2a6262f518c0b1fd4954c4aa606a5449",
     "skills/synthesise-audience/references/audience-intelligence-methodology.md": "d56cef1ee31208f4f20f22c642f61debc97a0ade",
-    "skills/synthesise-uvz/SKILL.md": "33aa48bdfb8ecc2973b3585ed93bd8ab5289081c",
-    "skills/synthesise-uvz/references/uvz-advanced-methodology.md": "897d4e16d36410242fec3f16744d0c772f25b3ad",
+    "skills/synthesise-uvz/SKILL.md": "ceb0de3993e3c7362aefe5f58139774f21caee82",
+    "skills/synthesise-uvz/references/uvz-advanced-methodology.md": "b0e7628afeb9f6148c0d55cd69a04bc05d1451d8",
     "skills/synthesise-market-intelligence/SKILL.md": "667a18d8817478e9fb9e455eaf5bc1b537ab7a18",
     "skills/synthesise-market-intelligence/references/market-research-methodology.md": "ef1d4a5bd6383e52362a406796f40f30b73dbdea",
     "skills/synthesise-validation/SKILL.md": "067e6e7f3f338f7ab9a2eb5a0bd6c0fe5d2752de",
@@ -28,6 +28,7 @@
     "skills/synthesise-launch/SKILL.md": "7613deb42ad25a78ff6416c22c0619dd284aeef8",
     "skills/synthesise-launch/references/go-to-market-methodology.md": "d52e95f410520fcc81a5226e1b1b803296a44b6c",
     "skills/synthesise-project/SKILL.md": "bdf15ae7fe185b210ae8f6811fb41407f04d559c",
-    "skills/synthesise-project/references/project-state-and-continuity-methodology.md": "03fed01f173df9ee1dbac3d84e7b41f84edf6326"
+    "skills/synthesise-project/references/project-state-and-continuity-methodology.md": "03fed01f173df9ee1dbac3d84e7b41f84edf6326",
+    "skills/synthesise-uvz/references/uvz-scoring.md": "6d646cde86c1d6d3ade85a30f15dc85750850129"
   }
 }
