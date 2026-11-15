@@ -193,7 +193,7 @@ for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
     if not skill_path.is_file():
         continue
     content = skill_path.read_text(encoding="utf-8")
-    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\\.md", content):
+    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", content):
         target = (package_dir / ref).resolve()
         try:
             target.relative_to(package_dir.resolve())
@@ -237,7 +237,15 @@ else:
 catalog_path = ROOT / "docs" / "skill-catalog.md"
 if catalog_path.is_file():
     catalog = catalog_path.read_text(encoding="utf-8")
-    catalog_ids = set(re.findall(r"(?m)^\\|\\s*\\d+\\s*\\|\\s*`(synthesise-[a-z-]+)`", catalog))
+    catalog_ids = set()
+    for line in catalog.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) >= 2 and cells[0].isdigit():
+            skill_cell = cells[1]
+            if skill_cell.startswith("`") and skill_cell.endswith("`"):
+                catalog_ids.add(skill_cell[1:-1])
     expected_catalog_ids = set(EXPECTED_SPECIALISTS) | {"synthesise-orchestrator"}
     if catalog_ids != expected_catalog_ids:
         fail("Skill catalog IDs do not match the eleven modular packages: " + str(sorted(catalog_ids)))
