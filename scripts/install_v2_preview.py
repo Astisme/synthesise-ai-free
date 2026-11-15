@@ -35,7 +35,7 @@ def skill_metadata(path: Path) -> tuple[str, str]:
         raise ValueError(f"Invalid SKILL.md frontmatter: {path}")
     name = re.search(r"(?m)^name:\s*([^\s]+)\s*$", match.group(1))
     version = re.search(r'(?m)^\s+version:\s*["\']?([^\s"\']+)', match.group(1))
-    if not name or not version:
+    if not name:
         raise ValueError(f"Missing name/version metadata: {path}")
     return name.group(1), version.group(1) if version else ""
 
