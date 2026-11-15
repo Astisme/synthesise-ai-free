@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; research tool availability varies by harness.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Market Intelligence
@@ -34,6 +34,10 @@ Decision/context; competitor and alternative matrix; customer-language themes; p
 - Revenue, market share, conversion and satisfaction are not inferred from marketing copy.
 - Recent sources are preferred for changing prices/features.
 - Observations are distinguished from interpretation.
+
+## Progressive methodology reference
+
+Load `references/market-research-methodology.md` whenever performing substantive market intelligence work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 Provide source provenance, access dates, geography, limitations and open questions. If browsing is unavailable, state that research is unverified and provide a research plan.
