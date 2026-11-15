@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from project_brief import ProjectBriefError, parse_project_brief
 from workflow_integrity import validate_product_lifecycle, validate_project_resume
+from security_fixtures import validate_security_suite
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "evaluations/baseline/v1.1.0.json"
@@ -165,6 +166,15 @@ def main():
             check(name, bool(errors), errors or "Invalid handoff was unexpectedly accepted")
     except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
         check("product_workflow_integrity", False, str(exc))
+
+    # Check adversarial documents as untrusted data and enforce source-provenance contracts.
+    try:
+        security_suite = load_json(ROOT / "evaluations/security/security-cases.json")
+        security_errors = validate_security_suite(security_suite)
+        check("security_untrusted_content_and_provenance", not security_errors,
+              security_errors or "Prompt injection, malicious research, fabricated citations and quoted instructions remain untrusted")
+    except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
+        check("security_untrusted_content_and_provenance", False, str(exc))
 
     scenario_files = sorted(SCENARIOS.glob("*.yaml"))
     scenario_ids, fixture_failures = set(), []

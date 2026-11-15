@@ -54,25 +54,46 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
     except (json.JSONDecodeError, OSError) as exc:
         fail("Invalid manifest " + relative + ": " + str(exc))
 
-for relative in ("schemas/project-brief.schema.json", "schemas/model-run.schema.json",
-                 "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
-                 "scripts/project_brief.py", "scripts/test_project_brief.py",
-                 "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
-                 "evaluations/workflows/product-lifecycle.json",
-                 "evaluations/workflows/continuity/resume-preserves-decisions.json",
-                 "evaluations/workflows/invalid/missing-validation-evidence.json",
-                 "evaluations/workflows/invalid/broken-monetization-handoff.json",
-                 "evaluations/workflows/invalid/decision-loss-on-resume.json",
-                 "fixtures/projects/creator-analytics/PROJECT-BRIEF.md",
-                 "fixtures/projects/invalid/missing-sections.md"):
-    path = ROOT / relative
-    if not path.is_file():
+required_files = (
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+    "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
+    "scripts/project_brief.py", "scripts/test_project_brief.py",
+    "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
+    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py",
+    "evaluations/workflows/product-lifecycle.json",
+    "evaluations/workflows/continuity/resume-preserves-decisions.json",
+    "evaluations/workflows/invalid/missing-validation-evidence.json",
+    "evaluations/workflows/invalid/broken-monetization-handoff.json",
+    "evaluations/workflows/invalid/decision-loss-on-resume.json",
+    "evaluations/security/security-cases.json",
+    "evaluations/security/fixtures/prompt-injection.md",
+    "evaluations/security/fixtures/malicious-research-document.md",
+    "evaluations/security/fixtures/fabricated-citations.md",
+    "evaluations/security/fixtures/untrusted-instructions.md",
+    "fixtures/projects/creator-analytics/PROJECT-BRIEF.md",
+    "fixtures/projects/invalid/missing-sections.md",
+)
+for relative in required_files:
+    if not (ROOT / relative).is_file():
         fail("Missing evaluation contract file: " + relative)
-        continue
-    try:
-        json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as exc:
-        fail("Invalid JSON in " + relative + ": " + str(exc))
+
+json_files = (
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+    "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
+    "evaluations/workflows/product-lifecycle.json",
+    "evaluations/workflows/continuity/resume-preserves-decisions.json",
+    "evaluations/workflows/invalid/missing-validation-evidence.json",
+    "evaluations/workflows/invalid/broken-monetization-handoff.json",
+    "evaluations/workflows/invalid/decision-loss-on-resume.json",
+    "evaluations/security/security-cases.json",
+)
+for relative in json_files:
+    path = ROOT / relative
+    if path.is_file():
+        try:
+            json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as exc:
+            fail("Invalid JSON in " + relative + ": " + str(exc))
 
 if errors:
     print("Validation failed:")

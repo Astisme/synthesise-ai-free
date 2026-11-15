@@ -32,3 +32,10 @@
 - Verify selected opportunities map to validation hypotheses, completed validation evidence bounds the product promise, curriculum supports that promise, and the offer preserves the product/audience IDs.
 - Add project-resume fixtures that reject dropped or silently modified prior decisions and dropped open questions.
 - Add negative fixtures for missing validation evidence, broken monetization handoffs and decision loss.
+
+## Unreleased — v1.2.3 Security hardening
+
+- Add adversarial prompt-injection, malicious research-document, fabricated-citation and untrusted-instruction fixtures.
+- Add deterministic checks for trust labels, handling controls, claim-state separation and verified provenance requirements for observed claims.
+- Add negative tests for trusted promotion, missing controls and unverified citations.
+- Security fixtures are never executed; no network calls, API keys or external scanners are required.

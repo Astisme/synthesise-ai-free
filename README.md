@@ -142,3 +142,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 ### Workflow integrity fixtures
 
 The deterministic integration suite uses controlled, ID-linked fixtures to check that discovery evidence and audience flow into UVZ selection; selected opportunities become falsifiable validation hypotheses; completed validation evidence bounds the product promise; curriculum modules support that promise; and the monetization offer preserves the product and audience. Resume fixtures assert that prior decisions remain unchanged and unresolved questions are not silently dropped. These checks verify data handoffs, not LLM reasoning.
+
+### Security regression fixtures
+
+The security fixture suite includes prompt-injection content, a malicious research attachment, an intentionally fabricated citation and quoted untrusted instructions. The evaluator treats these files as data, checks that each case is labelled untrusted, requires explicit handling controls, and rejects observed claims without verified source identifiers and locators. No fixture content is executed and no network lookup is attempted; source verification is represented by controlled fixture metadata.
