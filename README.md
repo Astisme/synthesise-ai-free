@@ -38,7 +38,7 @@ claude plugin marketplace add Astisme/synthesise-ai-free
 claude plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-For the modular v2 preview, install `synthesise-v2-preview@synthesise-ai-free` instead. The stable and preview plugins are separate choices. Update from the plugin manager or refresh the marketplace and reinstall/update the selected plugin.
+For the modular v2 preview, install `synthesise-v2-preview@synthesise-ai-free` instead. The stable and preview plugins are separate choices. Update from the plugin manager or refresh the marketplace and update the selected plugin.
 
 ### OpenAI Codex
 
