@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; research tool availability varies by harness.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.3"
+  version: "2.0.0-alpha.4"
 ---
 
 # Synthesise Market Intelligence
