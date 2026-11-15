@@ -25,14 +25,14 @@ class SpecialistPackageTests(unittest.TestCase):
                 skill_path = package / "SKILL.md"
                 self.assertTrue(skill_path.is_file())
                 content = skill_path.read_text(encoding="utf-8")
-                self.assertTrue(content.startswith("---\\n"))
+                self.assertTrue(content.startswith("---\n"))
                 frontmatter = content.split("---", 2)[1]
-                self.assertRegex(frontmatter, r"(?m)^name:\\s*" + re.escape(package.name) + r"\\s*$")
+                self.assertRegex(frontmatter, r"(?m)^name:\s*" + re.escape(package.name) + r"\s*$")
                 for key in ("description:", "license:", "compatibility:", "version:"):
                     self.assertIn(key, frontmatter)
 
     def test_all_progressive_disclosure_links_resolve(self):
-        pattern = r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\\.md"
+        pattern = r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md"
         for package in self.packages:
             content = (package / "SKILL.md").read_text(encoding="utf-8")
             for relative in re.findall(pattern, content):
@@ -44,7 +44,7 @@ class SpecialistPackageTests(unittest.TestCase):
         if not package.is_dir():
             self.skipTest("UVZ package is introduced by its own specialist PR")
         scoring = (package / "references/uvz-scoring.md").read_text(encoding="utf-8")
-        for weight in ("20%", "20%", "15%", "10%", "15%", "10%", "10%"):
+        for weight in ("20%", "15%", "10%"):
             with self.subTest(weight=weight):
                 self.assertIn(weight, scoring)
         self.assertIn("sum(weight × rating / 5)", scoring)
