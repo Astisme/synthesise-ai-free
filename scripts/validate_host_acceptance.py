@@ -69,7 +69,7 @@ def validate_report(path: Path, require_all_passed: bool = False) -> tuple[list[
         if report_plugin.get("version") != plugin.get("version"):
             errors.append("plugin.version does not match the repository plugin manifest")
 
-    if report.get("host") not in ALLOWED_HOSTS:
+    if not isinstance(report.get("host"), str) or report.get("host") not in ALLOWED_HOSTS:
         errors.append("host must be claude-code or codex-desktop")
     for field in ("host_version", "os"):
         if not isinstance(report.get(field), str) or not report[field].strip():
@@ -80,7 +80,7 @@ def validate_report(path: Path, require_all_passed: bool = False) -> tuple[list[
             raise ValueError
     except (TypeError, ValueError):
         errors.append("tested_at must be an ISO YYYY-MM-DD date")
-    if report.get("install_route") not in ALLOWED_ROUTES:
+    if not isinstance(report.get("install_route"), str) or report.get("install_route") not in ALLOWED_ROUTES:
         errors.append("install_route must be native-marketplace or filesystem")
 
     results = report.get("results")
@@ -106,7 +106,7 @@ def validate_report(path: Path, require_all_passed: bool = False) -> tuple[list[
         status = check.get("status")
         evidence = check.get("evidence")
         notes = check.get("notes")
-        if status not in ALLOWED_STATUSES:
+        if not isinstance(status, str) or status not in ALLOWED_STATUSES:
             errors.append(f"{check_id}: invalid status")
             all_passed = False
             continue
