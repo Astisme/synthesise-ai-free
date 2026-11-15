@@ -136,7 +136,7 @@ for relative in json_files:
 # Validate every modular specialist package present in this checkout.
 SPECIALIST_ROOT = ROOT / "skills"
 for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
-    if not package_dir.is_dir() or package_dir.name in ("synthesise-ai-free", "synthesise-orchestrator"):
+    if not package_dir.is_dir() or package_dir.name == "synthesise-orchestrator":
         continue
     skill_path = package_dir / "SKILL.md"
     if not skill_path.is_file():
