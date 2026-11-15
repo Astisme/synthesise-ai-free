@@ -152,11 +152,11 @@ def main():
             # Package-version metadata is excluded from the frozen alpha.4
             # baseline: stable 2.0.0 changes release identity, not methodology.
             if relative.startswith("skills/") and relative.endswith("/SKILL.md"):
-                content = content.replace(
-                    b'version: "2.0.0"',
-                    b'version: "2.0.0-alpha.4"',
-                    1,
-                )
+                # Reconstruct historical metadata only for immutable baseline comparison.
+                if b"version: \\\"2.0.0\\\"" in content:
+                    content = content.replace(b"version: \\\"2.0.0\\\"", b"version: \\\"2.0.0-alpha.4\\\"", 1)
+                elif b"  author: astisme\\n" in content:
+                    content = content.replace(b"  author: astisme\\n", b"  author: astisme\\n  version: \\\"2.0.0-alpha.4\\\"\\n", 1)
             actual = git_blob_sha1(content)
             if actual != expected:
                 changed.append({"path": relative, "expected": expected, "actual": actual})
