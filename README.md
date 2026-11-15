@@ -1,6 +1,6 @@
 # Synthesise AI Free
 
-An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
+An independent, open-source modular Agent Skill system for turning expertise into a researched, validated and launch-ready digital product.
 
 **Canonical architecture:** modular v2 · **Current package version:** 2.0.0-alpha.4 · MIT
 
