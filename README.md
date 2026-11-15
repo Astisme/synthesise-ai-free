@@ -2,7 +2,7 @@
 
 An independent, open-source modular Agent Skill system for turning expertise into a researched, validated and launch-ready digital product.
 
-**Canonical architecture:** modular v2 · **Current package version:** 2.0.0-beta.1 · MIT
+**Canonical architecture:** modular v2 · **Current package version:** 2.0.0 · MIT
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
