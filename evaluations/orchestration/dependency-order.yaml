@@ -1,0 +1,47 @@
+{
+  "suite_id": "orchestration-dependency-order",
+  "version": "1.0.0",
+  "description": "Deterministic dependency and sequencing fixtures for the proposed specialist graph. Parallel eligibility is conditional on harness support and separate artifact ownership.",
+  "cases": [
+    {
+      "id": "uvz-waits-for-expertise-and-audience",
+      "plan": ["synthesise-discovery", "synthesise-audience", "synthesise-uvz"],
+      "expected": {
+        "predecessors": {
+          "synthesise-uvz": ["synthesise-discovery", "synthesise-audience"]
+        },
+        "parallel_groups": [["synthesise-discovery", "synthesise-audience"]]
+      }
+    },
+    {
+      "id": "market-and-validation-independent-after-opportunity",
+      "plan": ["synthesise-market-intelligence", "synthesise-validation"],
+      "available_artifacts": ["uvz-opportunity-report.md", "audience-intelligence.md"],
+      "expected": {
+        "parallel_eligible": true,
+        "parallel_requires_harness_support": true,
+        "separate_output_ownership": true
+      }
+    },
+    {
+      "id": "curriculum-follows-product-charter",
+      "plan": ["synthesise-product-architecture", "synthesise-curriculum"],
+      "expected": {
+        "predecessors": {
+          "synthesise-curriculum": ["synthesise-product-architecture"]
+        },
+        "parallel_eligible": false
+      }
+    },
+    {
+      "id": "launch-follows-offer",
+      "plan": ["synthesise-monetization", "synthesise-launch"],
+      "expected": {
+        "predecessors": {
+          "synthesise-launch": ["synthesise-monetization"]
+        },
+        "parallel_eligible": false
+      }
+    }
+  ]
+}
