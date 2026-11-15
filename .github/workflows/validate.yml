@@ -2,7 +2,7 @@ name: Validate and evaluate Synthesise
 
 on:
   push:
-    branches: [main, "v*", "v1.2.0-evaluation-foundation"]
+    branches: [main, "v*"]
   pull_request:
   workflow_dispatch:
 
