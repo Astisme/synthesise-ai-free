@@ -35,7 +35,7 @@ class DualHostAcceptanceTests(unittest.TestCase):
     def write(self, root, host, report=None):
         folder = root / host
         evidence = folder / "evidence"
-        evidence.mkdir(parents=True)
+        evidence.mkdir(parents=True, exist_ok=True)
         for check in CHECKS:
             (evidence / f"{check}.log").write_text(f"Observed {check}\n", encoding="utf-8")
         path = folder / "report.json"
