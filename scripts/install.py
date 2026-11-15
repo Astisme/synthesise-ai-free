@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -19,18 +20,22 @@ PACKAGES = (
     "synthesise-monetization", "synthesise-launch", "synthesise-project",
 )
 MANIFEST = ".synthesise-v2.json"
+PLUGIN_VERSION = json.loads((ROOT / "plugin.json").read_text(encoding="utf-8"))["version"]
 
 
-def skill_metadata(path: Path) -> tuple[str, str]:
+def skill_checksum(path: Path) -> str:
+    return hashlib.sha256((path / "SKILL.md").read_bytes()).hexdigest()
+
+
+def skill_metadata(path: Path) -> str:
     text = (path / "SKILL.md").read_text(encoding="utf-8")
     match = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
     if not match:
         raise ValueError(f"Invalid SKILL.md frontmatter: {path}")
     name = re.search(r"(?m)^name:\s*([^\s]+)\s*$", match.group(1))
-    version = re.search(r'(?m)^\s+version:\s*["\']?([^\s"\']+)', match.group(1))
     if not name:
-        raise ValueError(f"Missing name/version metadata: {path}")
-    return name.group(1), version.group(1) if version else ""
+        raise ValueError(f"Missing skill name metadata: {path}")
+    return name.group(1)
 
 
 def load_manifest(path: Path) -> dict:
@@ -56,7 +61,7 @@ def installed_skill_names(target: Path) -> dict[str, Path]:
     for child in target.iterdir():
         skill_file = child / "SKILL.md"
         if child.is_dir() and skill_file.is_file():
-            name, _ = skill_metadata(child)
+            name = skill_metadata(child)
             if name in found:
                 raise ValueError(f"Duplicate installed skill name '{name}': {found[name]} and {child}")
             found[name] = child
@@ -80,14 +85,17 @@ def verify_installation(target: Path, selected: tuple[str, ...], manifest: dict,
             errors.append(f"{package}: installed package or SKILL.md is missing")
             continue
         try:
-            name, version = skill_metadata(destination)
+            name = skill_metadata(destination)
         except (OSError, ValueError) as exc:
             errors.append(f"{package}: cannot read skill metadata ({exc})")
             continue
         if name != package:
             errors.append(f"{package}: skill identity is '{name}'")
-        if version != record["version"]:
-            errors.append(f"{package}: manifest version {record['version']} does not match installed version {version or '(missing)'}")
+        if record["version"] != PLUGIN_VERSION:
+            errors.append(f"{package}: install-manifest version {record['version']} does not match plugin version {PLUGIN_VERSION}")
+        expected_checksum = record.get("sha256")
+        if not isinstance(expected_checksum, str) or skill_checksum(destination) != expected_checksum:
+            errors.append(f"{package}: SKILL.md content checksum does not match installed package")
     if not single_package:
         for package in PACKAGES:
             if (target / package).exists() and package not in records:
@@ -163,9 +171,9 @@ def main() -> int:
             source = SKILLS / package
             if not (source / "SKILL.md").is_file():
                 raise ValueError(f"Source package is incomplete: {source}")
-            name, version = skill_metadata(source)
-            if not version:
-                raise ValueError(f"Source package has no version metadata: {source}")
+            name = skill_metadata(source)
+            version = PLUGIN_VERSION
+            checksum = skill_checksum(source)
             if name != package:
                 raise ValueError(f"Package identity mismatch: directory={package}, skill={name}")
             destination = target / package
@@ -174,14 +182,14 @@ def main() -> int:
                 raise ValueError(f"Duplicate skill identity '{name}' already installed at {existing}")
             record = manifest["packages"].get(package)
             if destination.exists() and not args.force:
-                if record and record.get("version") == version:
+                if record and record.get("version") == version and record.get("sha256") == checksum:
                     print(f"Already installed: {package} ({version})")
                     continue
                 if record:
                     raise ValueError(f"{package} is installed at another version; use --force to upgrade")
                 raise ValueError(f"Unmanaged destination exists: {destination}; use --force to replace")
             replace_directory(source, destination)
-            manifest["packages"][package] = {"version": version}
+            manifest["packages"][package] = {"version": version, "sha256": checksum}
             write_manifest(manifest_path, manifest)
             print(f"Installed {package} ({version})")
         print(f"v2 installation complete: {target}")

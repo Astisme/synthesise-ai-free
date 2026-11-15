@@ -117,14 +117,14 @@ class V2InstallerTests(unittest.TestCase):
         self.assertNotEqual(verified.returncode, 0)
         self.assertIn("synthesise-launch: installed package or SKILL.md is missing", verified.stderr)
 
-    def test_verify_detects_identity_and_version_drift(self):
+    def test_verify_detects_identity_and_content_drift(self):
         self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)
         skill = self.target / "synthesise-discovery" / "SKILL.md"
         content = skill.read_text(encoding="utf-8")
-        skill.write_text(content.replace('version: "2.0.0"', 'version: "2.0.0-alpha.3"'), encoding="utf-8")
+        skill.write_text(content + "\n# locally modified\n", encoding="utf-8")
         verified = self.run_installer("--package", "synthesise-discovery", "--verify")
         self.assertNotEqual(verified.returncode, 0)
-        self.assertIn("manifest version 2.0.0 does not match installed version 2.0.0-alpha.3", verified.stderr)
+        self.assertIn("SKILL.md content checksum does not match installed package", verified.stderr)
 
     def test_verify_rejects_untracked_v2_package_directory(self):
         self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)

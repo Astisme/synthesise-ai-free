@@ -28,7 +28,7 @@ class SpecialistPackageTests(unittest.TestCase):
                 self.assertTrue(content.startswith("---\n"))
                 frontmatter = content.split("---", 2)[1]
                 self.assertRegex(frontmatter, r"(?m)^name:\s*" + re.escape(package.name) + r"\s*$")
-                for key in ("description:", "license:", "compatibility:", "version:"):
+                for key in ("description:", "license:", "compatibility:"):
                     self.assertIn(key, frontmatter)
 
     def test_all_progressive_disclosure_links_resolve(self):
