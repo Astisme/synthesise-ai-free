@@ -28,7 +28,7 @@ Fixture matching is case-insensitive substring matching: a deterministic smoke c
 
 Never update baseline hashes merely to make a failing check pass. A baseline update must be intentional and separately reviewed, include a rationale describing the methodology change and expected impact, record the source commit and updated Git blob SHA-1 values, update baseline version/results, and add or revise specialist/orchestration scenarios covering the changed behaviour.
 
-The frozen methodology reference is `evaluations/baseline/v2.0.0-alpha.4.json`; its pinned file hashes are in `evaluations/baseline/checksums.json`. It covers all eleven modular package entry points and their core methodology references. The release-version field in each skill frontmatter is normalized to the frozen alpha.4 value during hash verification, so promoting package metadata to stable `2.0.0` does not rewrite the historical methodology baseline. The seven-dimension UVZ rubric and its established weights, formulas, scales and sensitivity-analysis rules are part of the pinned v2 UVZ specialist method.
+The frozen methodology reference is `evaluations/baseline/v2.0.0-alpha.4.json`; its pinned file hashes are in `evaluations/baseline/checksums.json`. It covers all eleven modular package entry points and their core methodology references. Skill-level release versions are not part of the current package contract. During hash verification, the evaluator reconstructs the historical alpha.4 metadata line in memory only, so removing duplicated skill versions does not rewrite the immutable methodology baseline. The seven-dimension UVZ rubric and its established weights, formulas, scales and sensitivity-analysis rules are part of the pinned v2 UVZ specialist method.
 
 ## Model-run input
 
