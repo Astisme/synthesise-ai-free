@@ -85,7 +85,7 @@ The deterministic suite checks:
 - existence of every referenced `SKILL.md`;
 - one canonical marketplace entry in each marketplace catalog;
 - root plugin source paths and package layout;
-- absence of nested preview plugin manifests.
+- absence of nested plugin manifests.
 
 CI does not install Claude Code or the Codex desktop application, authenticate a host session, or execute a live model. Contract tests are not a substitute for the manual acceptance checklist.
 
