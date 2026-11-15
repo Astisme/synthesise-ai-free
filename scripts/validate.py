@@ -87,6 +87,7 @@ if (ROOT / "skills" / "plugin.json").exists() or (ROOT / "skills" / ".claude-plu
 
 required_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
@@ -111,6 +112,7 @@ for relative in required_files:
 
 json_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
     "plugin.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json",
     "evaluations/specialists/methodology-cases.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
