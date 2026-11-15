@@ -20,8 +20,9 @@
       "Invent credentials or outcomes"
     ],
     "acceptance_criteria": [
-      "The fixture covers the required discovery behaviour"
+      "The fixture distinguishes demonstrated strengths from aspirations",
+      "The next step is a focused discovery question"
     ]
   },
-  "fixture_output": "Let's map your capability, evidence, and constraints first. Which problem do people already ask you to solve, and what evidence shows you can solve it?"
+  "fixture_output": "Let's map your capability, evidence, and constraints first. Next question: which problem do people already ask you to solve, and what evidence shows you can solve it?"
 }

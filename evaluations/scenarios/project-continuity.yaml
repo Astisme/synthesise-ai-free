@@ -23,8 +23,8 @@
       "Pretend to have read an unavailable brief"
     ],
     "acceptance_criteria": [
-      "The fixture covers the required project-continuity behaviour"
+      "The fixture distinguishes existing facts from new assumptions"
     ]
   },
-  "fixture_output": "I will read PROJECT-BRIEF.md first, summarize confirmed facts, hypotheses, rejected options, unknowns, and dated decisions, then identify the next unresolved decision."
+  "fixture_output": "I will read PROJECT-BRIEF.md first, summarize confirmed facts, hypothesis, rejected options, and unknowns. I will preserve the dated decision log and identify the next action before continuing."
 }
