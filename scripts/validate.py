@@ -83,7 +83,7 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         fail("Invalid manifest " + relative + ": " + str(exc))
 
 if (ROOT / "skills" / "plugin.json").exists() or (ROOT / "skills" / ".claude-plugin" / "plugin.json").exists():
-    fail("Nested preview plugin manifests must not remain after canonical v2 consolidation")
+    fail("Nested plugin manifests must not remain after canonical v2 consolidation")
 
 required_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
