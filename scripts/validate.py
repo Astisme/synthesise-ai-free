@@ -23,12 +23,12 @@ else:
         for key in ("name:", "description:", "license:", "compatibility:"):
             if not re.search(r"(?m)^" + re.escape(key), frontmatter):
                 fail("Frontmatter missing " + key[:-1])
-        if not re.search(r"(?m)^name:\\s*synthesise-ai-free\\s*$", frontmatter):
+        if not re.search(r"(?m)^name:\s*synthesise-ai-free\s*$", frontmatter):
             fail("Frontmatter name must be synthesise-ai-free")
     for heading in ("Operating contract", "Engagement modes", "Project memory", "Deliverable standards"):
         if "## " + heading not in content:
             fail("SKILL.md missing section: " + heading)
-    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\\.md", content):
+    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", content):
         if not (SKILL_DIR / ref).is_file():
             fail("Broken skill reference: " + ref)
 
