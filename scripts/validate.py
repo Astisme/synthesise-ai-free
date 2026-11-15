@@ -169,7 +169,7 @@ EXPECTED_SPECIALISTS = {
 }
 actual_specialists = {
     path.name for path in SPECIALIST_ROOT.glob("synthesise-*")
-    if path.is_dir() and path.name not in ("synthesise-ai-free", "synthesise-orchestrator")
+    if path.is_dir() and path.name != "synthesise-orchestrator"
 }
 for missing in sorted(set(EXPECTED_SPECIALISTS) - actual_specialists):
     fail("Missing modular specialist package: " + missing)
