@@ -84,18 +84,18 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         fail("Invalid manifest " + relative + ": " + str(exc))
 
 required_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/evidence-record.schema.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
     "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py",
-    "scripts/test_ci_contract.py",
+    "scripts/test_ci_contract.py", "scripts/test_specialist_methodologies.py", "scripts/test_evidence_record.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
     "evaluations/workflows/invalid/missing-validation-evidence.json",
     "evaluations/workflows/invalid/broken-monetization-handoff.json",
     "evaluations/workflows/invalid/decision-loss-on-resume.json",
-    "evaluations/security/security-cases.json",
+    "evaluations/security/security-cases.json", "evaluations/specialists/methodology-cases.json", "docs/evidence-record.md",
     "evaluations/security/fixtures/prompt-injection.md",
     "evaluations/security/fixtures/malicious-research-document.md",
     "evaluations/security/fixtures/fabricated-citations.md",
@@ -232,6 +232,28 @@ else:
                 fail("Specialist needs at least two methodology fixtures: " + skill_id)
     except (json.JSONDecodeError, OSError, AttributeError) as exc:
         fail("Invalid specialist methodology fixture: " + str(exc))
+
+# Catalog identity and canonical output ownership are checked against the actual packages.
+catalog_path = ROOT / "docs" / "skill-catalog.md"
+if catalog_path.is_file():
+    catalog = catalog_path.read_text(encoding="utf-8")
+    catalog_ids = set(re.findall(r"(?m)^\\|\\s*\\d+\\s*\\|\\s*`(synthesise-[a-z-]+)`", catalog))
+    expected_catalog_ids = set(EXPECTED_SPECIALISTS) | {"synthesise-orchestrator"}
+    if catalog_ids != expected_catalog_ids:
+        fail("Skill catalog IDs do not match the eleven modular packages: " + str(sorted(catalog_ids)))
+else:
+    fail("Missing docs/skill-catalog.md")
+
+canonical_outputs = [value[0] for value in EXPECTED_SPECIALISTS.values()]
+if len(canonical_outputs) != len(set(canonical_outputs)):
+    fail("Duplicate canonical specialist artifact ownership detected")
+
+for skill_id in EXPECTED_SPECIALISTS:
+    skill_path = SPECIALIST_ROOT / skill_id / "SKILL.md"
+    if skill_path.is_file():
+        content = skill_path.read_text(encoding="utf-8")
+        if "## Shared evidence and handoff contract" not in content:
+            fail("Specialist missing shared evidence/handoff contract: " + skill_id)
 
 if errors:
     print("Validation failed:")
