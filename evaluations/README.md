@@ -29,3 +29,7 @@ The v1.1.0 baseline is anchored to commit 3b70afb997a377fd555e9888cec912c96bf4eb
 ## Model-run input
 
 See schemas/model-run.schema.json and fixtures/model-run.example.json. Scores are supplied by an evaluator/judge; they are not inferred from string matching. Keep raw customer data, secrets and credentials out of captured runs.
+
+## Regression metadata
+
+Every scenario stores a role/content input conversation and a regression_status object. The v1.2.0 scenarios are fixture-only because v1.1.0 did not have captured live-agent outputs; they must not be presented as historical behavioural regressions.
