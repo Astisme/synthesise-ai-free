@@ -5,7 +5,7 @@
 
 ## Package conventions
 
-Every package will be an independently understandable Agent Skill with its own `SKILL.md` and progressive-disclosure support files (references, workflows, templates and examples as justified). Each package must declare its scope, non-goals, required inputs, canonical outputs, quality gates, artifact ownership and handoff behaviour.
+Every package is an independently understandable Agent Skill with its own `SKILL.md` and progressive-disclosure support files (references, workflows, templates and examples as justified). Each package declares its scope, non-goals, required inputs, canonical outputs, quality gates, artifact ownership and handoff behaviour.
 
 The catalog describes the packages present in this revision. Package presence does not guarantee native discovery, automatic cross-skill invocation or installation in every harness; availability must be checked at runtime.
 
