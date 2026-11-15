@@ -1,0 +1,42 @@
+{
+  "suite_id": "orchestration-unnecessary-skill-loading",
+  "version": "1.0.0",
+  "description": "Negative routing fixtures that prevent loading unrelated specialists by default. Fixture-only; no live agent execution.",
+  "cases": [
+    {
+      "id": "direct-curriculum-with-approved-charter",
+      "input": {
+        "objective": "Create a detailed curriculum for this approved product",
+        "available_artifacts": ["product-charter.md"]
+      },
+      "expected": {
+        "required_skills": ["synthesise-curriculum"],
+        "allowed_conditional_skills": ["synthesise-project"],
+        "must_not_load": ["synthesise-discovery", "synthesise-audience", "synthesise-uvz", "synthesise-market-intelligence", "synthesise-validation", "synthesise-monetization", "synthesise-launch"]
+      }
+    },
+    {
+      "id": "direct-validation-defined-problem",
+      "input": {
+        "objective": "Design a demand validation experiment",
+        "available_artifacts": ["audience-intelligence.md", "uvz-opportunity-report.md"]
+      },
+      "expected": {
+        "required_skills": ["synthesise-validation"],
+        "allowed_conditional_skills": ["synthesise-market-intelligence", "synthesise-project"],
+        "must_not_load": ["synthesise-discovery", "synthesise-curriculum", "synthesise-launch"]
+      }
+    },
+    {
+      "id": "single-specialist-pricing",
+      "input": {
+        "objective": "Suggest pricing tiers for a scoped offer",
+        "available_artifacts": ["product-charter.md"]
+      },
+      "expected": {
+        "required_skills": ["synthesise-monetization"],
+        "must_not_load": ["synthesise-discovery", "synthesise-audience", "synthesise-uvz", "synthesise-validation", "synthesise-product-architecture", "synthesise-curriculum", "synthesise-launch"]
+      }
+    }
+  ]
+}
