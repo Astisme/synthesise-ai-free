@@ -38,16 +38,16 @@ claude plugin marketplace add Astisme/synthesise-ai-free
 claude plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-Update from the plugin manager or refresh the marketplace and reinstall/update the plugin. You can also open `/plugin` to browse and manage it.
+For the modular v2 preview, install `synthesise-v2-preview@synthesise-ai-free` instead. The stable and preview plugins are separate choices. Update from the plugin manager or refresh the marketplace and reinstall/update the selected plugin.
 
 ### OpenAI Codex
 
 ```bash
 codex plugin marketplace add Astisme/synthesise-ai-free
-codex plugin add synthesise-ai-free@synthesise-ai-free
+codex plugin marketplace upgrade
 ```
 
-Use `codex plugin marketplace upgrade` to refresh marketplace metadata and `codex plugin list` to inspect installed plugins. The plugin is packaged with the canonical skill under `skills/`.
+Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace, and install either `synthesise-ai-free` (stable v1) or `synthesise-v2-preview` (modular preview). The documented repo-marketplace flow uses the desktop Plugins Directory for installation; marketplace registration in the CLI is not proof that a plugin is installed.
 
 ### GitHub Copilot CLI
 
