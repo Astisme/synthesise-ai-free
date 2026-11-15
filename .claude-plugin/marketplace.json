@@ -4,30 +4,20 @@
     "name": "Astisme",
     "url": "https://github.com/Astisme"
   },
-  "description": "Synthesise AI Free — stable v1 and modular v2 preview plugins.",
+  "description": "Synthesise AI Free — modular v2 orchestrator and ten specialist skills.",
   "plugins": [
     {
       "name": "synthesise-ai-free",
       "source": "./",
-      "description": "Discover, validate, architect, price and launch differentiated digital products.",
-      "category": "productivity",
-      "keywords": [
-        "product-development",
-        "UVZ",
-        "market-research",
-        "validation"
-      ]
-    },
-    {
-      "name": "synthesise-v2-preview",
-      "source": "./skills",
-      "description": "Modular v2.0.0-alpha.4 preview: orchestrator and ten specialist skills. Not production-ready.",
+      "description": "Modular evidence-led product development: orchestrate discovery, UVZ, market intelligence, validation, product architecture, curriculum, monetization, launch and project continuity.",
       "category": "productivity",
       "keywords": [
         "product-development",
         "agent-skills",
         "orchestration",
-        "preview"
+        "UVZ",
+        "validation",
+        "market-research"
       ]
     }
   ]
