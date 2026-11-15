@@ -121,7 +121,7 @@ class V2PreviewInstallerTests(unittest.TestCase):
         self.assertEqual(self.run_installer("--package", "synthesise-discovery").returncode, 0)
         skill = self.target / "synthesise-discovery" / "SKILL.md"
         content = skill.read_text(encoding="utf-8")
-        skill.write_text(content.replace("version: 2.0.0-alpha.4", "version: 2.0.0-alpha.3"), encoding="utf-8")
+        skill.write_text(content.replace('version: "2.0.0-alpha.4"', 'version: "2.0.0-alpha.3"'), encoding="utf-8")
         verified = self.run_installer("--package", "synthesise-discovery", "--verify")
         self.assertNotEqual(verified.returncode, 0)
         self.assertIn("manifest version 2.0.0-alpha.4 does not match installed version 2.0.0-alpha.3", verified.stderr)
