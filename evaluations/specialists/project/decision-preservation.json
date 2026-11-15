@@ -1,0 +1,6 @@
+{
+  "id": "project-decision-preservation",
+  "skill": "synthesise-project",
+  "input": {"approved_decision": "serve independent consultants", "new_artifact": "suggests agencies"},
+  "expected": {"approved_decision_preserved": true, "conflict_escalated": true, "decision_log_append_only": true, "filesystem_writes_not_fabricated": true}
+}
