@@ -25,3 +25,10 @@
 - Generate JSON and Markdown deterministic evaluation reports.
 - Run structural validation, unit tests and deterministic evaluation in pull-request and push CI.
 - No external services, model calls, API keys or third-party Python packages.
+
+## Unreleased — v1.2.2 Workflow integrity
+
+- Add deterministic product lifecycle handoff fixtures from discovery through monetization.
+- Verify selected opportunities map to validation hypotheses, completed validation evidence bounds the product promise, curriculum supports that promise, and the offer preserves the product/audience IDs.
+- Add project-resume fixtures that reject dropped or silently modified prior decisions and dropped open questions.
+- Add negative fixtures for missing validation evidence, broken monetization handoffs and decision loss.

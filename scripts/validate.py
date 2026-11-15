@@ -57,6 +57,12 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
 for relative in ("schemas/project-brief.schema.json", "schemas/model-run.schema.json",
                  "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
                  "scripts/project_brief.py", "scripts/test_project_brief.py",
+                 "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
+                 "evaluations/workflows/product-lifecycle.json",
+                 "evaluations/workflows/continuity/resume-preserves-decisions.json",
+                 "evaluations/workflows/invalid/missing-validation-evidence.json",
+                 "evaluations/workflows/invalid/broken-monetization-handoff.json",
+                 "evaluations/workflows/invalid/decision-loss-on-resume.json",
                  "fixtures/projects/creator-analytics/PROJECT-BRIEF.md",
                  "fixtures/projects/invalid/missing-sections.md"):
     path = ROOT / relative

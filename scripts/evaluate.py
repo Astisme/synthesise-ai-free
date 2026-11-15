@@ -14,6 +14,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from project_brief import ProjectBriefError, parse_project_brief
+from workflow_integrity import validate_product_lifecycle, validate_project_resume
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "evaluations/baseline/v1.1.0.json"
@@ -142,6 +143,28 @@ def main():
               negative_results or "No invalid Markdown project brief fixtures found")
     except (OSError, json.JSONDecodeError) as exc:
         check("markdown_project_brief_parsing_and_schema", False, str(exc))
+
+    # Verify deterministic handoffs and project-resume invariants using controlled fixtures.
+    workflow_dir = ROOT / "evaluations/workflows"
+    try:
+        lifecycle = load_json(workflow_dir / "product-lifecycle.json")
+        lifecycle_errors = validate_product_lifecycle(lifecycle)
+        check("product_lifecycle_handoffs", not lifecycle_errors,
+              lifecycle_errors or "Discovery → UVZ → validation → charter → curriculum → monetization handoffs are intact")
+        continuity = load_json(workflow_dir / "continuity/resume-preserves-decisions.json")
+        continuity_errors = validate_project_resume(continuity)
+        check("project_resume_preserves_decisions", not continuity_errors,
+              continuity_errors or "Prior decisions and unresolved questions are preserved")
+        negative_cases = [
+            ("invalid/missing-validation-evidence.json", validate_product_lifecycle, "invalid_validation_handoff_rejected"),
+            ("invalid/broken-monetization-handoff.json", validate_product_lifecycle, "invalid_monetization_handoff_rejected"),
+            ("invalid/decision-loss-on-resume.json", validate_project_resume, "decision_loss_on_resume_rejected"),
+        ]
+        for relative, validator, name in negative_cases:
+            errors = validator(load_json(workflow_dir / relative))
+            check(name, bool(errors), errors or "Invalid handoff was unexpectedly accepted")
+    except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
+        check("product_workflow_integrity", False, str(exc))
 
     scenario_files = sorted(SCENARIOS.glob("*.yaml"))
     scenario_ids, fixture_failures = set(), []

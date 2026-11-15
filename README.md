@@ -138,3 +138,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 - v1.2.2 — Workflow integrity: test deterministic handoffs from discovery through monetization and preserve project decisions on resume.
 - v1.2.3 — Security hardening: test prompt injection, malicious research documents, fabricated citations and untrusted instructions.
 - v1.3.0 — Optional live model evaluation: only when explicitly enabled and credentials/budget are available. No provider SDK or API key is required by v1.2.x.
+
+### Workflow integrity fixtures
+
+The deterministic integration suite uses controlled, ID-linked fixtures to check that discovery evidence and audience flow into UVZ selection; selected opportunities become falsifiable validation hypotheses; completed validation evidence bounds the product promise; curriculum modules support that promise; and the monetization offer preserves the product and audience. Resume fixtures assert that prior decisions remain unchanged and unresolved questions are not silently dropped. These checks verify data handoffs, not LLM reasoning.
