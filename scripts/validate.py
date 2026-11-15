@@ -125,6 +125,29 @@ for relative in json_files:
         except (json.JSONDecodeError, OSError) as exc:
             fail("Invalid JSON in " + relative + ": " + str(exc))
 
+# Validate every modular specialist package present in this checkout.
+SPECIALIST_ROOT = ROOT / "skills"
+for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
+    if not package_dir.is_dir() or package_dir.name in ("synthesise-ai-free", "synthesise-orchestrator"):
+        continue
+    skill_path = package_dir / "SKILL.md"
+    if not skill_path.is_file():
+        fail("Missing specialist entry point: " + str(skill_path.relative_to(ROOT)))
+        continue
+    specialist_content = skill_path.read_text(encoding="utf-8")
+    if not specialist_content.startswith("---\n") or specialist_content.count("---") < 2:
+        fail("Specialist SKILL.md must start with terminated YAML frontmatter: " + package_dir.name)
+        continue
+    specialist_frontmatter = specialist_content.split("---", 2)[1]
+    if not re.search(r"(?m)^name:\s*" + re.escape(package_dir.name) + r"\s*$", specialist_frontmatter):
+        fail("Specialist frontmatter name mismatch: " + package_dir.name)
+    for key in ("description:", "license:", "compatibility:", "version:"):
+        if key not in specialist_frontmatter:
+            fail("Specialist frontmatter missing " + key[:-1] + ": " + package_dir.name)
+    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", specialist_content):
+        if not (package_dir / ref).is_file():
+            fail("Broken specialist reference in " + package_dir.name + ": " + ref)
+
 if errors:
     print("Validation failed:")
     for item in errors:

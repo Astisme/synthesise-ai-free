@@ -1,0 +1,6 @@
+{
+  "id": "launch-readiness-and-metrics",
+  "skill": "synthesise-launch",
+  "input": {"checkout": "not configured", "campaign": "draft", "metric_definitions": []},
+  "expected": {"readiness_blocker_reported": true, "draft_not_claimed_as_launched": true, "metrics_require_definition_source_cadence": true}
+}

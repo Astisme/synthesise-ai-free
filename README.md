@@ -21,9 +21,9 @@ The system distinguishes evidence from assumptions. A score is not proof of dema
 
 ## Modular v2.0 development
 
-The modular architecture is being implemented incrementally. The first package, `skills/synthesise-orchestrator/`, is an alpha development preview containing routing, dependency, handoff and quality-gate instructions.
+The modular architecture is being implemented incrementally. `skills/synthesise-orchestrator/` provides routing, dependency, handoff and quality-gate instructions. Specialist packages are being introduced in reviewable batches; check the v2 skill catalog and merged package directories for current availability.
 
-**The current published installation remains the v1.1.0 canonical skill.** The orchestrator is not yet included in the existing plugin manifests or copy installers, and the ten specialist packages are not yet implemented. Do not treat this preview as the completed v2.0 product. The orchestrator explicitly uses the v1.1.0 skill as a temporary methodology fallback when a planned specialist is unavailable.
+**The current published installation remains the v1.1.0 canonical skill.** The v2 packages are an alpha development preview and are not yet included in the existing plugin manifests or copy installers. Do not treat the preview as the completed v2.0 distribution. The orchestrator explicitly uses the v1.1.0 skill as a temporary methodology fallback when a planned specialist is unavailable.
 
 Track the architecture proposal in [PR #8](https://github.com/Astisme/synthesise-ai-free/pull/8) and the orchestrator implementation in its follow-up pull request.
 
