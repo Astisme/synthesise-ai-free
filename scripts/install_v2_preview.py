@@ -37,7 +37,7 @@ def skill_metadata(path: Path) -> tuple[str, str]:
     version = re.search(r'(?m)^\s+version:\s*["\']?([^\s"\']+)', match.group(1))
     if not name or not version:
         raise ValueError(f"Missing name/version metadata: {path}")
-    return name.group(1), version.group(1)
+    return name.group(1), version.group(1) if version else ""
 
 
 def load_manifest(path: Path) -> dict:
@@ -124,6 +124,8 @@ def main() -> int:
             if not (source / "SKILL.md").is_file():
                 raise ValueError(f"Source package is incomplete: {source}")
             name, version = skill_metadata(source)
+            if not version:
+                raise ValueError(f"Source package has no version metadata: {source}")
             if name != package:
                 raise ValueError(f"Package identity mismatch: directory={package}, skill={name}")
             destination = target / package
