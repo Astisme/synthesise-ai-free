@@ -1,6 +1,6 @@
 # Synthesise v2.0 Skill Catalog
 
-**Status:** Canonical modular v2 package, currently version 2.0.0-beta.1. All eleven packages (one orchestrator and ten specialists) are present and exposed by the root plugin manifests. Structural validation and deterministic contract fixtures cover package metadata, local references, specialist methodology depth and eight cross-specialist orchestration scenarios. The package is the default and only active distribution. Live host execution acceptance remains separate from CI contract coverage.  
+**Status:** Canonical modular v2 package, currently version 2.0.0. All eleven packages (one orchestrator and ten specialists) are present and exposed by the root plugin manifests. Structural validation and deterministic contract fixtures cover package metadata, local references, specialist methodology depth and eight cross-specialist orchestration scenarios. The package is the default and only active distribution. Maintainer-reported end-to-end use has been confirmed across Claude Code and Codex Desktop; deterministic CI remains distinct from live-host evidence.  
 **Default entry point:** `synthesise-orchestrator`
 
 ## Package conventions
