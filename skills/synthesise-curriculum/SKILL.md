@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Curriculum
@@ -33,6 +33,10 @@ Audience/prerequisites; overall outcome; completion evidence; module sequence; m
 
 ## Quality gates
 Objectives use observable actions; each module supports an outcome; practice and assessment measure objectives; feedback/remediation are defined; workload is realistic; the blueprint does not expand the promise without approval.
+
+## Progressive methodology reference
+
+Load `references/instructional-design-methodology.md` whenever performing substantive curriculum work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 Return curriculum scope, assumptions, production dependencies and acceptance criteria to Product Architecture/Project Continuity.
