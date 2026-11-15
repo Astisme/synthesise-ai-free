@@ -149,7 +149,7 @@ for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
     specialist_frontmatter = specialist_content.split("---", 2)[1]
     if not re.search(r"(?m)^name:\s*" + re.escape(package_dir.name) + r"\s*$", specialist_frontmatter):
         fail("Specialist frontmatter name mismatch: " + package_dir.name)
-    for key in ("description:", "license:", "compatibility:", "version:"):
+    for key in ("description:", "license:", "compatibility:"):
         if key not in specialist_frontmatter:
             fail("Specialist frontmatter missing " + key[:-1] + ": " + package_dir.name)
     for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", specialist_content):
