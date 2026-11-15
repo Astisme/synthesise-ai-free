@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Product Architecture
@@ -32,6 +32,10 @@ Positioning; audience/buying context; problem; transformation; promise/scope/exc
 
 ## Quality gates
 Promise is specific, realistic and evidence-bounded; every component advances an outcome; prerequisites/exclusions/support boundaries are explicit; delivery is feasible; privacy, safety and accessibility are considered.
+
+## Progressive methodology reference
+
+Load `references/product-transformation-architecture.md` whenever performing substantive product architecture work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 Curriculum may expand learning architecture but must not redefine the product promise. Monetization must align with approved scope.
