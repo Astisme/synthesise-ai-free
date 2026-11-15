@@ -69,4 +69,4 @@ Require all eight checks to pass with evidence before treating the host gate as 
 
     python scripts/validate_host_acceptance.py path/to/host-report.json --release-gate
 
-The validator checks the report contract and local evidence paths. It does not install plugins, invoke agents or prove model quality. Never mark a check passed without actual host evidence.
+The validator checks the report contract and local evidence paths. It does not install plugins, invoke agents or prove model quality. Never mark a check passed without actual host evidence.\n\nThe release gate must cover both supported hosts in the same run:\n\n    python scripts/validate_all_host_acceptance.py evidence/claude-code/report.json evidence/codex-desktop/report.json\n\nThis combined validator rejects duplicate or missing hosts and requires all eight evidence-backed checks to pass for each host.
