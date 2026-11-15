@@ -50,6 +50,11 @@ class OrchestratorPackageTests(unittest.TestCase):
         dependency = (PACKAGE / "references/dependency-graph.md").read_text(encoding="utf-8")
         self.assertIn("harness explicitly supports parallel execution", dependency)
 
+
+    def test_integration_contract_reference_is_linked_and_present(self):
+        self.assertIn("references/integration-contracts.md", self.skill)
+        self.assertTrue((PACKAGE / "references/integration-contracts.md").is_file())
+
     def test_handoff_contract_fields_are_documented(self):
         protocol = (PACKAGE / "references/orchestration-protocol.md").read_text(encoding="utf-8")
         for field in (

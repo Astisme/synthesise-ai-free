@@ -1,9 +1,9 @@
 # Synthesise AI Free v2.0.0 — Modular Agent Architecture
 
-**Status:** Modular architecture implemented as v2.0.0-alpha.3 preview; distribution and stable-release gates remain open  
+**Status:** Modular architecture implemented as v2.0.0-alpha.4 preview; distribution and stable-release gates remain open  
 **Target release:** v2.0.0  
 **Migration baseline:** canonical v1.1.0 methodology; v1.2.x deterministic QA remains in force  
-**Current state:** orchestrator and ten specialist packages exist; detailed specialist references and deterministic methodology fixtures are included. Installation transition and full integration verification remain incomplete.
+**Current state:** orchestrator and ten specialist packages exist; detailed specialist references, deterministic methodology fixtures and eight cross-specialist integration contracts are included. Harness installation and live integration verification remain incomplete.
 
 ## 1. Executive summary
 
@@ -160,7 +160,8 @@ A modular v2.0.0 release requires:
 2. **Orchestrator — implemented in alpha:** intent routing, project inspection, dependency-aware plans, handoffs and fallback loading are present with deterministic tests.
 3. **Ten specialist packages — implemented in alpha:** all specialist entry points exist with dedicated ownership, canonical outputs, quality gates and progressive-disclosure references.
 4. **Methodology depth — alpha.3:** detailed procedures, decision criteria and quality reviews are added for all ten specialists. UVZ continues to use the unchanged v1.1.0 seven-dimension scoring reference.
-5. **Deterministic integration and distribution — incomplete:** fixture coverage is expanded, but full cross-skill workflow verification, complete package installation, v1 migration, partial-install recovery and harness compatibility remain release gates.
+5. **Deterministic orchestration integration — alpha.4:** eight scenarios cover expertise-to-charter flow, parallel eligibility, evidence provenance, ownership, decision conflicts, resume, negative validation and launch readiness. These are deterministic contract tests, not live agent execution.
+6. **Distribution and live harness integration — incomplete:** full cross-skill workflow verification, complete package installation, v1 migration, partial-install recovery and harness compatibility remain release gates.
 6. **Stable modular release — not released:** v2.0.0 must not be declared stable until all release gates pass.
 
 ## 13. Open implementation decisions

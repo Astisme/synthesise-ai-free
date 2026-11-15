@@ -1,0 +1,278 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Deterministic cross-specialist integration contracts. These fixtures test data and decision invariants, not live model execution or the quality of generated prose.",
+  "api_calls_made": false,
+  "live_agent_behaviour_tested": false,
+  "scenarios": [
+    {
+      "id": "workflow-expertise-to-charter",
+      "type": "lifecycle",
+      "title": "Expertise to product charter",
+      "purpose": "Preserve audience, capability, opportunity and evidence provenance from Discovery through UVZ, Validation and Product Architecture.",
+      "stages": {
+        "discovery": {
+          "audience_id": "aud-early-consultants",
+          "problem_id": "prob-onboarding",
+          "capability_ids": [
+            "cap-diagnostic"
+          ],
+          "evidence_ids": [
+            "E-101"
+          ]
+        },
+        "audience": {
+          "audience_id": "aud-early-consultants",
+          "problem_id": "prob-onboarding",
+          "evidence_ids": [
+            "E-101"
+          ],
+          "segment_status": "hypothesis"
+        },
+        "uvz": {
+          "opportunity_id": "opp-onboarding",
+          "audience_id": "aud-early-consultants",
+          "problem_id": "prob-onboarding",
+          "capability_ids": [
+            "cap-diagnostic"
+          ],
+          "evidence_ids": [
+            "E-101"
+          ],
+          "unknowns": [
+            "Willingness to pay"
+          ]
+        },
+        "market": {
+          "opportunity_id": "opp-onboarding",
+          "audience_id": "aud-early-consultants",
+          "evidence_ids": [
+            "E-201"
+          ],
+          "output_owner": "synthesise-market-intelligence"
+        },
+        "validation": {
+          "opportunity_id": "opp-onboarding",
+          "audience_id": "aud-early-consultants",
+          "hypothesis_id": "hyp-payment",
+          "status": "completed",
+          "evidence_ids": [
+            "E-301"
+          ],
+          "decision": "revise"
+        },
+        "charter": {
+          "opportunity_id": "opp-onboarding",
+          "audience_id": "aud-early-consultants",
+          "promise_status": "provisional",
+          "evidence_ids": [
+            "E-101",
+            "E-301"
+          ],
+          "owner": "synthesise-product-architecture"
+        }
+      }
+    },
+    {
+      "id": "parallel-market-validation",
+      "type": "parallelism",
+      "title": "Independent market and validation research",
+      "purpose": "Permit concurrent work only when both tasks share approved inputs, have no mutual dependency and own separate outputs.",
+      "harness_supports_parallel": true,
+      "selected_opportunity": "opp-202",
+      "tasks": [
+        {
+          "skill_id": "synthesise-market-intelligence",
+          "depends_on": [
+            "opp-202"
+          ],
+          "output": "market-intelligence.md",
+          "owner": "synthesise-market-intelligence"
+        },
+        {
+          "skill_id": "synthesise-validation",
+          "depends_on": [
+            "opp-202"
+          ],
+          "output": "validation-report.md",
+          "owner": "synthesise-validation"
+        }
+      ],
+      "expected_mode": "parallel"
+    },
+    {
+      "id": "evidence-provenance-through-handoffs",
+      "type": "evidence",
+      "title": "Evidence retains its original meaning",
+      "purpose": "Reuse a customer interview across Audience, UVZ and Validation without upgrading status, confidence or sample.",
+      "record": {
+        "evidence_id": "E-303",
+        "claim": "One interviewee reports onboarding friction",
+        "type": "customer_interview",
+        "status": "reported",
+        "confidence": "low",
+        "scope": {
+          "description": "One interview with an early-stage consultant",
+          "segment": "early-stage-consultants",
+          "sample_size": 1
+        },
+        "limitations": [
+          "Single interview",
+          "No behavioural validation"
+        ]
+      },
+      "consumers": [
+        {
+          "skill_id": "synthesise-audience",
+          "evidence_id": "E-303",
+          "status": "reported",
+          "confidence": "low",
+          "sample_size": 1
+        },
+        {
+          "skill_id": "synthesise-uvz",
+          "evidence_id": "E-303",
+          "status": "reported",
+          "confidence": "low",
+          "sample_size": 1
+        },
+        {
+          "skill_id": "synthesise-validation",
+          "evidence_id": "E-303",
+          "status": "reported",
+          "confidence": "low",
+          "sample_size": 1
+        }
+      ]
+    },
+    {
+      "id": "artifact-owner-and-proposed-patch",
+      "type": "ownership",
+      "title": "Non-owner changes remain proposals",
+      "purpose": "Prevent a downstream specialist from overwriting the canonical product charter.",
+      "artifact": {
+        "artifact_id": "product-charter",
+        "path": "product-charter.md",
+        "owner": "synthesise-product-architecture",
+        "status": "approved",
+        "version": "1.0"
+      },
+      "request": {
+        "requesting_skill": "synthesise-audience",
+        "operation": "modify",
+        "write_status": "proposed",
+        "approved_by_owner": false
+      },
+      "expected": "reject_write_keep_proposal"
+    },
+    {
+      "id": "approved-decision-conflict",
+      "type": "decision_conflict",
+      "title": "Contradictory recommendation does not rewrite approval",
+      "purpose": "Surface a conflict between new evidence and an approved segment decision without silently changing project state.",
+      "approved_decision": {
+        "id": "DEC-014",
+        "decision": "Focus on early-stage consultants",
+        "status": "approved",
+        "owner": "user"
+      },
+      "incoming": {
+        "source_skill": "synthesise-validation",
+        "recommendation": "Switch to agency operators",
+        "evidence_ids": [
+          "E-411"
+        ],
+        "status": "proposed"
+      },
+      "resolution": {
+        "status": "pending_user_approval",
+        "prior_decision_preserved": true,
+        "automatic_replacement": false
+      }
+    },
+    {
+      "id": "resume-preserves-project-state",
+      "type": "resume",
+      "title": "Resume retains decisions, evidence and unresolved questions",
+      "purpose": "Recover the next action without losing approved decisions or unresolved questions.",
+      "before": {
+        "project_id": "proj-alpha",
+        "decisions": [
+          {
+            "id": "DEC-001",
+            "decision": "Test onboarding opportunity",
+            "status": "approved"
+          }
+        ],
+        "open_questions": [
+          "Confirm buyer budget"
+        ],
+        "evidence_ids": [
+          "E-501"
+        ]
+      },
+      "after": {
+        "project_id": "proj-alpha",
+        "decisions": [
+          {
+            "id": "DEC-001",
+            "decision": "Test onboarding opportunity",
+            "status": "approved"
+          }
+        ],
+        "open_questions": [
+          "Confirm buyer budget"
+        ],
+        "evidence_ids": [
+          "E-501"
+        ],
+        "next_action": "Review completed validation evidence"
+      }
+    },
+    {
+      "id": "negative-validation-bounds-promise",
+      "type": "validation",
+      "title": "Failed experiment cannot create a validated promise",
+      "purpose": "Keep a contradicted hypothesis from being represented as validated product demand.",
+      "validation": {
+        "hypothesis_id": "HYP-09",
+        "status": "failed",
+        "evidence_ids": [
+          "E-601"
+        ],
+        "result": "No qualified participant committed to paid pilot"
+      },
+      "charter": {
+        "promise_status": "provisional",
+        "evidence_ids": [
+          "E-101"
+        ],
+        "decision_required": true
+      },
+      "expected": "no_validated_promise"
+    },
+    {
+      "id": "launch-readiness-blockers",
+      "type": "launch_readiness",
+      "title": "Launch remains blocked by critical operational gaps",
+      "purpose": "Do not mark launch complete when checkout and fulfillment have not been tested.",
+      "readiness": {
+        "product_scope": "ready",
+        "claims": "ready",
+        "checkout": "blocked",
+        "onboarding": "not_tested",
+        "fulfillment": "blocked",
+        "support": "ready"
+      },
+      "launch": {
+        "completion_status": "blocked",
+        "campaign_plan_status": "conditional",
+        "blockers": [
+          "checkout",
+          "onboarding",
+          "fulfillment"
+        ]
+      },
+      "expected": "blocked_until_critical_gates_pass"
+    }
+  ]
+}

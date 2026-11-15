@@ -12,7 +12,7 @@ compatibility: >
   fallback. Never claim a specialist was loaded unless it was actually loaded.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.1"
+  version: "2.0.0-alpha.4"
 ---
 
 # Synthesise Orchestrator
@@ -96,4 +96,5 @@ Use `references/quality-gates.md` before reporting completion.
 - `references/dependency-graph.md` — prerequisites and parallel eligibility.
 - `references/orchestration-protocol.md` — loading, context, handoff and reconciliation.
 - `references/quality-gates.md` — completion and safety checks.
+- `references/integration-contracts.md` — cross-specialist workflow invariants and deterministic integration coverage.
 - `examples/routing-examples.md` — illustrative routing cases.

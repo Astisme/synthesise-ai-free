@@ -1,6 +1,6 @@
 # Synthesise Orchestration Specification
 
-**Status:** Proposed; implementation not started  
+**Status:** Implemented in modular v2 alpha; deterministic integration contracts added in alpha.4  
 **Default entry point:** `synthesise-orchestrator`
 
 ## 1. Purpose
@@ -192,3 +192,10 @@ The orchestrator may report the objective complete only when:
 - remaining assumptions, evidence gaps and next actions are visible.
 
 Otherwise report partial or blocked with a concrete reason.
+
+
+## 12. Deterministic integration coverage
+
+The alpha.4 repository suite defines eight cross-specialist contracts in `evaluations/integration/orchestration-scenarios.json`, covering lifecycle identity, parallel eligibility, evidence provenance, artifact ownership, approved-decision conflicts, project resume, negative validation and launch readiness. See [the orchestrator integration reference](../skills/synthesise-orchestrator/references/integration-contracts.md).
+
+These checks validate deterministic state and handoff invariants only. They do not prove native skill activation, live agent reasoning, actual parallel execution or cross-harness installation. Those remain stable-release acceptance requirements.

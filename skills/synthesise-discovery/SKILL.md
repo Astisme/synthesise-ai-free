@@ -8,7 +8,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.3"
+  version: "2.0.0-alpha.4"
 ---
 
 # Synthesise Discovery
