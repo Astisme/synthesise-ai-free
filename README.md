@@ -25,7 +25,7 @@ The modular v2 architecture is implemented in the repository as eleven Agent Ski
 
 **Distribution remains transitional.** The stable v1.1.0 plugin remains separately available. The modular v2.0.0-alpha.4 preview is now exposed as a separate `synthesise-v2-preview` entry in the Claude Code and Codex repository marketplaces, and through `scripts/install_v2_preview.py` for filesystem-based installs. The preview is not production-ready; install it explicitly and do not replace the stable v1 package. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
 
-The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric, stable v1 plugin identities or v1 installer routes.
+The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric, stable v1 plugin identities or v1 installer routes. For a controlled side-by-side evaluation, see the [v1-to-v2 preview migration guide](docs/v2-migration-guide.md), including project-continuity checks and rollback.
 
 ## Install
 
