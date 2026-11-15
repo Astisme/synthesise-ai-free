@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting workflow is loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Validation
@@ -37,6 +37,10 @@ Hypothesis register; prioritized assumptions; experiment protocol; recruitment/s
 - Behavioural/payment evidence is weighted more strongly than hypothetical intent.
 - Sample and recruitment limitations are explicit.
 - Conclusions match evidence strength; no unsupported market-wide claims.
+
+## Progressive methodology reference
+
+Load `references/validation-and-experiment-design.md` whenever performing substantive validation work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 Pass validated/unvalidated hypotheses and evidence to Product Architecture. Product promises must not exceed what validation supports.
