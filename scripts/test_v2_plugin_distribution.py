@@ -68,6 +68,8 @@ class V2NativePluginDistributionTests(unittest.TestCase):
         self.assertEqual(root_plugin["name"], "synthesise-ai-free")
         self.assertEqual(root_plugin["version"], "1.1.0")
         self.assertEqual(root_plugin["skills"], ["./skills/synthesise-ai-free"])
+        self.assertNotIn("./skills/synthesise-orchestrator", root_plugin["skills"])
+        self.assertEqual(root_plugin["version"], "1.1.0")
         canonical = (ROOT / "skills" / "synthesise-ai-free" / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("name: synthesise-ai-free", canonical)
 
