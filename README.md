@@ -109,9 +109,12 @@ Requires Python 3; no third-party dependencies:
 
 ```bash
 python scripts/validate.py
+python scripts/evaluate.py
 ```
 
-GitHub Actions runs the same check on pushes and pull requests.
+The structural validator checks the skill and manifests. The deterministic evaluator checks the frozen v1.1.0 skill baseline, the extracted project-brief schema fixture and authored scenario fixtures. Fixture checks do not execute an agent and do not prove live model behaviour. See [evaluations/README.md](evaluations/README.md) for the optional captured-run evaluator and baseline update policy.
+
+GitHub Actions runs structural validation and deterministic fixture evaluation on pushes and pull requests.
 
 ## Project memory
 

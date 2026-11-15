@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "title": "Example product project",
+    "created_at": "2026-11-15",
+    "updated_at": "2026-11-15",
+    "schema_version": "1.0.0"
+  },
+  "status": "discovery",
+  "creator_profile": {
+    "capabilities": [
+      "Example capability"
+    ],
+    "evidence": [
+      "Example portfolio artifact"
+    ],
+    "constraints": [
+      "Limited weekly capacity"
+    ]
+  },
+  "audience_problem": null,
+  "uvz_opportunities": [],
+  "market_findings": [],
+  "experiments": [],
+  "product": null,
+  "commercial": null,
+  "launch": null,
+  "open_questions": [
+    "Which audience has the most urgent problem?"
+  ],
+  "risks": [
+    "Audience access is unproven"
+  ],
+  "next_actions": [
+    {
+      "action": "Interview five people in the candidate segment",
+      "owner": null,
+      "due_date": null
+    }
+  ],
+  "decision_log": [
+    {
+      "date": "2026-11-15",
+      "decision": "Start with discovery",
+      "rationale": "Evidence is not yet sufficient to select an opportunity",
+      "status": "confirmed"
+    }
+  ]
+}

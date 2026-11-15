@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free structural validator for the canonical Agent Skill and install manifests."""
+"""Dependency-free structural validator for the canonical Agent Skill and evaluation contracts."""
 from pathlib import Path
 import json
 import re
@@ -10,8 +10,10 @@ SKILL_DIR = ROOT / "skills" / "synthesise-ai-free"
 SKILL = SKILL_DIR / "SKILL.md"
 errors = []
 
+
 def fail(message):
     errors.append(message)
+
 
 if not SKILL.is_file():
     fail("Missing canonical skills/synthesise-ai-free/SKILL.md")
@@ -37,7 +39,6 @@ for folder in ("references", "workflows", "templates", "examples"):
     if not (SKILL_DIR / folder).is_dir():
         fail("Missing directory: " + folder)
 
-# Check that the native plugin and marketplace manifests remain valid JSON.
 for relative in ("plugin.json", ".claude-plugin/plugin.json",
                  ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json"):
     path = ROOT / relative
@@ -53,9 +54,20 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
     except (json.JSONDecodeError, OSError) as exc:
         fail("Invalid manifest " + relative + ": " + str(exc))
 
+for relative in ("schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+                 "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json"):
+    path = ROOT / relative
+    if not path.is_file():
+        fail("Missing evaluation contract file: " + relative)
+        continue
+    try:
+        json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as exc:
+        fail("Invalid JSON in " + relative + ": " + str(exc))
+
 if errors:
     print("Validation failed:")
     for item in errors:
         print("- " + item)
     sys.exit(1)
-print("Synthesise AI Free structure and install manifests: OK")
+print("Synthesise AI Free structure, install manifests and evaluation contracts: OK")

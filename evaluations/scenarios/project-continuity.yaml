@@ -1,0 +1,41 @@
+{
+  "id": "project-continuity",
+  "category": "project-continuity",
+  "mode": "fixture",
+  "input": "Continue my existing product project from PROJECT-BRIEF.md.",
+  "expected": {
+    "required_behaviours": [
+      "Read the brief before continuing",
+      "Summarize current state and decisions",
+      "Preserve dated decision history",
+      "Identify next unresolved decision"
+    ],
+    "required_output_elements": [
+      "confirmed",
+      "hypothesis",
+      "rejected",
+      "unknown",
+      "decision log",
+      "next action"
+    ],
+    "forbidden_behaviours": [
+      "Silently overwrite material decisions",
+      "Pretend to have read an unavailable brief"
+    ],
+    "acceptance_criteria": [
+      "The fixture distinguishes existing facts from new assumptions"
+    ]
+  },
+  "fixture_output": "I will read PROJECT-BRIEF.md first, summarize confirmed facts, hypothesis, rejected options, and unknowns. I will preserve the dated decision log and identify the next action before continuing.",
+  "input_conversation": [
+    {
+      "role": "user",
+      "content": "Continue my existing product project from PROJECT-BRIEF.md."
+    }
+  ],
+  "regression_status": {
+    "baseline": "not_measured_in_v1.1.0",
+    "introduced_in": "1.2.0",
+    "mode": "fixture-only"
+  }
+}

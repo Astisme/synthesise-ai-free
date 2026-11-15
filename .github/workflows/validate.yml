@@ -1,8 +1,8 @@
-name: Validate Agent Skill
+name: Validate and evaluate Synthesise
 
 on:
   push:
-    branches: [main, "v*"]
+    branches: [main, "v*", "v1.2.0-evaluation-foundation"]
   pull_request:
   workflow_dispatch:
 
@@ -10,12 +10,25 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  deterministic:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
-      - name: Validate canonical skill
+          python-version: "3.11"
+      - name: Validate canonical skill and contracts
         run: python scripts/validate.py
+      - name: Run deterministic baseline and fixture evaluation
+        run: python scripts/evaluate.py --report evaluations/reports/deterministic.json
+      - name: Smoke-test captured-run evaluator with authored fixture (not a live model run)
+        run: python scripts/evaluate_model.py fixtures/model-run.example.json --report evaluations/reports/model-evaluation-example.json
+      - name: Upload evaluation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthesise-evaluation-reports
+          path: |
+            evaluations/reports/deterministic.json
+            evaluations/reports/model-evaluation-example.json
+          if-no-files-found: ignore

@@ -1,0 +1,35 @@
+{
+  "name": "evidence-quality",
+  "description": "Assess provenance, evidence strength, and uncertainty handling.",
+  "scale": {
+    "min": 1,
+    "max": 5,
+    "anchors": {
+      "1": "Missing or materially incorrect",
+      "3": "Partially correct; notable gaps",
+      "5": "Complete, accurate, evidence-aware, and actionable"
+    }
+  },
+  "criteria": [
+    {
+      "id": "provenance",
+      "weight": 30,
+      "description": "Material claims have traceable sources and dates."
+    },
+    {
+      "id": "fact_inference_separation",
+      "weight": 25,
+      "description": "Observed facts are separated from interpretation and hypotheses."
+    },
+    {
+      "id": "limitations",
+      "weight": 25,
+      "description": "Coverage, recency, geography and sample limitations are disclosed."
+    },
+    {
+      "id": "honesty",
+      "weight": 20,
+      "description": "No fabricated citations, quotes, metrics or unsupported certainty."
+    }
+  ]
+}

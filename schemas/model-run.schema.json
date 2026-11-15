@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthesise captured model evaluation run",
+  "type": "object",
+  "required": [
+    "model",
+    "harness",
+    "configuration",
+    "scenario_set",
+    "rubric_version",
+    "results"
+  ],
+  "properties": {
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "harness": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configuration": {
+      "type": "object"
+    },
+    "scenario_set": {
+      "type": "string"
+    },
+    "rubric_version": {
+      "type": "string"
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "scenario_id",
+          "output",
+          "scores"
+        ],
+        "properties": {
+          "scenario_id": {
+            "type": "string"
+          },
+          "output": {
+            "type": "string"
+          },
+          "scores": {
+            "type": "object",
+            "required": [
+              "methodology",
+              "evidence-quality",
+              "output-quality"
+            ],
+            "properties": {
+              "methodology": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "evidence-quality": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "output-quality": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Astisme/synthesise-ai-free/schemas/project-brief.schema.json",
+  "title": "Synthesise Project Brief structured sections",
+  "description": "Schema for structured metadata extracted from PROJECT-BRIEF.md. Markdown remains the portable source of truth.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "status",
+    "creator_profile",
+    "audience_problem",
+    "uvz_opportunities",
+    "market_findings",
+    "experiments",
+    "product",
+    "commercial",
+    "launch",
+    "open_questions",
+    "risks",
+    "next_actions",
+    "decision_log"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "title",
+        "created_at",
+        "updated_at",
+        "schema_version"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "discovery",
+        "opportunity-selection",
+        "research",
+        "validation",
+        "architecture",
+        "commercial-strategy",
+        "launch",
+        "operating",
+        "paused",
+        "completed"
+      ]
+    },
+    "creator_profile": {
+      "type": "object",
+      "required": [
+        "capabilities",
+        "evidence",
+        "constraints"
+      ],
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "audience_problem": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "uvz_opportunities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "hypothesis",
+              "selected",
+              "rejected",
+              "unknown"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "market_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim_status"
+        ],
+        "properties": {
+          "claim_status": {
+            "type": "string",
+            "enum": [
+              "observed",
+              "interpretation",
+              "hypothesis",
+              "unknown"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "running",
+              "completed",
+              "abandoned"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "product": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "commercial": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "launch": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "due_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "decision_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "decision",
+          "rationale"
+        ],
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "revised",
+              "rejected"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

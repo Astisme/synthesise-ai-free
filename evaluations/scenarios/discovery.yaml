@@ -1,0 +1,39 @@
+{
+  "id": "discovery",
+  "category": "discovery",
+  "mode": "fixture",
+  "input": "I have experience in several fields but do not know what product to create. Help me start.",
+  "expected": {
+    "required_behaviours": [
+      "Ask about demonstrated capabilities and evidence",
+      "Explore constraints and intended outcomes",
+      "Ask one high-value question at a time"
+    ],
+    "required_output_elements": [
+      "capability",
+      "evidence",
+      "constraints",
+      "next question"
+    ],
+    "forbidden_behaviours": [
+      "Assume expertise without evidence",
+      "Invent credentials or outcomes"
+    ],
+    "acceptance_criteria": [
+      "The fixture distinguishes demonstrated strengths from aspirations",
+      "The next step is a focused discovery question"
+    ]
+  },
+  "fixture_output": "Let's map your capability, evidence, and constraints first. Next question: which problem do people already ask you to solve, and what evidence shows you can solve it?",
+  "input_conversation": [
+    {
+      "role": "user",
+      "content": "I have experience in several fields but do not know what product to create. Help me start."
+    }
+  ],
+  "regression_status": {
+    "baseline": "not_measured_in_v1.1.0",
+    "introduced_in": "1.2.0",
+    "mode": "fixture-only"
+  }
+}

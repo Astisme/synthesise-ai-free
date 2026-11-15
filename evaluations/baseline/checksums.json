@@ -1,0 +1,23 @@
+{
+  "algorithm": "git-blob-sha1",
+  "source_commit": "3b70afb997a377fd555e9888cec912c96bf4ebd9",
+  "files": {
+    "skills/synthesise-ai-free/SKILL.md": "5605a15577361060d892d56a4800a2afe48a329c",
+    "skills/synthesise-ai-free/examples/uvz-example.md": "bd7d9cee722a9afdf1f0943b20ca2d68bee71508",
+    "skills/synthesise-ai-free/references/commercial-strategy.md": "bd6532aa125b9864f91e4bb47f24dca93b3c6208",
+    "skills/synthesise-ai-free/references/product-architecture.md": "0818eaefdcbd73ffb768365f873e1f8d5af84d13",
+    "skills/synthesise-ai-free/references/quality-gates.md": "3066c9fbf786601740332f8c9e5974fa5cbdb3d6",
+    "skills/synthesise-ai-free/references/research-protocol.md": "38677ef637ffe559681b3d308c37d5cc8d3c5831",
+    "skills/synthesise-ai-free/references/uvz-scoring.md": "6d646cde86c1d6d3ade85a30f15dc85750850129",
+    "skills/synthesise-ai-free/templates/curriculum.md": "1f40ca46494111fe764b13fcba876860d021e2bd",
+    "skills/synthesise-ai-free/templates/expertise-inventory.md": "8bf7f85fde77c0b62534b997e051bd7b67059aad",
+    "skills/synthesise-ai-free/templates/launch-plan.md": "8e55b3ad28132dafc087f954b33d0834a6b0d2d9",
+    "skills/synthesise-ai-free/templates/product-charter.md": "07b5086ea0ea0c12b4aa55fe9123f3ba441b1c8a",
+    "skills/synthesise-ai-free/templates/workbook-outline.md": "0b3a16eff24d07deebcf391cdad57dbfc4ff1405",
+    "skills/synthesise-ai-free/workflows/discovery.md": "efc3a467170d8f19f8ff7f6770c52d25fae6c14b",
+    "skills/synthesise-ai-free/workflows/launch.md": "8db5598bf879390948e8e45cfac32c57a81bdc24",
+    "skills/synthesise-ai-free/workflows/market-intelligence.md": "b9b41b5e168ca0c26d6aafbc0d1b0e594b359175",
+    "skills/synthesise-ai-free/workflows/product-building.md": "da6bf08b138c4c3b3863c94ef35d3d4558a0f773",
+    "skills/synthesise-ai-free/workflows/validation.md": "070f395f0b448b97c2da558059dd4741aa9bc49d"
+  }
+}
