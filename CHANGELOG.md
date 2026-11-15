@@ -1,6 +1,6 @@
 # Changelog
 
-## v2.0.0-beta.1 — Modular v2 beta
+## v2.0.0 — Modular v2 stable release
 
 - Promote the canonical eleven-skill modular plugin distribution from alpha to beta.
 - Record maintainer-reported successful end-to-end use across Claude Code and Codex Desktop, including installation, orchestrator and specialist discovery/invocation, project resume and artifact ownership.
@@ -9,7 +9,7 @@
 
 
 
-## v2.0.0-alpha.4 — Canonical modular distribution (superseded by beta.1)
+## v2.0.0-alpha.4 — Canonical modular distribution (superseded by v2.0.0)
 
 - Make the modular architecture the single canonical product: one orchestrator and ten specialist skills.
 - Consolidate Codex and Claude Code plugin manifests at the repository root and expose all eleven skills through one `synthesise-ai-free` plugin identity.
