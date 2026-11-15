@@ -60,6 +60,7 @@ required_files = (
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
     "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py",
+    "scripts/test_ci_contract.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
     "evaluations/workflows/invalid/missing-validation-evidence.json",

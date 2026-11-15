@@ -114,7 +114,7 @@ python scripts/evaluate.py --report-dir evaluations/reports
 
 The structural validator checks the skill and manifests. The deterministic evaluator checks the frozen v1.1.0 skill baseline, the extracted project-brief schema fixture and authored scenario fixtures. Fixture checks do not execute an agent and do not prove live model behaviour. See [evaluations/README.md](evaluations/README.md) for the optional captured-run evaluator and baseline update policy.
 
-GitHub Actions runs structural validation, Markdown brief parser unit tests and deterministic fixture evaluation on pushes and pull requests. It publishes JSON and Markdown reports as workflow artifacts. No API keys or model calls are used.
+GitHub Actions runs two jobs on pushes and pull requests: (1) Ubuntu runs `python scripts/validate.py`, the complete `python -m unittest discover -s scripts -p 'test_*.py' -v` suite, and `python scripts/evaluate.py --report-dir evaluations/reports`, then uploads the deterministic JSON/Markdown reports; (2) Windows runs the PowerShell installer regression suite with `python -m unittest discover -s scripts -p 'test_install.py' -v`. The workflow contract itself is regression-tested so these checks cannot silently disappear while README coverage claims remain. These checks use no API keys or live model calls.
 
 ## Project memory
 
@@ -140,7 +140,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 - v1.2.4 — CI and quality gate completion: harden evaluator input validation and regression-test malformed scenarios, duplicate IDs, baseline-file failures and schema edge cases; keep CI reports and artifacts mandatory.
 - v1.2.5 — Installation and update regression tests: exercise Bash and PowerShell installers on their native CI platforms, including overwrite protection, forced updates and complete skill copies.
 - v1.2.6 — Security and research provenance hardening: reject malformed security contracts and fixture path escapes; require auditable verification metadata for observed claims.
-- v1.3.0 — Optional live model evaluation: only when explicitly enabled and credentials/budget are available. No provider SDK or API key is required by v1.2.x.
+- v1.3.0 — Local-first product development workbench: architecture proposal published before implementation; see [the v1.3.0 workbench architecture proposal](docs/v1.3-workbench-architecture.md). Live model evaluation remains an optional, separately gated future capability and is not part of required CI.
 
 ### Workflow integrity fixtures
 
