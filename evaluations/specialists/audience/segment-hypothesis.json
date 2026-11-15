@@ -1,0 +1,6 @@
+{
+  "id": "audience-segment-hypothesis",
+  "skill": "synthesise-audience",
+  "input": {"segment": "independent consultants who need a repeatable client onboarding process", "evidence": "three exploratory interviews"},
+  "expected": {"segment_contextual": true, "persona_labelled_hypothesis": true, "sample_limitations_disclosed": true, "buyer_user_distinguished": true}
+}

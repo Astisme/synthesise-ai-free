@@ -1,0 +1,66 @@
+---
+name: synthesise-audience
+description: >
+  Define and compare customer segments, ideal customer profiles, jobs-to-be-done,
+  problem intensity, buying context, objections and reachability. Use when the
+  target audience or customer problem needs to be understood or made actionable.
+license: MIT
+compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
+metadata:
+  author: astisme
+  version: "2.0.0-alpha.2"
+---
+
+# Synthesise Audience
+
+Translate a broad audience idea into evidence-labelled segment and problem intelligence. Audience owns `audience-intelligence.md`; it does not rank creator opportunities or claim an inferred persona is a real customer.
+
+## Scope
+
+- Segment definitions grounded in context and behaviour.
+- Ideal customer profile (ICP) hypotheses and distinctions between user, buyer and beneficiary.
+- Jobs-to-be-done, triggering situations, workarounds and switching context.
+- Functional, emotional and social pains; desired outcomes and success criteria.
+- Frequency, severity, urgency, consequences, buying authority, budget and objections.
+- Reachability, channels and evidence gaps.
+
+## Non-goals
+
+- Do not invent customer interviews, quotes, market prevalence or willingness-to-pay evidence.
+- Do not use demographics as a substitute for a meaningful segment.
+- Do not treat likes, survey enthusiasm or hypothetical intent as purchase evidence.
+- Do not choose a final UVZ opportunity or write the product promise.
+
+## Required inputs
+
+A target context, problem area or creator hypothesis is sufficient to begin. A discovery profile, customer records, interview notes and market evidence improve quality but are not mandatory for exploratory work. State what is missing.
+
+## Method
+
+1. Define the decision and candidate market context.
+2. Generate distinct segments by situation, behaviour, need, constraints or buying context.
+3. For each segment identify user, buyer and beneficiary; distinguish them where they differ.
+4. Map trigger, job-to-be-done, current workaround, alternatives and switching costs.
+5. Describe functional, emotional and social pains and desired outcomes.
+6. Assess frequency, severity, urgency and consequences using observed evidence where possible.
+7. Record buying authority, budget ownership, objections, procurement friction and evidence of existing spend.
+8. Assess where the segment can be identified and reached; distinguish channel hypotheses from proven access.
+9. Label every claim as observed, customer-reported, secondary-source evidence, inference, hypothesis or unknown.
+10. Recommend the highest-value unresolved question or research step.
+
+## Canonical output: audience-intelligence.md
+
+Include segment comparison, ICP hypotheses, JTBD map, pain/outcome map, buying context, reachability assessment, source/evidence register, confidence and open questions.
+
+## Quality gates
+
+- Segment definitions describe context and behaviour, not demographic stereotypes.
+- Personas inferred from limited evidence are labelled hypotheses.
+- User, buyer and beneficiary are separated when relevant.
+- Observations and interpretations are distinguishable.
+- Problem intensity and willingness to pay are not conflated.
+- Reachability is grounded in identifiable channels or explicitly labelled as a hypothesis.
+
+## Handoff
+
+Provide segment IDs/names consistently for downstream UVZ, Market Intelligence and Validation. Include evidence, confidence, unknowns and any sample limitations. Do not silently change an approved segment definition.
