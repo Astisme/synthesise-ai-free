@@ -45,6 +45,27 @@ class SecurityFixtureTests(unittest.TestCase):
         errors = validate_security_suite(suite)
         self.assertTrue(any("must be an object" in error for error in errors))
 
+    def test_symlink_fixture_cannot_escape_repository_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            root.mkdir()
+            outside = Path(tmp) / "outside.md"
+            outside.write_text("outside", encoding="utf-8")
+            link = root / "linked-fixture.md"
+            try:
+                link.symlink_to(outside)
+            except (OSError, NotImplementedError):
+                self.skipTest("Symlink creation is not permitted on this platform")
+            case = dict(self.suite["cases"][0], fixture="linked-fixture.md")
+            errors = validate_security_case(case, root)
+        self.assertTrue(any("escapes the repository root" in error for error in errors))
+
+    def test_duplicate_security_case_ids_are_rejected(self):
+        suite = dict(self.suite)
+        suite["cases"] = self.suite["cases"] + [dict(self.suite["cases"][0])]
+        errors = validate_security_suite(suite)
+        self.assertTrue(any("Duplicate security case id" in error for error in errors))
+
     def test_invalid_claim_source_container_is_rejected(self):
         case = dict(self.suite["cases"][0])
         case["claims"] = [{"text": "A claim", "status": "hypothesis", "sources": "not-a-list"}]
