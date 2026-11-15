@@ -1,13 +1,13 @@
 # Synthesise v2.0 Skill Catalog
 
-**Status:** v2.0.0 modular catalog. The orchestrator is present on `main`; specialist packages are being introduced in staged alpha pull requests. Treat only packages present in the checked-out revision as implemented.  
+**Status:** v2.0.0-alpha.3 modular preview. All eleven packages (one orchestrator and ten specialists) are present in this revision. Structural validation and deterministic contract fixtures cover package metadata, local references and specialist methodology depth. This is not a stable or default installation release.  
 **Default entry point:** `synthesise-orchestrator`
 
 ## Package conventions
 
-Every package will be an independently understandable Agent Skill with its own `SKILL.md` and progressive-disclosure support files (references, workflows, templates and examples as justified). Each package must declare its scope, non-goals, required inputs, canonical outputs, quality gates, artifact ownership and handoff behaviour.
+Every package is an independently understandable Agent Skill with its own `SKILL.md` and progressive-disclosure support files (references, workflows, templates and examples as justified). Each package declares its scope, non-goals, required inputs, canonical outputs, quality gates, artifact ownership and handoff behaviour.
 
-The catalog defines intended boundaries. It does not assert that these packages already exist or can be invoked programmatically in every harness.
+The catalog describes the packages present in this revision. Package presence does not guarantee native discovery, automatic cross-skill invocation or installation in every harness; availability must be checked at runtime.
 
 ## Skill catalog
 
@@ -93,6 +93,10 @@ The catalog defines intended boundaries. It does not assert that these packages 
 - **Outputs:** synchronized portable project brief, append-only decision entries, status/milestone updates, artifact inventory and recovery report.
 - **Quality:** never silently rewrite approved decisions; detect conflicts and missing files; keep paths portable; preserve provenance and unresolved questions.
 
+## Shared evidence record
+
+All specialists preserve evidence identity, claim status, confidence, scope and limitations when reusing findings. See [the shared evidence-record contract](evidence-record.md) and its machine-readable [JSON Schema](../schemas/evidence-record.schema.json). Reuse must never silently upgrade evidence strength.
+
 ## Cross-skill ownership rules
 
 - Each canonical artifact has exactly one owner as listed above.
@@ -104,4 +108,4 @@ The catalog defines intended boundaries. It does not assert that these packages 
 
 ## Package maturity
 
-The orchestrator is implemented on `main`. Each specialist becomes implemented only when its package is merged and passes structural validation. Specialist evaluation fixtures are deterministic contracts, not proof of live-agent behaviour. Installation availability must be verified per harness before it is advertised.
+All eleven packages are implemented in the repository preview. The ten specialists include detailed methodology references and two deterministic evaluation fixtures each. Fixtures validate authored contracts and coverage; they are not proof of live-agent behaviour. Native discovery, complete installation, migration and cross-harness integration remain release gates for stable v2.0.0.

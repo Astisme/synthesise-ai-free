@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting workflow is loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Validation
@@ -37,6 +37,18 @@ Hypothesis register; prioritized assumptions; experiment protocol; recruitment/s
 - Behavioural/payment evidence is weighted more strongly than hypothetical intent.
 - Sample and recruitment limitations are explicit.
 - Conclusions match evidence strength; no unsupported market-wide claims.
+
+## Progressive methodology reference
+
+Load `references/validation-and-experiment-design.md` whenever performing substantive validation work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
+
+## Shared evidence and handoff contract
+
+- Distinguish verified facts, user-provided claims, external research, analytical interpretations, hypotheses, recommendations and unknowns. Never silently promote one state into another.
+- Preserve evidence provenance and limitations: stable evidence ID, claim, type, source/locator, date, status, confidence, scope/segment, sample size where relevant, limitations and consuming artifacts. Reuse does not upgrade evidence strength.
+- This skill owns its canonical artifact. Other specialists may propose changes but must not silently overwrite it; cross-owner changes require owner/user approval.
+- Every handoff reports skill ID, project ID, objective, inputs used, outputs created, decisions proposed, decisions requiring approval, assumptions, evidence, limitations, next recommended skills and completion status.
+- Before completion, check required sections, output names, evidence support, explicit assumptions/limitations, ownership, project continuity and actionable next steps. State blockers rather than claiming completion.
 
 ## Handoff
 Pass validated/unvalidated hypotheses and evidence to Product Architecture. Product promises must not exceed what validation supports.

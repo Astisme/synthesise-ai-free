@@ -5,7 +5,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting files are loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Product Architecture
@@ -32,6 +32,18 @@ Positioning; audience/buying context; problem; transformation; promise/scope/exc
 
 ## Quality gates
 Promise is specific, realistic and evidence-bounded; every component advances an outcome; prerequisites/exclusions/support boundaries are explicit; delivery is feasible; privacy, safety and accessibility are considered.
+
+## Progressive methodology reference
+
+Load `references/product-transformation-architecture.md` whenever performing substantive product architecture work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
+
+## Shared evidence and handoff contract
+
+- Distinguish verified facts, user-provided claims, external research, analytical interpretations, hypotheses, recommendations and unknowns. Never silently promote one state into another.
+- Preserve evidence provenance and limitations: stable evidence ID, claim, type, source/locator, date, status, confidence, scope/segment, sample size where relevant, limitations and consuming artifacts. Reuse does not upgrade evidence strength.
+- This skill owns its canonical artifact. Other specialists may propose changes but must not silently overwrite it; cross-owner changes require owner/user approval.
+- Every handoff reports skill ID, project ID, objective, inputs used, outputs created, decisions proposed, decisions requiring approval, assumptions, evidence, limitations, next recommended skills and completion status.
+- Before completion, check required sections, output names, evidence support, explicit assumptions/limitations, ownership, project continuity and actionable next steps. State blockers rather than claiming completion.
 
 ## Handoff
 Curriculum may expand learning architecture but must not redefine the product promise. Monetization must align with approved scope.

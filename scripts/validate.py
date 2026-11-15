@@ -84,18 +84,18 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         fail("Invalid manifest " + relative + ": " + str(exc))
 
 required_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
     "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py",
-    "scripts/test_ci_contract.py",
+    "scripts/test_ci_contract.py", "scripts/test_specialist_methodologies.py", "scripts/test_evidence_record.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
     "evaluations/workflows/invalid/missing-validation-evidence.json",
     "evaluations/workflows/invalid/broken-monetization-handoff.json",
     "evaluations/workflows/invalid/decision-loss-on-resume.json",
-    "evaluations/security/security-cases.json",
+    "evaluations/security/security-cases.json", "evaluations/specialists/methodology-cases.json", "docs/evidence-record.md",
     "evaluations/security/fixtures/prompt-injection.md",
     "evaluations/security/fixtures/malicious-research-document.md",
     "evaluations/security/fixtures/fabricated-citations.md",
@@ -108,7 +108,8 @@ for relative in required_files:
         fail("Missing evaluation contract file: " + relative)
 
 json_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "evaluations/specialists/methodology-cases.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
@@ -147,6 +148,121 @@ for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
     for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", specialist_content):
         if not (package_dir / ref).is_file():
             fail("Broken specialist reference in " + package_dir.name + ": " + ref)
+
+# Enforce the complete modular catalog, specialist methodology references and fixture coverage.
+EXPECTED_SPECIALISTS = {
+    "synthesise-discovery": ("expertise-profile.md", "references/expertise-discovery-methodology.md"),
+    "synthesise-audience": ("audience-intelligence.md", "references/audience-intelligence-methodology.md"),
+    "synthesise-uvz": ("uvz-opportunity-report.md", "references/uvz-advanced-methodology.md"),
+    "synthesise-market-intelligence": ("market-intelligence.md", "references/market-research-methodology.md"),
+    "synthesise-validation": ("validation-report.md", "references/validation-and-experiment-design.md"),
+    "synthesise-product-architecture": ("product-charter.md", "references/product-transformation-architecture.md"),
+    "synthesise-curriculum": ("curriculum-blueprint.md", "references/instructional-design-methodology.md"),
+    "synthesise-monetization": ("commercial-strategy.md", "references/commercial-and-pricing-methodology.md"),
+    "synthesise-launch": ("go-to-market-plan.md", "references/go-to-market-methodology.md"),
+    "synthesise-project": ("PROJECT-BRIEF.md", "references/project-state-and-continuity-methodology.md"),
+}
+actual_specialists = {
+    path.name for path in SPECIALIST_ROOT.glob("synthesise-*")
+    if path.is_dir() and path.name not in ("synthesise-ai-free", "synthesise-orchestrator")
+}
+for missing in sorted(set(EXPECTED_SPECIALISTS) - actual_specialists):
+    fail("Missing modular specialist package: " + missing)
+for unexpected in sorted(actual_specialists - set(EXPECTED_SPECIALISTS)):
+    fail("Uncatalogued modular specialist package: " + unexpected)
+
+for skill_id, (canonical_output, methodology_ref) in EXPECTED_SPECIALISTS.items():
+    package_dir = SPECIALIST_ROOT / skill_id
+    skill_path = package_dir / "SKILL.md"
+    if not skill_path.is_file():
+        continue
+    content = skill_path.read_text(encoding="utf-8")
+    if methodology_ref not in content:
+        fail("Specialist does not declare its methodology reference: " + skill_id)
+    if not (package_dir / methodology_ref).is_file():
+        fail("Missing specialist methodology reference: " + skill_id + "/" + methodology_ref)
+    if "## Handoff" not in content:
+        fail("Specialist is missing a handoff section: " + skill_id)
+    if canonical_output not in content:
+        fail("Specialist does not declare its canonical output: " + skill_id)
+
+# Local references must remain within their owning package; existence alone is insufficient.
+for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
+    if not package_dir.is_dir() or package_dir.name in ("synthesise-ai-free", "synthesise-orchestrator"):
+        continue
+    skill_path = package_dir / "SKILL.md"
+    if not skill_path.is_file():
+        continue
+    content = skill_path.read_text(encoding="utf-8")
+    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", content):
+        target = (package_dir / ref).resolve()
+        try:
+            target.relative_to(package_dir.resolve())
+        except ValueError:
+            fail("Specialist reference escapes package directory: " + package_dir.name + "/" + ref)
+
+# Every specialist has at least two deterministic methodology fixtures.
+methodology_fixture = ROOT / "evaluations" / "specialists" / "methodology-cases.json"
+if not methodology_fixture.is_file():
+    fail("Missing specialist methodology fixture: evaluations/specialists/methodology-cases.json")
+else:
+    try:
+        fixture_data = json.loads(methodology_fixture.read_text(encoding="utf-8"))
+        cases = fixture_data.get("cases", []) if isinstance(fixture_data, dict) else []
+        counts = {skill_id: 0 for skill_id in EXPECTED_SPECIALISTS}
+        seen_case_ids = set()
+        for case in cases:
+            if not isinstance(case, dict):
+                fail("Specialist methodology fixture case must be an object")
+                continue
+            case_id = case.get("id")
+            skill_id = case.get("skill_id")
+            if not isinstance(case_id, str) or not case_id or case_id in seen_case_ids:
+                fail("Specialist methodology fixture has an empty or duplicate case id")
+            else:
+                seen_case_ids.add(case_id)
+            if skill_id not in counts:
+                fail("Unknown specialist in methodology fixture: " + str(skill_id))
+                continue
+            counts[skill_id] += 1
+            for field in ("scenario", "task", "input_context", "expected_task", "required_invariants", "reject_if"):
+                if field not in case or not case[field]:
+                    fail("Methodology fixture case missing " + field + ": " + str(case_id))
+        for skill_id, count in counts.items():
+            if count < 2:
+                fail("Specialist needs at least two methodology fixtures: " + skill_id)
+    except (json.JSONDecodeError, OSError, AttributeError) as exc:
+        fail("Invalid specialist methodology fixture: " + str(exc))
+
+# Catalog identity and canonical output ownership are checked against the actual packages.
+catalog_path = ROOT / "docs" / "skill-catalog.md"
+if catalog_path.is_file():
+    catalog = catalog_path.read_text(encoding="utf-8")
+    catalog_ids = set()
+    for line in catalog.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) >= 2 and cells[0].isdigit():
+            skill_cell = cells[1]
+            if skill_cell.startswith("`") and skill_cell.endswith("`"):
+                catalog_ids.add(skill_cell[1:-1])
+    expected_catalog_ids = set(EXPECTED_SPECIALISTS) | {"synthesise-orchestrator"}
+    if catalog_ids != expected_catalog_ids:
+        fail("Skill catalog IDs do not match the eleven modular packages: " + str(sorted(catalog_ids)))
+else:
+    fail("Missing docs/skill-catalog.md")
+
+canonical_outputs = [value[0] for value in EXPECTED_SPECIALISTS.values()]
+if len(canonical_outputs) != len(set(canonical_outputs)):
+    fail("Duplicate canonical specialist artifact ownership detected")
+
+for skill_id in EXPECTED_SPECIALISTS:
+    skill_path = SPECIALIST_ROOT / skill_id / "SKILL.md"
+    if skill_path.is_file():
+        content = skill_path.read_text(encoding="utf-8")
+        if "## Shared evidence and handoff contract" not in content:
+            fail("Specialist missing shared evidence/handoff contract: " + skill_id)
 
 if errors:
     print("Validation failed:")

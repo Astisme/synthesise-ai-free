@@ -2,7 +2,7 @@
 
 An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-**Canonical methodology v1.1.0** · Deterministic QA track v1.2.x · MIT · Canonical skill: `skills/synthesise-ai-free/`
+**Stable methodology:** v1.1.0 · **Deterministic QA:** v1.2.x · **Modular preview:** v2.0.0-alpha.3 · MIT
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
@@ -21,11 +21,11 @@ The system distinguishes evidence from assumptions. A score is not proof of dema
 
 ## Modular v2.0 development
 
-The modular architecture is being implemented incrementally. `skills/synthesise-orchestrator/` provides routing, dependency, handoff and quality-gate instructions. Specialist packages are being introduced in reviewable batches; check the v2 skill catalog and merged package directories for current availability.
+The modular v2 architecture is implemented in the repository as eleven Agent Skill packages: one orchestrator and ten specialists. Each specialist has a concise `SKILL.md`, a detailed progressive-disclosure methodology reference, shared evidence/handoff requirements and deterministic methodology fixtures. The catalog and architecture document describe the current package state.
 
-**The current published installation remains the v1.1.0 canonical skill.** The v2 packages are an alpha development preview and are not yet included in the existing plugin manifests or copy installers. Do not treat the preview as the completed v2.0 distribution. The orchestrator explicitly uses the v1.1.0 skill as a temporary methodology fallback when a planned specialist is unavailable.
+**Distribution remains transitional.** The existing published installation routes and manifests continue to install the stable v1.1.0 canonical skill. The modular v2.0.0-alpha.3 package set is an explicit development preview; it is not yet the default plugin/marketplace installation and is not production-ready. Install or copy the orchestrator and selected specialist directories manually for preview work. Do not replace an existing v1 installation automatically. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
 
-Track the architecture proposal in [PR #8](https://github.com/Astisme/synthesise-ai-free/pull/8) and the orchestrator implementation in its follow-up pull request.
+The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric or existing installation manifests.
 
 ## Install
 
@@ -123,6 +123,10 @@ python scripts/evaluate.py --report-dir evaluations/reports
 The structural validator checks the skill and manifests. The deterministic evaluator checks the frozen v1.1.0 skill baseline, the extracted project-brief schema fixture and authored scenario fixtures. Fixture checks do not execute an agent and do not prove live model behaviour. See [evaluations/README.md](evaluations/README.md) for the optional captured-run evaluator and baseline update policy.
 
 GitHub Actions runs two jobs on pushes and pull requests: (1) Ubuntu runs `python scripts/validate.py`, the complete `python -m unittest discover -s scripts -p 'test_*.py' -v` suite, and `python scripts/evaluate.py --report-dir evaluations/reports`, then uploads the deterministic JSON/Markdown reports; (2) Windows runs the PowerShell installer regression suite with `python -m unittest discover -s scripts -p 'test_install.py' -v`. The workflow contract itself is regression-tested so these checks cannot silently disappear while README coverage claims remain. These checks use no API keys or live model calls.
+
+## Shared evidence provenance
+
+The modular specialists use a common evidence-record convention so findings can be reused without silently upgrading their status, confidence or scope. See [the evidence-record contract](docs/evidence-record.md) and [schema](schemas/evidence-record.schema.json).
 
 ## Project memory
 
