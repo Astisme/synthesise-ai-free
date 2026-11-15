@@ -84,7 +84,7 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         fail("Invalid manifest " + relative + ": " + str(exc))
 
 required_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/evidence-record.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
@@ -108,7 +108,8 @@ for relative in required_files:
         fail("Missing evaluation contract file: " + relative)
 
 json_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "evaluations/specialists/methodology-cases.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
