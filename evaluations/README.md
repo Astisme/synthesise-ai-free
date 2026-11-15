@@ -48,3 +48,15 @@ Run the complete local QA pipeline:
     python scripts/evaluate.py --report-dir evaluations/reports
 
 The evaluator writes evaluations/reports/deterministic.json and deterministic.md. Reports state that no live agent behaviour was tested and no API calls were made.
+
+## Installer regression tests
+
+The installer regression suite exercises the Bash and PowerShell copy installers using temporary target directories. It checks fresh installation, complete nested-file copying, paths containing spaces, refusal to overwrite an existing destination without force, and replacement of stale files when force is enabled. Ubuntu CI runs the Bash cases; Windows CI runs the PowerShell cases.
+
+Run on a platform with Bash:
+
+    python -m unittest discover -s scripts -p 'test_install.py' -v
+
+Run on Windows with PowerShell:
+
+    python -m unittest discover -s scripts -p 'test_install.py' -v
