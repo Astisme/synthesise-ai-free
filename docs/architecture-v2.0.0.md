@@ -1,9 +1,9 @@
 # Synthesise AI Free v2.0.0 — Modular Agent Architecture
 
-**Status:** Proposed; architecture-only, implementation not started  
+**Status:** Modular architecture implemented as v2.0.0-alpha.3 preview; distribution and stable-release gates remain open  
 **Target release:** v2.0.0  
 **Migration baseline:** canonical v1.1.0 methodology; v1.2.x deterministic QA remains in force  
-**First change:** architecture proposal; no specialist extraction or runtime implementation
+**Current state:** orchestrator and ten specialist packages exist; detailed specialist references and deterministic methodology fixtures are included. Installation transition and full integration verification remain incomplete.
 
 ## 1. Executive summary
 
@@ -154,14 +154,14 @@ A modular v2.0.0 release requires:
 - existing projects can be resumed without loss or forced migration;
 - README, changelog and compatibility documentation accurately describe supported installation behaviour.
 
-## 12. Phased implementation
+## 12. Phased implementation and current status
 
-1. **Architecture specification:** approve boundaries, routing, dependencies, contracts and migration map. This proposal is the deliverable.
-2. **Orchestrator:** implement intent routing, project inspection, plan construction, handoffs and fallback loading; add deterministic routing tests.
-3. **Core opportunity specialists:** extract Discovery, Audience, UVZ and Validation without methodology changes.
-4. **Product and go-to-market specialists:** add Product Architecture, Curriculum, Monetization, Market Intelligence, Launch and Project Continuity.
-5. **Integration and compatibility:** test full journeys, parallel-safe work, ownership, resume and installation across supported harnesses.
-6. **Modular release:** publish v2.0.0 only after all release gates pass.
+1. **Architecture specification — complete:** boundaries, routing, dependencies, contracts and migration map are documented.
+2. **Orchestrator — implemented in alpha:** intent routing, project inspection, dependency-aware plans, handoffs and fallback loading are present with deterministic tests.
+3. **Ten specialist packages — implemented in alpha:** all specialist entry points exist with dedicated ownership, canonical outputs, quality gates and progressive-disclosure references.
+4. **Methodology depth — alpha.3:** detailed procedures, decision criteria and quality reviews are added for all ten specialists. UVZ continues to use the unchanged v1.1.0 seven-dimension scoring reference.
+5. **Deterministic integration and distribution — incomplete:** fixture coverage is expanded, but full cross-skill workflow verification, complete package installation, v1 migration, partial-install recovery and harness compatibility remain release gates.
+6. **Stable modular release — not released:** v2.0.0 must not be declared stable until all release gates pass.
 
 ## 13. Open implementation decisions
 
