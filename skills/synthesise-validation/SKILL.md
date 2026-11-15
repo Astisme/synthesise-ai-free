@@ -5,7 +5,6 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting workflow is loaded progressively.
 metadata:
   author: astisme
-  version: "2.0.0"
 ---
 
 # Synthesise Validation
