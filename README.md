@@ -2,7 +2,7 @@
 
 An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-**v1.1.0** · MIT · Canonical skill: `skills/synthesise-ai-free/`
+**Canonical methodology v1.1.0** · Deterministic QA track v1.2.x · MIT · Canonical skill: `skills/synthesise-ai-free/`
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
@@ -109,12 +109,12 @@ Requires Python 3; no third-party dependencies:
 
 ```bash
 python scripts/validate.py
-python scripts/evaluate.py
+python scripts/evaluate.py --report-dir evaluations/reports
 ```
 
 The structural validator checks the skill and manifests. The deterministic evaluator checks the frozen v1.1.0 skill baseline, the extracted project-brief schema fixture and authored scenario fixtures. Fixture checks do not execute an agent and do not prove live model behaviour. See [evaluations/README.md](evaluations/README.md) for the optional captured-run evaluator and baseline update policy.
 
-GitHub Actions runs structural validation and deterministic fixture evaluation on pushes and pull requests.
+GitHub Actions runs structural validation, Markdown brief parser unit tests and deterministic fixture evaluation on pushes and pull requests. It publishes JSON and Markdown reports as workflow artifacts. No API keys or model calls are used.
 
 ## Project memory
 
@@ -131,3 +131,10 @@ This is an independent open-source implementation inspired by publicly described
 ## Contributing and license
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).
+
+## Deterministic QA roadmap
+
+- v1.2.1 — Deterministic QA: parse real PROJECT-BRIEF.md examples, validate extracted sections and publish reproducible JSON/Markdown reports.
+- v1.2.2 — Workflow integrity: test deterministic handoffs from discovery through monetization and preserve project decisions on resume.
+- v1.2.3 — Security hardening: test prompt injection, malicious research documents, fabricated citations and untrusted instructions.
+- v1.3.0 — Optional live model evaluation: only when explicitly enabled and credentials/budget are available. No provider SDK or API key is required by v1.2.x.

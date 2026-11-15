@@ -17,3 +17,11 @@
 - Add optional offline grading of captured model/harness runs with configuration hashes and rubric score capture.
 - Extend CI to run structural validation and deterministic evaluation and upload a machine-readable report.
 - No canonical skill methodology files are changed.
+
+## Unreleased — v1.2.1 Deterministic QA
+
+- Parse actual PROJECT-BRIEF.md Markdown fixtures into structured sections and validate extracted data against the project brief schema.
+- Add positive/negative project brief parser unit tests.
+- Generate JSON and Markdown deterministic evaluation reports.
+- Run structural validation, unit tests and deterministic evaluation in pull-request and push CI.
+- No external services, model calls, API keys or third-party Python packages.

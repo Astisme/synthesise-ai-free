@@ -55,7 +55,10 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         fail("Invalid manifest " + relative + ": " + str(exc))
 
 for relative in ("schemas/project-brief.schema.json", "schemas/model-run.schema.json",
-                 "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json"):
+                 "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
+                 "scripts/project_brief.py", "scripts/test_project_brief.py",
+                 "fixtures/projects/creator-analytics/PROJECT-BRIEF.md",
+                 "fixtures/projects/invalid/missing-sections.md"):
     path = ROOT / relative
     if not path.is_file():
         fail("Missing evaluation contract file: " + relative)
