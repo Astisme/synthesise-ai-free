@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Astisme/synthesise-ai-free/blob/main/schemas/evidence-record.schema.json",
+  "title": "Synthesise Evidence Record",
+  "description": "Portable, reusable evidence record. Reuse must preserve original scope, confidence and limitations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_id",
+    "claim",
+    "type",
+    "status",
+    "confidence",
+    "scope",
+    "limitations",
+    "supports",
+    "used_by"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^E-[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "customer_interview",
+        "customer_observation",
+        "survey",
+        "experiment",
+        "transaction",
+        "internal_document",
+        "external_research",
+        "creator_report",
+        "other"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_locator": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "reported",
+        "verified",
+        "inferred",
+        "hypothesis",
+        "disputed",
+        "superseded"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "segment": {
+          "type": "string"
+        },
+        "geography": {
+          "type": "string"
+        },
+        "sample_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "population": {
+          "type": "string"
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "used_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "verified_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "verified_by": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
