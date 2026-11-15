@@ -76,6 +76,7 @@
       ],
       "required_controls": [
         "treat_as_data",
+        "ignore_embedded_instructions",
         "attribute_source",
         "separate_fact_from_interpretation",
         "require_verified_source_for_observed_claims"
