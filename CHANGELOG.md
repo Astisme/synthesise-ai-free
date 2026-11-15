@@ -6,6 +6,17 @@
 - Add deterministic specialist evaluation fixtures and package structure tests.
 - Keep the v1.1.0 monolithic skill, frozen baseline and existing installation manifests unchanged; modular packages remain an alpha development preview.
 
+## v2.0.0-alpha.3 — Specialist methodology depth and repository synchronization
+
+- Mark all ten specialist packages and the orchestrator as implemented in the repository preview; keep stable installation on the legacy v1.1.0 package.
+- Add dedicated progressive-disclosure methodology references for all ten specialists, including tacit expertise extraction, JTBD and behavioural segmentation, UVZ interpretation, market research, experiment design, transformation architecture, instructional design, commercial economics, go-to-market operations and project continuity.
+- Add shared evidence provenance and handoff requirements to every specialist entry point.
+- Add two deterministic methodology scenarios per specialist and a dependency-free fixture contract test.
+- Extend the main validator to enforce the exact ten-specialist catalog, canonical output ownership declarations, methodology reference availability, local-reference containment and fixture coverage.
+- Synchronize README, skill catalog and architecture implementation status.
+- Preserve the frozen v1.1.0 methodology, original seven-dimension UVZ scoring and existing plugin/marketplace installation manifests.
+- This remains an alpha development preview; cross-harness installation and end-to-end integration are not yet a stable-release claim.
+
 # Changelog
 
 ## v2.0.0-alpha.1 — Orchestrator implementation preview
