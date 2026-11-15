@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "plugin": {
+    "name": "synthesise-ai-free",
+    "version": "2.0.0-alpha.4"
+  },
+  "host": "claude-code",
+  "host_version": "REPLACE_WITH_INSTALLED_VERSION",
+  "os": "REPLACE_WITH_OS_AND_VERSION",
+  "tested_at": "2026-11-15",
+  "install_route": "native-marketplace",
+  "results": {
+    "marketplace_refresh": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "plugin_install": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "orchestrator_discovery": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "orchestrator_invocation": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "specialist_discovery": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "specialist_invocation": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "project_resume": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    },
+    "artifact_ownership": {
+      "status": "not_run",
+      "evidence": [],
+      "notes": "Run this check on the actual host and attach a log or transcript file."
+    }
+  }
+}
