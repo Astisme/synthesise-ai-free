@@ -195,7 +195,7 @@ for skill_id, (canonical_output, methodology_ref) in EXPECTED_SPECIALISTS.items(
 
 # Local references must remain within their owning package; existence alone is insufficient.
 for package_dir in sorted(SPECIALIST_ROOT.glob("synthesise-*")):
-    if not package_dir.is_dir() or package_dir.name in ("synthesise-ai-free", "synthesise-orchestrator"):
+    if not package_dir.is_dir() or package_dir.name == "synthesise-orchestrator":
         continue
     skill_path = package_dir / "SKILL.md"
     if not skill_path.is_file():
