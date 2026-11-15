@@ -1,10 +1,4 @@
-## v2.0.0-alpha.2 — Specialist package expansion
-
-- Add the Discovery, Audience and UVZ specialist packages with creator evidence inventory, segment/JTBD intelligence and the preserved v1.1.0 UVZ rubric.
-- Add Market Intelligence, Validation, Product Architecture, Curriculum and Monetization specialist packages with source provenance, predeclared experiments, bounded product promises, backward design and ethical offer economics.
-- Add Launch and Project Continuity packages with operational readiness, portable project brief, append-only decisions and status tracking.
-- Add deterministic specialist evaluation fixtures and package structure tests.
-- Keep the v1.1.0 monolithic skill, frozen baseline and existing installation manifests unchanged; modular packages remain an alpha development preview.
+# Changelog
 
 ## v2.0.0-alpha.3 — Specialist methodology depth and repository synchronization
 
@@ -17,7 +11,13 @@
 - Preserve the frozen v1.1.0 methodology, original seven-dimension UVZ scoring and existing plugin/marketplace installation manifests.
 - This remains an alpha development preview; cross-harness installation and end-to-end integration are not yet a stable-release claim.
 
-# Changelog
+## v2.0.0-alpha.2 — Specialist package expansion
+
+- Add the Discovery, Audience and UVZ specialist packages with creator evidence inventory, segment/JTBD intelligence and the preserved v1.1.0 UVZ rubric.
+- Add Market Intelligence, Validation, Product Architecture, Curriculum and Monetization specialist packages with source provenance, predeclared experiments, bounded product promises, backward design and ethical offer economics.
+- Add Launch and Project Continuity packages with operational readiness, portable project brief, append-only decisions and status tracking.
+- Add deterministic specialist evaluation fixtures and package structure tests.
+- Keep the v1.1.0 monolithic skill, frozen baseline and existing installation manifests unchanged; modular packages remain an alpha development preview.
 
 ## v2.0.0-alpha.1 — Orchestrator implementation preview
 
