@@ -136,8 +136,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 
 ## Next milestones
 
-- **v2.0.0 beta:** functionally accepted by the maintainer across Claude Code and Codex Desktop, including installation, discovery, invocation, project resume and artifact ownership. CI remains contract-level and does not contain captured host-session logs.
-- **v2.0.0 release candidate:** add repeatable cross-harness smoke tests and migration-safe project fixtures; publish a release checklist with explicit evidence for each supported host.
+- **v2.0.0 (current):** stable modular distribution, functionally accepted by the maintainer across Claude Code and Codex Desktop, including installation, discovery, invocation, project resume and artifact ownership. CI remains contract-level and does not contain captured host-session logs.
 - **v2.1:** prototype the local-first product-development workbench described in [the workbench architecture proposal](docs/v2.1-workbench-architecture.md), keeping the modular skill packages as the canonical methodology source.
 
 ### Modular orchestration integration
