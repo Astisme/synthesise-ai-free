@@ -2,7 +2,7 @@
 
 An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-**Stable methodology:** v1.1.0 · **Deterministic QA:** v1.2.x · **Modular preview:** v2.0.0-alpha.4 · MIT
+**Canonical architecture:** modular v2 · **Current package version:** 2.0.0-alpha.4 · MIT
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
@@ -19,17 +19,19 @@ Inspired by publicly described product-development concepts, including the Uniqu
 
 The system distinguishes evidence from assumptions. A score is not proof of demand, and no commercial outcome is guaranteed.
 
-## Modular v2.0 development
+## Modular v2 — canonical architecture
 
-The modular v2 architecture is implemented in the repository as eleven Agent Skill packages: one orchestrator and ten specialists. Each specialist has a concise `SKILL.md`, a detailed progressive-disclosure methodology reference, shared evidence/handoff requirements and deterministic methodology fixtures. The catalog and architecture document describe the current package state.
+The canonical product is the modular v2 system: eleven Agent Skill packages consisting of one orchestrator and ten specialists. The root plugin manifests expose all eleven packages as one plugin named `synthesise-ai-free`. Claude Code and Codex marketplaces each publish one canonical plugin entry; there is no separate v1/v2 choice.
 
-**Distribution remains transitional.** The stable v1.1.0 plugin remains separately available. The modular v2.0.0-alpha.4 preview is now exposed as a separate `synthesise-v2-preview` entry in the Claude Code and Codex repository marketplaces, and through `scripts/install_v2_preview.py` for filesystem-based installs. The preview is not production-ready; install it explicitly and do not replace the stable v1 package. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
+The orchestrator is the default entry point. It selects only the specialists needed for a task, respects dependencies, coordinates evidence and artifact ownership, and maintains portable project continuity. Each specialist has its own methodology reference, handoff contract and deterministic fixtures.
 
-The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric, stable v1 plugin identities or v1 installer routes. For a controlled side-by-side evaluation, see the [v1-to-v2 preview migration guide](docs/v2-migration-guide.md), including project-continuity checks and rollback.
+The seven-dimension UVZ scoring rubric remains explicit and consistent across the UVZ specialist, including its established weights, formulas, scales and sensitivity-analysis rules. The system distinguishes evidence from assumptions; a score is not proof of demand and no commercial outcome is guaranteed.
+
+The old monolithic skill and old installer routes are no longer the recommended product or distribution path. They may remain in repository history or as archived material, but the active plugin manifests and installation instructions target modular v2 only.
 
 ## Install
 
-Choose **one installation route per agent**. Native plugins provide marketplace-based installation and update flows. The standalone Agent Skill route is available for agents that use the Skills CLI. Installing both into the same agent may create duplicate skills.
+Choose one installation route per agent. Native plugins provide marketplace-based installation and updates. The filesystem installer is available for compatible skills directories.
 
 ### Claude Code
 
@@ -38,16 +40,17 @@ claude plugin marketplace add Astisme/synthesise-ai-free
 claude plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-For the modular v2 preview, install `synthesise-v2-preview@synthesise-ai-free` instead. The stable and preview plugins are separate choices. Update from the plugin manager or refresh the marketplace and update the selected plugin.
+Use `/synthesise-ai-free:synthesise-orchestrator` as the default entry point. Manage the plugin with `claude plugin list`, `claude plugin update synthesise-ai-free@synthesise-ai-free` and `claude plugin uninstall synthesise-ai-free@synthesise-ai-free`.
 
 ### OpenAI Codex
 
 ```bash
 codex plugin marketplace add Astisme/synthesise-ai-free
 codex plugin marketplace upgrade
+codex plugin marketplace list
 ```
 
-Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace, and install either `synthesise-ai-free` (stable v1) or `synthesise-v2-preview` (modular preview). The documented repo-marketplace flow uses the desktop Plugins Directory for installation; marketplace registration in the CLI is not proof that a plugin is installed.
+Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace and install `synthesise-ai-free`. The documented repository-marketplace flow uses the desktop Plugins Directory for installation; marketplace registration in the CLI is not proof that a plugin is installed.
 
 ### GitHub Copilot CLI
 
@@ -56,47 +59,32 @@ copilot plugin marketplace add Astisme/synthesise-ai-free
 copilot plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-Use `copilot plugin update synthesise-ai-free` to update. In supported VS Code surfaces, use the plugin marketplace / install-from-source UI.
+Update with `copilot plugin update synthesise-ai-free`.
 
 ### Gemini CLI
 
+Install the orchestrator and specialists as separate skills from the repository:
+
 ```bash
-gemini skills install https://github.com/Astisme/synthesise-ai-free.git --path skills/synthesise-ai-free
+gemini skills install https://github.com/Astisme/synthesise-ai-free.git --path skills/synthesise-orchestrator
 ```
 
-Re-run the command to update the installed skill.
+Repeat for the specialist directories you want available. The full native plugin route is preferred where supported.
 
 ### Other Agent Skills-compatible agents
 
-Use the Vercel Skills CLI for Cursor, OpenCode, Windsurf, and other supported agents:
+Use the Vercel Skills CLI to install the orchestrator and specialist directories from the repository. Check `npx skills@latest add --help` for the supported agent identifiers and source/path syntax. Install the complete eleven-skill set where the CLI supports selecting multiple skills.
+
+### Filesystem installation
+
+From a repository clone, install the complete modular package:
 
 ```bash
-npx skills@latest add Astisme/synthesise-ai-free -a cursor
+python scripts/install_v2_preview.py --target .agents/skills
+python scripts/install_v2_preview.py --target .agents/skills --verify
 ```
 
-Replace `cursor` with the agent identifier supported by your installed Skills CLI. Omit `-a` to choose interactively. Check `npx skills@latest add --help` for the current supported agent list.
-
-Update installed skills with:
-
-```bash
-npx skills@latest update
-```
-
-Re-run `add` when you want to select newly added skills from the repository.
-
-### Claude Desktop and manual fallback
-
-For Claude Desktop versions that support uploaded skills, package the complete `skills/synthesise-ai-free/` directory (including its references, workflows and templates) as an archive and import it through the skill interface.
-
-For any Markdown-capable agent, clone the repository and copy the canonical folder into its documented skills directory:
-
-```bash
-git clone https://github.com/Astisme/synthesise-ai-free.git
-mkdir -p .agents/skills
-cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
-```
-
-For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills\npython scripts/install_v2_preview.py --target .agents/skills --verify`. See [docs/installation.md](docs/installation.md) for native preview marketplace installs, install verification, upgrade, recovery and removal guidance. See [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and the harness smoke-test checklist.
+The installer currently retains its historical filename, but it installs the canonical modular v2 package. See [docs/installation.md](docs/installation.md) for install, verify, upgrade and removal instructions, and [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and host acceptance checks.
 
 ## Use it
 
@@ -120,7 +108,7 @@ python scripts/validate.py
 python scripts/evaluate.py --report-dir evaluations/reports
 ```
 
-The structural validator checks the skill and manifests. The deterministic evaluator checks the frozen v1.1.0 skill baseline, the extracted project-brief schema fixture and authored scenario fixtures. Fixture checks do not execute an agent and do not prove live model behaviour. See [evaluations/README.md](evaluations/README.md) for the optional captured-run evaluator and baseline update policy.
+The structural validator checks all eleven modular skill packages, root plugin manifests and marketplace contracts. The deterministic evaluator checks the project-brief schema, specialist methodology fixtures and cross-specialist orchestration scenarios. Fixture checks do not execute an agent and do not prove live model behaviour. See [evaluations/README.md](evaluations/README.md) for the optional captured-run evaluator and baseline update policy.
 
 GitHub Actions runs two jobs on pushes and pull requests: (1) Ubuntu runs `python scripts/validate.py`, the complete `python -m unittest discover -s scripts -p 'test_*.py' -v` suite, and `python scripts/evaluate.py --report-dir evaluations/reports`, then uploads the deterministic JSON/Markdown reports; (2) Windows runs the PowerShell installer regression suite with `python -m unittest discover -s scripts -p 'test_install.py' -v`. The workflow contract itself is regression-tested so these checks cannot silently disappear while README coverage claims remain. These checks use no API keys or live model calls.
 
@@ -144,7 +132,7 @@ This is an independent open-source implementation inspired by publicly described
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).
 
-## Deterministic QA roadmap
+## Quality roadmap
 
 - v1.2.1 — Deterministic QA: parse real PROJECT-BRIEF.md examples, validate extracted sections and publish reproducible JSON/Markdown reports.
 - v1.2.2 — Workflow integrity: test deterministic handoffs from discovery through monetization and preserve project decisions on resume.
