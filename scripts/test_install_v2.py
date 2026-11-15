@@ -107,7 +107,7 @@ class V2InstallerTests(unittest.TestCase):
         self.assertIn("Install verification passed (read-only).", verified.stdout)
         after = {p.name: p.read_bytes() for p in self.target.iterdir() if p.is_file()}
         self.assertEqual(before, after)
-        self.assertIn("unrelated installed skill data", (self.legacy / "SKILL.md").read_text(encoding="utf-8"))
+        self.assertIn("unrelated installed skill data", (self.unrelated_skill / "SKILL.md").read_text(encoding="utf-8"))
 
     def test_verify_detects_missing_package_directory(self):
         self.assertEqual(self.run_installer().returncode, 0)
