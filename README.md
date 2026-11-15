@@ -124,6 +124,10 @@ The structural validator checks the skill and manifests. The deterministic evalu
 
 GitHub Actions runs two jobs on pushes and pull requests: (1) Ubuntu runs `python scripts/validate.py`, the complete `python -m unittest discover -s scripts -p 'test_*.py' -v` suite, and `python scripts/evaluate.py --report-dir evaluations/reports`, then uploads the deterministic JSON/Markdown reports; (2) Windows runs the PowerShell installer regression suite with `python -m unittest discover -s scripts -p 'test_install.py' -v`. The workflow contract itself is regression-tested so these checks cannot silently disappear while README coverage claims remain. These checks use no API keys or live model calls.
 
+## Shared evidence provenance
+
+The modular specialists use a common evidence-record convention so findings can be reused without silently upgrading their status, confidence or scope. See [the evidence-record contract](docs/evidence-record.md) and [schema](schemas/evidence-record.schema.json).
+
 ## Project memory
 
 For ongoing work, ask the agent to create/update a `PROJECT-BRIEF.md` in your project. It stores audience, evidence, UVZ ranking, decisions, product architecture, commercial assumptions and next actions in portable Markdown. Keep secrets and unnecessary personal data out.
