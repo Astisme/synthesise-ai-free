@@ -3,5 +3,5 @@
   "skill": "synthesise-uvz",
   "weights": {"expertise_proof": 20, "problem_intensity": 20, "willingness_to_pay": 15, "reachability": 10, "differentiation": 15, "delivery_feasibility": 10, "strategic_fit": 10},
   "ratings": [4, 3, 2, 4, 3, 5, 4],
-  "expected": {"weight_sum": 100, "rating_scale": [1, 5], "weighted_score": 68, "formula": "sum(weight * rating / 5)", "unknowns_not_neutral": true}
+  "expected": {"weight_sum": 100, "rating_scale": [1, 5], "weighted_score": 69, "formula": "sum(weight * rating / 5)", "unknowns_not_neutral": true}
 }
