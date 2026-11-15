@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthesise AI Free v2 Host Acceptance Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plugin",
+    "host",
+    "host_version",
+    "os",
+    "tested_at",
+    "install_route",
+    "results"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "plugin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "synthesise-ai-free" },
+        "version": { "type": "string", "pattern": "^2\\.0\\.0" }
+      }
+    },
+    "host": { "enum": ["claude-code", "codex-desktop"] },
+    "host_version": { "type": "string", "minLength": 1 },
+    "os": { "type": "string", "minLength": 1 },
+    "tested_at": { "type": "string", "format": "date" },
+    "install_route": { "enum": ["native-marketplace", "filesystem"] },
+    "results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "marketplace_refresh",
+        "plugin_install",
+        "orchestrator_discovery",
+        "orchestrator_invocation",
+        "specialist_discovery",
+        "specialist_invocation",
+        "project_resume",
+        "artifact_ownership"
+      ],
+      "properties": {
+        "marketplace_refresh": { "$ref": "#/$defs/check" },
+        "plugin_install": { "$ref": "#/$defs/check" },
+        "orchestrator_discovery": { "$ref": "#/$defs/check" },
+        "orchestrator_invocation": { "$ref": "#/$defs/check" },
+        "specialist_discovery": { "$ref": "#/$defs/check" },
+        "specialist_invocation": { "$ref": "#/$defs/check" },
+        "project_resume": { "$ref": "#/$defs/check" },
+        "artifact_ownership": { "$ref": "#/$defs/check" }
+      }
+    }
+  },
+  "$defs": {
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence"],
+      "properties": {
+        "status": { "enum": ["passed", "failed", "blocked", "not_run"] },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "passed" } }, "required": ["status"] },
+          "then": { "properties": { "evidence": { "minItems": 1 } } }
+        },
+        {
+          "if": { "properties": { "status": { "enum": ["failed", "blocked", "not_run"] } }, "required": ["status"] },
+          "then": { "required": ["notes"] }
+        }
+      ]
+    }
+  }
+}
