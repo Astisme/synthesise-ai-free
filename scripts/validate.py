@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Dependency-free structural validator for the canonical Agent Skill."""
+"""Dependency-free structural validator for the canonical Agent Skill and install manifests."""
 from pathlib import Path
+import json
 import re
 import sys
 
@@ -36,9 +37,25 @@ for folder in ("references", "workflows", "templates", "examples"):
     if not (SKILL_DIR / folder).is_dir():
         fail("Missing directory: " + folder)
 
+# Check that the native plugin and marketplace manifests remain valid JSON.
+for relative in ("plugin.json", ".claude-plugin/plugin.json",
+                 ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json"):
+    path = ROOT / relative
+    if not path.is_file():
+        fail("Missing install manifest: " + relative)
+        continue
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if relative.endswith("marketplace.json") and not data.get("plugins"):
+            fail("Marketplace has no plugins: " + relative)
+        if relative.endswith("plugin.json") and data.get("name") != "synthesise-ai-free":
+            fail("Unexpected plugin name in: " + relative)
+    except (json.JSONDecodeError, OSError) as exc:
+        fail("Invalid manifest " + relative + ": " + str(exc))
+
 if errors:
     print("Validation failed:")
     for item in errors:
         print("- " + item)
     sys.exit(1)
-print("Synthesise AI Free structure: OK")
+print("Synthesise AI Free structure and install manifests: OK")
