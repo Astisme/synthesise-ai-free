@@ -59,5 +59,13 @@ Use `templates/PROJECT-BRIEF.md`, `templates/DECISIONS.md` and `templates/PROJEC
 
 Load `references/project-state-and-continuity-methodology.md` whenever performing substantive project work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
+## Shared evidence and handoff contract
+
+- Distinguish verified facts, user-provided claims, external research, analytical interpretations, hypotheses, recommendations and unknowns. Never silently promote one state into another.
+- Preserve evidence provenance and limitations: stable evidence ID, claim, type, source/locator, date, status, confidence, scope/segment, sample size where relevant, limitations and consuming artifacts. Reuse does not upgrade evidence strength.
+- This skill owns its canonical artifact. Other specialists may propose changes but must not silently overwrite it; cross-owner changes require owner/user approval.
+- Every handoff reports skill ID, project ID, objective, inputs used, outputs created, decisions proposed, decisions requiring approval, assumptions, evidence, limitations, next recommended skills and completion status.
+- Before completion, check required sections, output names, evidence support, explicit assumptions/limitations, ownership, project continuity and actionable next steps. State blockers rather than claiming completion.
+
 ## Handoff
 Return recovered state, files inspected/updated, conflicts, decisions requiring approval and next recommended specialist. If filesystem access is unavailable, provide templates and ask the user to place them in the project; do not claim persistence.
