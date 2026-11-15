@@ -1,6 +1,6 @@
 # Synthesise AI Free v2.0.0 — Modular Agent Architecture
 
-**Status:** Modular architecture implemented as v2.0.0-alpha.4 preview; distribution and stable-release gates remain open  
+**Status:** Modular v2.0.0 architecture is the current stable distribution. The alpha.4 baseline remains a frozen historical evaluation reference.  
 **Target release:** v2.0.0  
 **Migration baseline:** canonical v1.1.0 methodology; v1.2.x deterministic QA remains in force  
 **Current state:** orchestrator and ten specialist packages exist; detailed specialist references, deterministic methodology fixtures and eight cross-specialist integration contracts are included. Harness installation and live integration verification remain incomplete.

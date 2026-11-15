@@ -20,7 +20,7 @@ class DualHostAcceptanceTests(unittest.TestCase):
     def report(self, host):
         return {
             "schema_version": "1.0.0",
-            "plugin": {"name": "synthesise-ai-free", "version": "2.0.0-beta.1"},
+            "plugin": {"name": "synthesise-ai-free", "version": "2.0.0"},
             "host": host,
             "host_version": "test-version",
             "os": "test-os",

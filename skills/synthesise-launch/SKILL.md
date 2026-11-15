@@ -8,7 +8,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; research and publishing capabilities vary by harness.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.4"
+  version: "2.0.0"
 ---
 
 # Synthesise Launch

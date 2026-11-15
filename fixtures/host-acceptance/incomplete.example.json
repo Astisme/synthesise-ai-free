@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "plugin": {
     "name": "synthesise-ai-free",
-    "version": "2.0.0-beta.1"
+    "version": "2.0.0"
   },
   "host": "claude-code",
   "host_version": "REPLACE_WITH_INSTALLED_VERSION",

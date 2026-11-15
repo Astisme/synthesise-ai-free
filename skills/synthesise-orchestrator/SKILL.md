@@ -12,7 +12,7 @@ compatibility: >
   fallback. Never claim a specialist was loaded unless it was actually loaded.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.4"
+  version: "2.0.0"
 ---
 
 # Synthesise Orchestrator

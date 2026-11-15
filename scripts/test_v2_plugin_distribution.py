@@ -28,7 +28,7 @@ class CanonicalV2PluginDistributionTests(unittest.TestCase):
     def test_codex_root_manifest_exposes_exactly_all_v2_skills(self):
         manifest = load_json("plugin.json")
         self.assertEqual(manifest["name"], "synthesise-ai-free")
-        self.assertEqual(manifest["version"], "2.0.0-beta.1")
+        self.assertEqual(manifest["version"], "2.0.0")
         self.assertEqual(manifest["skills"], EXPECTED_PATHS)
         for name in V2_SKILLS:
             self.assertTrue((ROOT / "skills" / name / "SKILL.md").is_file(), name)
@@ -36,7 +36,7 @@ class CanonicalV2PluginDistributionTests(unittest.TestCase):
     def test_claude_root_manifest_exposes_exactly_all_v2_skills(self):
         manifest = load_json(".claude-plugin/plugin.json")
         self.assertEqual(manifest["name"], "synthesise-ai-free")
-        self.assertEqual(manifest["version"], "2.0.0-beta.1")
+        self.assertEqual(manifest["version"], "2.0.0")
         self.assertEqual(manifest["skills"], EXPECTED_PATHS)
         for name in V2_SKILLS:
             self.assertTrue((ROOT / "skills" / name / "SKILL.md").is_file(), name)
