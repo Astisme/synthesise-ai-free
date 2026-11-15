@@ -103,23 +103,6 @@ See [docs/installation.md](docs/installation.md) for the full harness matrix, up
 
 You can start at any stage; a full engagement does not require restarting discovery.
 
-## Repository structure
-
-```text
-plugin.json
-.claude-plugin/          # Claude Code marketplace and plugin manifest
-.agents/plugins/         # Codex plugin marketplace
-skills/synthesise-ai-free/
-├── SKILL.md
-├── references/
-├── workflows/
-├── templates/
-└── examples/
-docs/
-scripts/
-.github/workflows/
-```
-
 ## Validate
 
 Requires Python 3; no third-party dependencies:
