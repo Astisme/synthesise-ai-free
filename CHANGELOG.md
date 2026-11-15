@@ -4,9 +4,11 @@
 
 - Add a separate cross-platform Python installer for the modular v2 preview, supporting complete or individual package installation.
 - Add install-manifest tracking, duplicate identity detection, safe collision refusal, explicit forced upgrade, partial-install recovery and package removal.
-- Preserve the stable v1.1.0 package and existing native plugin/marketplace manifests and installer scripts unchanged.
+- Preserve the stable v1.1.0 package, stable plugin identities and v1 installer scripts; the following distribution milestone adds separate preview-only marketplace entries.
 - Add regression coverage for v1 isolation, idempotence, partial recovery, collision handling, duplicate detection and removal.
-- This is a distribution preview, not a stable v2 release or proof of native harness discovery.
+- Add separate Claude Code and Codex marketplace entries for the eleven-skill v2 preview package; retain the v1 marketplace entries as separate install choices.
+- Add deterministic manifest/path contract tests and a manual real-host acceptance checklist. CI does not claim a live Claude Code or Codex desktop installation.
+- This is a distribution preview, not a stable v2 release or proof of native harness execution.
 
 
 ## v2.0.0-alpha.4 — Orchestration integration contracts
