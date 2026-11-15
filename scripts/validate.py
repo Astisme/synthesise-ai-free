@@ -88,7 +88,7 @@ required_files = (
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
-    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py",
+    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py", "scripts/install_v2_preview.py", "scripts/test_install_v2_preview.py",
     "scripts/test_ci_contract.py", "scripts/test_specialist_methodologies.py", "scripts/test_evidence_record.py", "scripts/orchestration_integration.py", "scripts/test_orchestration_integration.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
