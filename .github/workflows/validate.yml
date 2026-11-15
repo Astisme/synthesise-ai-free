@@ -42,4 +42,4 @@ jobs:
           python-version: "3.11"
       - name: Run PowerShell installer regression tests
         shell: pwsh
-        run: python -m unittest discover -s scripts -p 'test_install.py' -v
+        run: python -m unittest discover -s scripts -p 'test_install*.py' -v
