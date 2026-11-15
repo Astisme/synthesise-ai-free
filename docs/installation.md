@@ -19,19 +19,11 @@ Manage it with `claude plugin list`, `claude plugin update synthesise-ai-free@sy
 
 ```bash
 codex plugin marketplace add Astisme/synthesise-ai-free
-codex plugin add synthesise-ai-free@synthesise-ai-free
+codex plugin marketplace upgrade
+codex plugin marketplace list
 ```
 
-Refresh marketplace metadata with `codex plugin marketplace upgrade`. Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace, and install either `synthesise-ai-free` (stable v1) or `synthesise-v2-preview` (modular preview). The repository catalog is `.agents/plugins/marketplace.json`; the v2 package is a Git subdirectory at `skills/` with its own `plugin.json`. The current documented repo-marketplace flow uses the desktop Plugins Directory for installation rather than a `codex plugin add` CLI command.
-
-## GitHub Copilot CLI — native plugin marketplace
-
-```bash
-copilot plugin marketplace add Astisme/synthesise-ai-free
-copilot plugin install synthesise-ai-free@synthesise-ai-free
-```
-
-Update with `copilot plugin update synthesise-ai-free`. Inspect with `copilot plugin list`. Supported VS Code surfaces can also install plugins from a marketplace or source through their plugin UI. Copilot reads the portable root `plugin.json` and the marketplace catalog in `.claude-plugin/marketplace.json`.
+Then open the Plugins Directory in the ChatGPT desktop app, select the Synthesise AI Free marketplace, and install either `synthesise-ai-free` (stable v1) or `synthesise-v2-preview` (modular preview). The repository catalog is `.agents/plugins/marketplace.json`; the v2 package is a Git subdirectory at `skills/` with its own portable `plugin.json`. The current documented repo-marketplace flow uses the desktop Plugins Directory for installation rather than a `codex plugin add` CLI command.
 
 ## Gemini CLI — native skill install
 
