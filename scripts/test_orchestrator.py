@@ -22,7 +22,7 @@ class OrchestratorPackageTests(unittest.TestCase):
     def test_required_operating_sections_exist(self):
         for heading in (
             "Operating contract", "Modes", "Execution protocol",
-            "Migration-era package availability", "Project continuity",
+            "Specialist availability", "Project continuity",
             "Completion response",
         ):
             self.assertIn("## " + heading, self.skill)
@@ -42,9 +42,11 @@ class OrchestratorPackageTests(unittest.TestCase):
         self.assertIn("not a declaration that the packages are already installed", routing)
         self.assertIn("Package availability must be checked at runtime", routing)
 
-    def test_legacy_fallback_is_explicit(self):
-        self.assertIn("temporary methodology source", self.skill)
-        self.assertIn("do not pretend it is a modular specialist", self.skill)
+    def test_v2_is_canonical_without_legacy_fallback(self):
+        self.assertIn("canonical v2 distribution", self.skill)
+        self.assertIn("all ten specialist packages", self.skill)
+        self.assertNotIn("temporary methodology source", self.skill)
+        self.assertNotIn("legacy fallback", self.skill.lower())
 
     def test_parallel_execution_is_capability_gated(self):
         dependency = (PACKAGE / "references/dependency-graph.md").read_text(encoding="utf-8")

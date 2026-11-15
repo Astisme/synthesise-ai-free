@@ -1,6 +1,6 @@
 # Synthesise v2.0 Skill Catalog
 
-**Status:** v2.0.0-alpha.4 modular preview. All eleven packages (one orchestrator and ten specialists) are present in this revision. Structural validation and deterministic contract fixtures cover package metadata, local references and specialist methodology depth and eight cross-specialist orchestration scenarios. This is not a stable or default installation release.  
+**Status:** Canonical modular v2 package, currently version 2.0.0-alpha.4. All eleven packages (one orchestrator and ten specialists) are present and exposed by the root plugin manifests. Structural validation and deterministic contract fixtures cover package metadata, local references, specialist methodology depth and eight cross-specialist orchestration scenarios. The package is the default and only active distribution. Live host execution acceptance remains separate from CI contract coverage.  
 **Default entry point:** `synthesise-orchestrator`
 
 ## Package conventions
@@ -16,7 +16,7 @@ The catalog describes the packages present in this revision. Package presence do
 | 0 | `synthesise-orchestrator` | Intent, routing, plan, dependency order, skill loading, handoffs, reconciliation and approval gates | Execution plan and consolidated response | Overall execution plan |
 | 1 | `synthesise-discovery` | Creator expertise, achievements, tacit knowledge, methods, proof, assets and constraints | `expertise-profile.md` | Expertise profile |
 | 2 | `synthesise-audience` | ICP, segmentation, jobs-to-be-done, pains, desired outcomes, triggers, awareness, objections and reachability | `audience-intelligence.md` | Audience intelligence |
-| 3 | `synthesise-uvz` | Expertise/problem intersection, opportunity generation, differentiation, v1.1 scoring, sensitivity and ranking | `uvz-opportunity-report.md` | UVZ opportunity report and recommendation |
+| 3 | `synthesise-uvz` | Expertise/problem intersection, opportunity generation, differentiation, seven-dimension UVZ scoring, sensitivity and ranking | `uvz-opportunity-report.md` | UVZ opportunity report and recommendation |
 | 4 | `synthesise-market-intelligence` | Competitors, alternatives, positioning, market gaps, pricing observations, reviews and source quality | `market-intelligence.md` | Market intelligence |
 | 5 | `synthesise-validation` | Hypotheses, problem/demand tests, interviews, experiments, thresholds and go/revise/stop decisions | `validation-report.md` | Validation plan and findings |
 | 6 | `synthesise-product-architecture` | Transformation, promise, mechanism, scope, delivery model, customer journey and product structure | `product-charter.md` | Product charter |
@@ -49,7 +49,7 @@ The catalog describes the packages present in this revision. Package presence do
 
 - **Inputs:** expertise profile; audience intelligence; relevant constraints; prior UVZ decisions and evidence.
 - **Outputs:** distinct opportunity hypotheses, complete scorecards, sensitivity analysis, ranked portfolio, recommended opportunity, rationale and unresolved assumptions.
-- **Quality:** preserve v1.1.0 scoring methodology exactly; show evidence and confidence; unknowns are not confirmed neutral facts.
+- **Quality:** preserve the established seven-dimension UVZ scoring methodology exactly; show evidence and confidence; unknowns are not confirmed neutral facts.
 
 ### Market Intelligence
 
@@ -112,4 +112,4 @@ All specialists preserve evidence identity, claim status, confidence, scope and 
 
 ## Package maturity
 
-All eleven packages are implemented in the repository preview. The ten specialists include detailed methodology references and two deterministic evaluation fixtures each. Fixtures validate authored contracts and coverage; they are not proof of live-agent behaviour. Native discovery, complete installation, migration and cross-harness integration remain release gates for stable v2.0.0.
+All eleven packages are implemented and exposed through the canonical root plugin manifests. The ten specialists include detailed methodology references and two deterministic evaluation fixtures each. Fixtures validate authored contracts and coverage; they are not proof of live-agent behaviour. Live discovery and invocation in each supported host remain acceptance checks outside CI.

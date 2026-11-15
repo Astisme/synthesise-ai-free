@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install, verify or remove the modular v2 preview without modifying stable v1."""
+"""Install, verify or remove the canonical modular Synthesise v2 package."""
 from __future__ import annotations
 
 import argparse
@@ -18,7 +18,7 @@ PACKAGES = (
     "synthesise-product-architecture", "synthesise-curriculum",
     "synthesise-monetization", "synthesise-launch", "synthesise-project",
 )
-MANIFEST = ".synthesise-v2-preview.json"
+MANIFEST = ".synthesise-v2.json"
 
 
 def skill_metadata(path: Path) -> tuple[str, str]:
@@ -35,9 +35,9 @@ def skill_metadata(path: Path) -> tuple[str, str]:
 
 def load_manifest(path: Path) -> dict:
     if not path.exists():
-        return {"schema_version": 1, "channel": "v2-preview", "packages": {}}
+        return {"schema_version": 1, "channel": "v2", "packages": {}}
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("schema_version") != 1 or data.get("channel") != "v2-preview" or not isinstance(data.get("packages"), dict):
+    if data.get("schema_version") != 1 or data.get("channel") != "v2" or not isinstance(data.get("packages"), dict):
         raise ValueError(f"Unrecognized install manifest: {path}")
     return data
 
@@ -122,12 +122,12 @@ def replace_directory(source: Path, destination: Path) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Install, verify or remove the modular Synthesise v2 preview.")
+    parser = argparse.ArgumentParser(description="Install, verify or remove the modular Synthesise v2 package.")
     parser.add_argument("--target", default=".agents/skills", help="Agent skills directory (default: .agents/skills)")
     parser.add_argument("--package", choices=PACKAGES, help="Install/verify/remove one package; default is the complete v2 set")
     parser.add_argument("--force", action="store_true", help="Replace an existing managed or unmanaged package")
     actions = parser.add_mutually_exclusive_group()
-    actions.add_argument("--remove", action="store_true", help="Remove selected v2 preview package(s)")
+    actions.add_argument("--remove", action="store_true", help="Remove selected v2 package(s)")
     actions.add_argument("--verify", action="store_true", help="Verify installed package identities and versions without writing files")
     args = parser.parse_args()
 
@@ -154,7 +154,7 @@ def main() -> int:
                 write_manifest(manifest_path, manifest)
             elif manifest_path.exists():
                 manifest_path.unlink()
-            print("Removed selected v2 preview package(s).")
+            print("Removed selected v2 package(s).")
             return 0
 
         target.mkdir(parents=True, exist_ok=True)
@@ -184,10 +184,10 @@ def main() -> int:
             manifest["packages"][package] = {"version": version}
             write_manifest(manifest_path, manifest)
             print(f"Installed {package} ({version})")
-        print(f"v2 preview installation complete: {target}")
+        print(f"v2 installation complete: {target}")
         return 0
     except (OSError, ValueError, json.JSONDecodeError) as exc:
-        print(f"v2 preview installer error: {exc}", file=sys.stderr)
+        print(f"v2 installer error: {exc}", file=sys.stderr)
         return 1
 
 

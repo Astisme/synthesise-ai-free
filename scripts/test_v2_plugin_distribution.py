@@ -1,4 +1,4 @@
-"""Contract tests for the separate native v2 preview plugin packages."""
+"""Contract tests for the canonical modular v2 plugin distribution."""
 import json
 import unittest
 from pathlib import Path
@@ -17,61 +17,56 @@ V2_SKILLS = (
     "synthesise-launch",
     "synthesise-project",
 )
+EXPECTED_PATHS = [f"./skills/{name}" for name in V2_SKILLS]
 
 
 def load_json(relative):
     return json.loads((ROOT / relative).read_text(encoding="utf-8"))
 
 
-class V2NativePluginDistributionTests(unittest.TestCase):
-    def test_codex_plugin_manifest_is_a_separate_v2_package(self):
-        manifest = load_json("skills/plugin.json")
-        self.assertEqual(manifest["name"], "synthesise-v2-preview")
+class CanonicalV2PluginDistributionTests(unittest.TestCase):
+    def test_codex_root_manifest_exposes_exactly_all_v2_skills(self):
+        manifest = load_json("plugin.json")
+        self.assertEqual(manifest["name"], "synthesise-ai-free")
         self.assertEqual(manifest["version"], "2.0.0-alpha.4")
-        self.assertEqual(
-            manifest["skills"],
-            [f"./{name}" for name in V2_SKILLS],
-        )
+        self.assertEqual(manifest["skills"], EXPECTED_PATHS)
         for name in V2_SKILLS:
             self.assertTrue((ROOT / "skills" / name / "SKILL.md").is_file(), name)
 
-    def test_claude_plugin_manifest_is_a_separate_v2_package(self):
-        manifest = load_json("skills/.claude-plugin/plugin.json")
-        self.assertEqual(manifest["name"], "synthesise-v2-preview")
+    def test_claude_root_manifest_exposes_exactly_all_v2_skills(self):
+        manifest = load_json(".claude-plugin/plugin.json")
+        self.assertEqual(manifest["name"], "synthesise-ai-free")
         self.assertEqual(manifest["version"], "2.0.0-alpha.4")
-        self.assertEqual(manifest["skills"], [f"./{name}" for name in V2_SKILLS])
+        self.assertEqual(manifest["skills"], EXPECTED_PATHS)
         for name in V2_SKILLS:
             self.assertTrue((ROOT / "skills" / name / "SKILL.md").is_file(), name)
 
-    def test_codex_marketplace_keeps_v1_and_exposes_v2_git_subdirectory(self):
+    def test_codex_marketplace_has_one_root_v2_plugin(self):
         marketplace = load_json(".agents/plugins/marketplace.json")
-        entries = {entry["name"]: entry for entry in marketplace["plugins"]}
-        self.assertEqual(set(entries), {"synthesise-ai-free", "synthesise-v2-preview"})
-        self.assertEqual(entries["synthesise-ai-free"]["source"]["source"], "url")
-        preview = entries["synthesise-v2-preview"]
-        self.assertEqual(preview["source"]["source"], "git-subdir")
-        self.assertEqual(preview["source"]["path"], "./skills")
-        self.assertEqual(preview["source"]["ref"], "main")
-        self.assertEqual(preview["policy"]["installation"], "AVAILABLE")
-        self.assertEqual(preview["policy"]["authentication"], "ON_INSTALL")
-        self.assertEqual(preview["category"], "Productivity")
+        entries = marketplace["plugins"]
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(entries[0]["name"], "synthesise-ai-free")
+        self.assertEqual(entries[0]["source"]["source"], "url")
+        self.assertEqual(entries[0]["source"]["url"], "https://github.com/Astisme/synthesise-ai-free")
+        self.assertEqual(entries[0]["policy"]["installation"], "AVAILABLE")
+        self.assertEqual(entries[0]["policy"]["authentication"], "ON_INSTALL")
 
-    def test_claude_marketplace_keeps_v1_and_exposes_v2_subdirectory(self):
+    def test_claude_marketplace_has_one_root_v2_plugin(self):
         marketplace = load_json(".claude-plugin/marketplace.json")
-        entries = {entry["name"]: entry for entry in marketplace["plugins"]}
-        self.assertEqual(set(entries), {"synthesise-ai-free", "synthesise-v2-preview"})
-        self.assertEqual(entries["synthesise-ai-free"]["source"], "./")
-        self.assertEqual(entries["synthesise-v2-preview"]["source"], "./skills")
+        entries = marketplace["plugins"]
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(entries[0]["name"], "synthesise-ai-free")
+        self.assertEqual(entries[0]["source"], "./")
 
-    def test_v1_root_plugin_and_canonical_skill_are_unchanged(self):
-        root_plugin = load_json("plugin.json")
-        self.assertEqual(root_plugin["name"], "synthesise-ai-free")
-        self.assertEqual(root_plugin["version"], "1.1.0")
-        self.assertEqual(root_plugin["skills"], ["./skills/synthesise-ai-free"])
-        self.assertNotIn("./skills/synthesise-orchestrator", root_plugin["skills"])
-        self.assertEqual(root_plugin["version"], "1.1.0")
-        canonical = (ROOT / "skills" / "synthesise-ai-free" / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("name: synthesise-ai-free", canonical)
+    def test_nested_preview_plugin_roots_are_retired(self):
+        self.assertFalse((ROOT / "skills" / "plugin.json").exists())
+        self.assertFalse((ROOT / "skills" / ".claude-plugin" / "plugin.json").exists())
+
+    def test_orchestrator_is_the_default_entry_point(self):
+        orchestrator = (ROOT / "skills" / "synthesise-orchestrator" / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("canonical v2 distribution", orchestrator)
+        self.assertNotIn("Migration-era package availability", orchestrator)
+        self.assertNotIn("legacy methodology fallback", orchestrator.lower())
 
 
 if __name__ == "__main__":

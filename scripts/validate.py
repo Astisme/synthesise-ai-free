@@ -6,8 +6,6 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_DIR = ROOT / "skills" / "synthesise-ai-free"
-SKILL = SKILL_DIR / "SKILL.md"
 errors = []
 
 
@@ -15,32 +13,7 @@ def fail(message):
     errors.append(message)
 
 
-if not SKILL.is_file():
-    fail("Missing canonical skills/synthesise-ai-free/SKILL.md")
-else:
-    content = SKILL.read_text(encoding="utf-8")
-    if not content.startswith("---\n") or content.count("---") < 2:
-        fail("SKILL.md must start with terminated YAML frontmatter")
-    else:
-        frontmatter = content.split("---", 2)[1]
-        for key in ("name:", "description:", "license:", "compatibility:"):
-            if not re.search(r"(?m)^" + re.escape(key), frontmatter):
-                fail("Frontmatter missing " + key[:-1])
-        if not re.search(r"(?m)^name:\s*synthesise-ai-free\s*$", frontmatter):
-            fail("Frontmatter name must be synthesise-ai-free")
-    for heading in ("Operating contract", "Engagement modes", "Project memory", "Deliverable standards"):
-        if "## " + heading not in content:
-            fail("SKILL.md missing section: " + heading)
-    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", content):
-        if not (SKILL_DIR / ref).is_file():
-            fail("Broken skill reference: " + ref)
-
-for folder in ("references", "workflows", "templates", "examples"):
-    if not (SKILL_DIR / folder).is_dir():
-        fail("Missing directory: " + folder)
-
-
-# Validate the first modular v2 orchestrator package without changing the frozen v1.1 skill.
+# Validate the canonical modular v2 orchestrator package.
 ORCHESTRATOR_DIR = ROOT / "skills" / "synthesise-orchestrator"
 ORCHESTRATOR = ORCHESTRATOR_DIR / "SKILL.md"
 if not ORCHESTRATOR.is_file():
@@ -57,7 +30,7 @@ else:
         if not re.search(r"(?m)^name:\s*synthesise-orchestrator\s*$", orchestrator_frontmatter):
             fail("Orchestrator frontmatter name must be synthesise-orchestrator")
     for heading in ("Operating contract", "Modes", "Execution protocol",
-                    "Migration-era package availability", "Project continuity", "Completion response"):
+                    "Specialist availability", "Project continuity", "Completion response"):
         if "## " + heading not in orchestrator_content:
             fail("Orchestrator SKILL.md missing section: " + heading)
     for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", orchestrator_content):
@@ -68,29 +41,57 @@ for folder in ("references", "examples"):
     if not (ORCHESTRATOR_DIR / folder).is_dir():
         fail("Missing orchestrator directory: " + folder)
 
+EXPECTED_PLUGIN_SKILLS = [
+    "./skills/synthesise-orchestrator",
+    "./skills/synthesise-discovery",
+    "./skills/synthesise-audience",
+    "./skills/synthesise-uvz",
+    "./skills/synthesise-market-intelligence",
+    "./skills/synthesise-validation",
+    "./skills/synthesise-product-architecture",
+    "./skills/synthesise-curriculum",
+    "./skills/synthesise-monetization",
+    "./skills/synthesise-launch",
+    "./skills/synthesise-project",
+]
 for relative in ("plugin.json", ".claude-plugin/plugin.json",
-                 ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json", "skills/plugin.json", "skills/.claude-plugin/plugin.json"):
+                 ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json"):
     path = ROOT / relative
     if not path.is_file():
         fail("Missing install manifest: " + relative)
         continue
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-        if relative.endswith("marketplace.json") and not data.get("plugins"):
-            fail("Marketplace has no plugins: " + relative)
-        if relative in ("plugin.json", ".claude-plugin/plugin.json") and data.get("name") != "synthesise-ai-free":
-            fail("Unexpected stable plugin name in: " + relative)
-        if relative in ("skills/plugin.json", "skills/.claude-plugin/plugin.json") and data.get("name") != "synthesise-v2-preview":
-            fail("Unexpected v2 preview plugin name in: " + relative)
+        if relative in ("plugin.json", ".claude-plugin/plugin.json"):
+            if data.get("name") != "synthesise-ai-free":
+                fail("Canonical plugin name must be synthesise-ai-free in: " + relative)
+            if data.get("version") != "2.0.0-alpha.4":
+                fail("Canonical plugin version must be 2.0.0-alpha.4 in: " + relative)
+            if data.get("skills") != EXPECTED_PLUGIN_SKILLS:
+                fail("Canonical plugin must expose exactly the eleven modular v2 skills: " + relative)
+        else:
+            plugins = data.get("plugins", [])
+            if len(plugins) != 1 or plugins[0].get("name") != "synthesise-ai-free":
+                fail("Marketplace must expose exactly one canonical v2 plugin: " + relative)
+            elif relative == ".claude-plugin/marketplace.json" and plugins[0].get("source") != "./":
+                fail("Claude marketplace must source the repository root")
+            elif relative == ".agents/plugins/marketplace.json":
+                source = plugins[0].get("source", {})
+                if source.get("source") != "url" or source.get("url") != "https://github.com/Astisme/synthesise-ai-free":
+                    fail("Codex marketplace must source the canonical repository root")
     except (json.JSONDecodeError, OSError) as exc:
         fail("Invalid manifest " + relative + ": " + str(exc))
 
+if (ROOT / "skills" / "plugin.json").exists() or (ROOT / "skills" / ".claude-plugin" / "plugin.json").exists():
+    fail("Nested plugin manifests must not remain after canonical v2 consolidation")
+
 required_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
-    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py", "scripts/install_v2_preview.py", "scripts/test_install_v2_preview.py", "scripts/test_v2_plugin_distribution.py", "scripts/test_v2_migration_guide.py", "docs/native-plugin-distribution.md", "docs/v2-migration-guide.md", "skills/plugin.json", "skills/.claude-plugin/plugin.json",
+    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/install.py", "scripts/test_install_v2.py", "scripts/test_v2_plugin_distribution.py", "docs/native-plugin-distribution.md",
     "scripts/test_ci_contract.py", "scripts/test_specialist_methodologies.py", "scripts/test_evidence_record.py", "scripts/orchestration_integration.py", "scripts/test_orchestration_integration.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
@@ -111,7 +112,8 @@ for relative in required_files:
 
 json_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
-    "plugin.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json", "skills/plugin.json", "skills/.claude-plugin/plugin.json",
+    "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
+    "plugin.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json",
     "evaluations/specialists/methodology-cases.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "evaluations/workflows/product-lifecycle.json",

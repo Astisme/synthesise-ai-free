@@ -2,24 +2,24 @@
 
 ## Canonical source
 
-skills/synthesise-ai-free/ is the sole canonical skill package. Add harness-specific adapters only when a documented technical requirement exists; adapters must point to canonical content, not become methodology forks.
+The canonical product is the modular v2 package under `skills/`: one orchestrator and ten specialist skills. The root plugin manifests enumerate these eleven skill directories explicitly. The orchestrator owns intent interpretation, routing, dependency-aware execution plans, handoffs, reconciliation and project-state coordination. Specialists own their domain methodologies and canonical artifacts.
+
+The former monolithic skill directory is retained only as historical repository material; it is not included in the active plugin manifests or current installation instructions. New work must target the modular v2 packages.
 
 ## Progressive disclosure
 
-- SKILL.md: identity, operating contract, stage selection and workflow.
-- references/: stable methods, rubrics, research standards and quality gates.
-- workflows/: stage execution procedures.
-- templates/: reusable deliverables.
-- examples/: illustrative, clearly labelled examples.
+Each specialist package contains a concise `SKILL.md` entry point and its own supporting methodology references, workflows, templates and examples where appropriate. The orchestrator contains routing, dependency, execution, quality-gate and integration references.
 
 ## Portable project memory
 
-PROJECT-BRIEF.md is user-owned Markdown stored with the project. It captures facts, hypotheses, evidence, decisions and next actions. It is portable across agents and is not hidden model memory.
+`PROJECT-BRIEF.md` is user-owned Markdown stored with the project. It captures facts, hypotheses, evidence, decisions and next actions. It is portable across agents and is not hidden model memory. The `synthesise-project` specialist owns project continuity and decision-state updates.
 
-## Compatibility
+## Plugin distribution
 
-The package follows the Agent Skills convention: a skill directory containing SKILL.md with YAML frontmatter and relative supporting files. The Skills CLI can install it into supported harnesses. Manual installation is the fallback for Markdown-capable agents.
+The repository root is the single plugin root for Claude Code and Codex-compatible marketplaces. Root manifests expose the orchestrator and all ten specialists under one plugin identity, `synthesise-ai-free`. Do not register the nested `skills/` directory as a second plugin.
+
+For compatible agents without native plugin support, use the cross-platform `scripts/install.py` installer or the host's documented Agent Skills installation flow.
 
 ## Quality and maintenance
 
-The local quality pipeline has distinct layers: structural and manifest validation (`python scripts/validate.py`), Python regression tests (`python -m unittest discover -s scripts -p 'test_*.py' -v`), and deterministic scenario/fixture evaluation (`python scripts/evaluate.py --report-dir evaluations/reports`). GitHub Actions runs all three on Ubuntu for pushes and pull requests, uploads JSON/Markdown evaluation reports, and separately runs the PowerShell installer regression suite on Windows. The CI contract is itself covered by a regression test to prevent accidental reduction to structural validation only. None of these jobs executes a live agent or calls a model provider. Keep methodology canonical and update CHANGELOG for user-visible changes.
+The local quality pipeline has distinct layers: structural and manifest validation (`python scripts/validate.py`), Python regression tests (`python -m unittest discover -s scripts -p 'test_*.py' -v`), and deterministic scenario/fixture evaluation (`python scripts/evaluate.py --report-dir evaluations/reports`). GitHub Actions runs all three on Ubuntu for pushes and pull requests, uploads JSON/Markdown evaluation reports, and separately runs the modular v2 installer regression suite on Windows. None of these jobs executes a live agent or calls a model provider. Keep methodology canonical and update CHANGELOG for user-visible changes.

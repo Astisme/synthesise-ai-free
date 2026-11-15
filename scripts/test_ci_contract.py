@@ -26,9 +26,9 @@ class WorkflowContractTests(unittest.TestCase):
             with self.subTest(required=required):
                 self.assertIn(required, self.workflow)
 
-    def test_windows_job_runs_powershell_installer_regressions(self):
+    def test_windows_job_runs_modular_v2_installer_regressions(self):
         for required in (
-            "windows-installers:",
+            "windows-v2-installer:",
             "runs-on: windows-latest",
             "shell: pwsh",
             "python -m unittest discover -s scripts -p 'test_install*.py' -v",

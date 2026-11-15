@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.0-alpha.4 — Canonical modular distribution
+
+- Make the modular architecture the single canonical product: one orchestrator and ten specialist skills.
+- Consolidate Codex and Claude Code plugin manifests at the repository root and expose all eleven skills through one `synthesise-ai-free` plugin identity.
+- Remove the separate v2 preview marketplace entries and nested plugin manifests.
+- Replace the preview installer with the canonical cross-platform `scripts/install.py` installer and its `.synthesise-v2.json` install manifest.
+- Retire the legacy monolithic installer scripts and their regression suite from active distribution.
+- Update the orchestrator, installation documentation, architecture, skill catalog and roadmap to route all new work through modular v2.
+- Keep the seven-dimension UVZ methodology, weights, formulas, scales and sensitivity-analysis rules unchanged.
+- The package version remains alpha.4; deterministic CI does not claim live Claude Code or Codex host execution.
+
+
 ## v2.0.0-beta.1-preview — Isolated distribution installer
 
 - Add a separate cross-platform Python installer for the modular v2 preview, supporting complete or individual package installation.
