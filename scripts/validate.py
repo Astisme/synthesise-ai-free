@@ -78,8 +78,10 @@ for relative in ("plugin.json", ".claude-plugin/plugin.json",
         data = json.loads(path.read_text(encoding="utf-8"))
         if relative.endswith("marketplace.json") and not data.get("plugins"):
             fail("Marketplace has no plugins: " + relative)
-        if relative.endswith("plugin.json") and data.get("name") != "synthesise-ai-free":
-            fail("Unexpected plugin name in: " + relative)
+        if relative in ("plugin.json", ".claude-plugin/plugin.json") and data.get("name") != "synthesise-ai-free":
+            fail("Unexpected stable plugin name in: " + relative)
+        if relative in ("skills/plugin.json", "skills/.claude-plugin/plugin.json") and data.get("name") != "synthesise-v2-preview":
+            fail("Unexpected v2 preview plugin name in: " + relative)
     except (json.JSONDecodeError, OSError) as exc:
         fail("Invalid manifest " + relative + ": " + str(exc))
 
@@ -109,6 +111,7 @@ for relative in required_files:
 
 json_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "plugin.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json", "skills/plugin.json", "skills/.claude-plugin/plugin.json",
     "evaluations/specialists/methodology-cases.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "evaluations/workflows/product-lifecycle.json",
