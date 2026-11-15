@@ -1,7 +1,7 @@
 {
   "baseline_version": "2.0.0-alpha.4",
   "skill_version": "2.0.0-alpha.4",
-  "source_commit": "ff1b3b664acb9e8835c3a85cabf5619d61c979f4",
+  "source_commit": "6585984e08159d4d09ea64d4403b106af1aa0ac4",
   "captured_at": "2026-11-15",
   "canonical_package_paths": [
     "skills/synthesise-orchestrator/",
@@ -16,7 +16,7 @@
     "skills/synthesise-launch/",
     "skills/synthesise-project/"
   ],
-  "canonical_file_count": 27,
+  "canonical_file_count": 28,
   "deterministic_baseline": {
     "structural_validation": "checks the complete modular package and root marketplace manifests",
     "specialist_fixtures": "deterministic authored methodology contract fixtures; not live-agent behaviour measurements",
