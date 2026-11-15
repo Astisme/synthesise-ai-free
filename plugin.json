@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "synthesise-ai-free",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-beta.1",
   "description": "The modular Synthesise AI product-development system: one orchestrator and ten specialist skills for evidence-led discovery, validation, product design and launch.",
   "author": {
     "name": "Astisme",

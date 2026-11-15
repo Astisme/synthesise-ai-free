@@ -1,6 +1,15 @@
 # Changelog
 
-## v2.0.0-alpha.4 — Canonical modular distribution
+## v2.0.0-beta.1 — Modular v2 beta
+
+- Promote the canonical eleven-skill modular plugin distribution from alpha to beta.
+- Record maintainer-reported successful end-to-end use across Claude Code and Codex Desktop, including installation, orchestrator and specialist discovery/invocation, project resume and artifact ownership.
+- Keep deterministic CI and machine-validated host evidence reports distinct; no host logs or environment metadata are represented as captured artifacts in this repository.
+- Preserve the established seven-dimension UVZ rubric, weights, formulas, scales and sensitivity-analysis rules unchanged.
+
+
+
+## v2.0.0-alpha.4 — Canonical modular distribution (superseded by beta.1)
 
 - Make the modular architecture the single canonical product: one orchestrator and ten specialist skills.
 - Consolidate Codex and Claude Code plugin manifests at the repository root and expose all eleven skills through one `synthesise-ai-free` plugin identity.
