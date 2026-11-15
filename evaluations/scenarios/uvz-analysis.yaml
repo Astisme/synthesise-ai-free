@@ -1,0 +1,32 @@
+{
+  "id": "uvz-analysis",
+  "category": "uvz",
+  "mode": "fixture",
+  "input": "Compare three digital product opportunities using the UVZ method.",
+  "expected": {
+    "required_behaviours": [
+      "Generate distinct opportunity hypotheses",
+      "Show weighted criteria and score rationale",
+      "Label unknown evidence and confidence",
+      "Run sensitivity analysis when rankings are close"
+    ],
+    "required_output_elements": [
+      "creator advantage",
+      "audience demand",
+      "distinctive mechanism",
+      "deliverability",
+      "commercial logic",
+      "weights",
+      "confidence",
+      "unknowns"
+    ],
+    "forbidden_behaviours": [
+      "Present scores as objective truth",
+      "Treat missing evidence as confirmed demand"
+    ],
+    "acceptance_criteria": [
+      "The fixture covers the required uvz behaviour"
+    ]
+  },
+  "fixture_output": "Compare creator advantage, audience demand, distinctive mechanism, deliverability, and commercial logic. Show weights, confidence, and unknowns; scores are prioritization aids, not proof of demand."
+}

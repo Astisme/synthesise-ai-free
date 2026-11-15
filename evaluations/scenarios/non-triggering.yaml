@@ -1,0 +1,27 @@
+{
+  "id": "non-triggering",
+  "category": "non-triggering",
+  "mode": "fixture",
+  "input": "Give me a simple recipe for tomato soup.",
+  "expected": {
+    "required_behaviours": [
+      "Recognize the request is unrelated to digital product development",
+      "Answer the actual request directly"
+    ],
+    "required_output_elements": [
+      "tomatoes",
+      "onion",
+      "stock",
+      "blend"
+    ],
+    "forbidden_behaviours": [
+      "Force UVZ scoring into the answer",
+      "Start creator discovery",
+      "Create a product brief"
+    ],
+    "acceptance_criteria": [
+      "The fixture covers the required non-triggering behaviour"
+    ]
+  },
+  "fixture_output": "Sauté onion, add tomatoes and stock, simmer until soft, then blend until smooth and season to taste."
+}

@@ -1,0 +1,31 @@
+{
+  "id": "product-architecture",
+  "category": "product-architecture",
+  "mode": "fixture",
+  "input": "Design a curriculum for a product that teaches a measurable transformation.",
+  "expected": {
+    "required_behaviours": [
+      "Design backward from customer transformation",
+      "Define observable learning evidence",
+      "Connect activities to outcomes",
+      "Include accessibility and support"
+    ],
+    "required_output_elements": [
+      "starting state",
+      "target state",
+      "measurable outcome",
+      "assessment",
+      "activities",
+      "deliverables",
+      "completion criteria"
+    ],
+    "forbidden_behaviours": [
+      "Optimize for content volume alone",
+      "Promise an outcome without evidence"
+    ],
+    "acceptance_criteria": [
+      "The fixture covers the required product-architecture behaviour"
+    ]
+  },
+  "fixture_output": "Starting state → target state → measurable outcome → assessment and evidence of learning → activities and content. Each module includes an observable deliverable and completion criteria."
+}

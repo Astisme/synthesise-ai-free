@@ -1,8 +1,8 @@
-name: Validate Agent Skill
+name: Validate and evaluate Synthesise
 
 on:
   push:
-    branches: [main, "v*"]
+    branches: [main, "v*", "v1.2.0-evaluation-foundation"]
   pull_request:
   workflow_dispatch:
 
@@ -10,12 +10,21 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  deterministic:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
-      - name: Validate canonical skill
+          python-version: "3.11"
+      - name: Validate canonical skill and contracts
         run: python scripts/validate.py
+      - name: Run deterministic baseline and fixture evaluation
+        run: python scripts/evaluate.py --report evaluations/reports/deterministic.json
+      - name: Upload deterministic report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthesise-deterministic-evaluation
+          path: evaluations/reports/deterministic.json
+          if-no-files-found: ignore

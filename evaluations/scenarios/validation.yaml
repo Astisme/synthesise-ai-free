@@ -1,0 +1,31 @@
+{
+  "id": "validation",
+  "category": "validation",
+  "mode": "fixture",
+  "input": "I want to build a course immediately. What should I validate first?",
+  "expected": {
+    "required_behaviours": [
+      "Identify riskiest assumptions",
+      "Choose smallest informative experiment",
+      "Predefine success and failure thresholds",
+      "Distinguish proposed experiment from completed validation"
+    ],
+    "required_output_elements": [
+      "hypothesis",
+      "segment",
+      "method",
+      "sample",
+      "timeframe",
+      "threshold",
+      "decision rule"
+    ],
+    "forbidden_behaviours": [
+      "Call an unrun experiment validated",
+      "Treat likes as proof of willingness to pay"
+    ],
+    "acceptance_criteria": [
+      "The fixture covers the required validation behaviour"
+    ]
+  },
+  "fixture_output": "Hypothesis: this segment has an urgent problem and will pay for the proposed outcome. Define segment, method, sample, timeframe, cost, success threshold, failure threshold, and decision rule. This is a proposed experiment, not validation."
+}

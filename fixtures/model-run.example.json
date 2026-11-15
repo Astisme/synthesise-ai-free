@@ -1,0 +1,21 @@
+{
+  "model": "provider/model-version",
+  "harness": "harness/version",
+  "configuration": {
+    "temperature": 0,
+    "system_prompt_version": "1.1.0"
+  },
+  "scenario_set": "1.0.0",
+  "rubric_version": "1.0.0",
+  "results": [
+    {
+      "scenario_id": "discovery",
+      "output": "Replace with the captured agent response.",
+      "scores": {
+        "methodology": 3,
+        "evidence-quality": 3,
+        "output-quality": 3
+      }
+    }
+  ]
+}

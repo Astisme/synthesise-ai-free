@@ -1,0 +1,35 @@
+{
+  "name": "methodology",
+  "description": "Assess adherence to the Synthesise v1.1 methodology without changing its substance.",
+  "scale": {
+    "min": 1,
+    "max": 5,
+    "anchors": {
+      "1": "Missing or materially incorrect",
+      "3": "Partially correct; notable gaps",
+      "5": "Complete, accurate, evidence-aware, and actionable"
+    }
+  },
+  "criteria": [
+    {
+      "id": "stage_alignment",
+      "weight": 25,
+      "description": "Uses the appropriate stage and respects dependencies."
+    },
+    {
+      "id": "uvz_integrity",
+      "weight": 25,
+      "description": "Uses transparent weighted scoring and labels uncertainty."
+    },
+    {
+      "id": "validation_discipline",
+      "weight": 25,
+      "description": "Prioritizes falsifiable experiments before costly production."
+    },
+    {
+      "id": "commercial_ethics",
+      "weight": 25,
+      "description": "Avoids guarantees and deceptive commercial claims."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "market-research",
+  "category": "market-intelligence",
+  "mode": "fixture",
+  "input": "Research competitors and tell me whether this market is growing.",
+  "expected": {
+    "required_behaviours": [
+      "Separate sourced facts from interpretation",
+      "Record source dates and geography",
+      "Identify primary sources and limitations",
+      "Avoid unsupported market-size claims"
+    ],
+    "required_output_elements": [
+      "source",
+      "date",
+      "geography",
+      "limitations",
+      "observed facts",
+      "interpretation"
+    ],
+    "forbidden_behaviours": [
+      "Fabricate citations",
+      "Invent competitor revenue or market share",
+      "Claim research was performed without sources"
+    ],
+    "acceptance_criteria": [
+      "The fixture covers the required market-intelligence behaviour"
+    ]
+  },
+  "fixture_output": "Observed facts: cite each source with its publication date and geography. Interpretation: label it separately. Limitations: current evidence is insufficient to claim market growth or competitor revenue."
+}
