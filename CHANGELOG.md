@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.0.0-alpha.4 — Orchestration integration contracts
+
+- Add eight deterministic cross-specialist scenarios covering expertise-to-charter flow, capability-gated parallel research, evidence provenance, artifact ownership, approved-decision conflicts, project resume, negative validation and launch readiness.
+- Add mutation tests that reject representative handoff, ownership, evidence, decision and readiness violations.
+- Include the integration suite in the main deterministic evaluator and repository validator.
+- Document the orchestrator's cross-specialist integration contracts and update architecture/catalog/specification status.
+- Advance modular package metadata to alpha.4.
+- Preserve the frozen v1.1.0 methodology, original seven-dimension UVZ scoring and stable v1 installation routes.
+- These are API-free deterministic state/handoff tests, not live-agent or cross-harness execution tests. Installation and real workflow acceptance remain stable-release gates.
+
 ## v2.0.0-alpha.3 — Specialist methodology depth and repository synchronization
 
 - Mark all ten specialist packages and the orchestrator as implemented in the repository preview; keep stable installation on the legacy v1.1.0 package.
