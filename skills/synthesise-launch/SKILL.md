@@ -8,7 +8,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents; research and publishing capabilities vary by harness.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Launch
@@ -42,6 +42,10 @@ Objective; audience/offer; message architecture; channel rationale; campaign cal
 - Metrics have definitions, sources and review cadence.
 - Plans, drafts and completed activities are clearly distinguished.
 - Post-launch learning loop is included.
+
+## Progressive methodology reference
+
+Load `references/go-to-market-methodology.md` whenever performing substantive launch work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 Pass launch readiness, blockers, owners, metrics and next operating cycle to Project Continuity. Do not mark a task complete without evidence.
