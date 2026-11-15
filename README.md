@@ -23,7 +23,7 @@ The system distinguishes evidence from assumptions. A score is not proof of dema
 
 The modular v2 architecture is implemented in the repository as eleven Agent Skill packages: one orchestrator and ten specialists. Each specialist has a concise `SKILL.md`, a detailed progressive-disclosure methodology reference, shared evidence/handoff requirements and deterministic methodology fixtures. The catalog and architecture document describe the current package state.
 
-**Distribution remains transitional.** The existing published installation routes and manifests continue to install the stable v1.1.0 canonical skill. The modular v2.0.0-alpha.4 package set is an explicit development preview; it is not the default plugin/marketplace installation and is not production-ready. Use the separate `scripts/install_v2_preview.py` installer for a managed preview installation. It installs alongside v1 and never replaces the stable v1 package. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
+**Distribution remains transitional.** The stable v1.1.0 plugin remains separately available. The modular v2.0.0-alpha.4 preview is now exposed as a separate `synthesise-v2-preview` entry in the Claude Code and Codex repository marketplaces, and through `scripts/install_v2_preview.py` for filesystem-based installs. The preview is not production-ready; install it explicitly and do not replace the stable v1 package. The orchestrator retains an explicitly labelled v1.1.0 methodology fallback for harnesses where a specialist is unavailable.
 
 The modular package and methodology updates do not change the frozen v1.1.0 baseline, UVZ scoring rubric or existing installation manifests.
 
@@ -96,7 +96,7 @@ mkdir -p .agents/skills
 cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
 ```
 
-For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills`. See [docs/installation.md](docs/installation.md) for preview install, upgrade, recovery and removal guidance, plus the stable harness matrix.
+For the separate modular v2 preview installer, use `python scripts/install_v2_preview.py --target .agents/skills`. See [docs/installation.md](docs/installation.md) for native preview marketplace installs, install verification, upgrade, recovery and removal guidance. See [docs/native-plugin-distribution.md](docs/native-plugin-distribution.md) for package layout and the harness smoke-test checklist.
 
 ## Use it
 
