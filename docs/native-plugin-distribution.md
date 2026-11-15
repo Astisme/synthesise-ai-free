@@ -92,3 +92,35 @@ CI does not install Claude Code or the Codex desktop application, authenticate a
 ## Methodology boundaries
 
 The modular v2 package uses the established seven-dimension UVZ scoring rubric, including its weights, formulas, scales and sensitivity-analysis rules. Changes to that methodology require an explicit, separately reviewed change. The orchestrator owns routing and coordination; specialists own their respective methodology and canonical outputs.
+
+
+## Machine-validated acceptance reports
+
+Use one report per host and installation route. Start from [the incomplete report fixture](../fixtures/host-acceptance/incomplete.example.json), copy it into a dedicated evidence directory, and replace the example host/version/OS/date values with the actual environment.
+
+The report requires eight checks:
+
+1. Marketplace refresh.
+2. Plugin installation and enablement.
+3. Orchestrator discovery.
+4. Orchestrator invocation.
+5. Specialist discovery.
+6. Specialist invocation.
+7. Project resume from a real project brief.
+8. Artifact ownership and non-overwrite behavior.
+
+For each check, set `status` to `passed`, `failed`, `blocked` or `not_run`. A passed check must reference at least one evidence file relative to the report directory, such as a redacted CLI transcript or host session log. Failed, blocked and not-run checks require explanatory notes. Do not include API keys, credentials or unnecessary customer data in evidence.
+
+Validate the report structure and evidence paths:
+
+```bash
+python scripts/validate_host_acceptance.py path/to/host-report.json
+```
+
+Enforce the complete release gate:
+
+```bash
+python scripts/validate_host_acceptance.py path/to/host-report.json --release-gate
+```
+
+The report validator checks host identity, plugin version, all eight required checks, evidence file existence and path containment. It does not run the host or manufacture evidence. The release gate passes only when every check is marked passed and backed by an evidence file. Keep one report for Claude Code and one for Codex Desktop; a successful CI run is not a substitute for either report.
