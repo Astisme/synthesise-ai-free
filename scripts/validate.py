@@ -95,7 +95,7 @@ required_files = (
     "evaluations/workflows/invalid/missing-validation-evidence.json",
     "evaluations/workflows/invalid/broken-monetization-handoff.json",
     "evaluations/workflows/invalid/decision-loss-on-resume.json",
-    "evaluations/security/security-cases.json", "evaluations/specialists/methodology-cases.json", "evaluations/integration/orchestration-scenarios.json", "docs/evidence-record.md",
+    "evaluations/security/security-cases.json", "evaluations/specialists/methodology-cases.json", "evaluations/integration/orchestration-scenarios.json", "docs/evidence-record.md", "skills/synthesise-orchestrator/references/integration-contracts.md",
     "evaluations/security/fixtures/prompt-injection.md",
     "evaluations/security/fixtures/malicious-research-document.md",
     "evaluations/security/fixtures/fabricated-citations.md",
