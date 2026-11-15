@@ -27,7 +27,7 @@ def validate_all_reports(paths: list[Path]) -> list[str]:
             errors.append(str(exc))
             continue
         host = report.get("host") if isinstance(report, dict) else None
-        if host not in ALLOWED_HOSTS:
+        if not isinstance(host, str) or host not in ALLOWED_HOSTS:
             errors.append(f"{path}: host must be one of {', '.join(sorted(ALLOWED_HOSTS))}")
             continue
         if host in seen:
