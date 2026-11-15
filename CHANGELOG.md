@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.0-beta.1-preview — Isolated distribution installer
+
+- Add a separate cross-platform Python installer for the modular v2 preview, supporting complete or individual package installation.
+- Add install-manifest tracking, duplicate identity detection, safe collision refusal, explicit forced upgrade, partial-install recovery and package removal.
+- Preserve the stable v1.1.0 package and existing native plugin/marketplace manifests and installer scripts unchanged.
+- Add regression coverage for v1 isolation, idempotence, partial recovery, collision handling, duplicate detection and removal.
+- This is a distribution preview, not a stable v2 release or proof of native harness discovery.
+
+
 ## v2.0.0-alpha.4 — Orchestration integration contracts
 
 - Add eight deterministic cross-specialist scenarios covering expertise-to-charter flow, capability-gated parallel research, evidence provenance, artifact ownership, approved-decision conflicts, project resume, negative validation and launch readiness.

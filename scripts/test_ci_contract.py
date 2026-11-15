@@ -31,7 +31,7 @@ class WorkflowContractTests(unittest.TestCase):
             "windows-installers:",
             "runs-on: windows-latest",
             "shell: pwsh",
-            "python -m unittest discover -s scripts -p 'test_install.py' -v",
+            "python -m unittest discover -s scripts -p 'test_install*.py' -v",
         ):
             with self.subTest(required=required):
                 self.assertIn(required, self.workflow)

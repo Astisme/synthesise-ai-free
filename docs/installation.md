@@ -126,3 +126,29 @@ python scripts/validate.py
 ```
 
 The validator checks the canonical skill structure and its local references.
+
+
+## Modular v2.0.0 alpha preview (separate install channel)
+
+The modular packages are available as a manual preview installation. This route does not change the native plugin/marketplace manifests or the stable v1.1.0 installer scripts.
+
+From a repository clone, install all eleven v2 packages alongside any existing v1 installation:
+
+```bash
+python scripts/install_v2_preview.py --target .agents/skills
+```
+
+Install one package only:
+
+```bash
+python scripts/install_v2_preview.py --target .agents/skills --package synthesise-orchestrator
+```
+
+The installer writes a `.synthesise-v2-preview.json` manifest, refuses unmanaged destination collisions, detects duplicate skill identities, and can resume a partial installation by rerunning the same command. A managed package at a different version requires `--force` to upgrade. Use `--remove` to remove all preview packages, or combine it with `--package` to remove one package:
+
+```bash
+python scripts/install_v2_preview.py --target .agents/skills --remove
+python scripts/install_v2_preview.py --target .agents/skills --package synthesise-orchestrator --remove
+```
+
+The preview installer is cross-platform Python and never deletes or upgrades `synthesise-ai-free/`. The original `scripts/install.sh` and `scripts/install.ps1` remain v1-only. This installer is a local file-copy mechanism; it does not register native plugins, prove that a harness discovers the skills, or enable automatic cross-skill invocation.
