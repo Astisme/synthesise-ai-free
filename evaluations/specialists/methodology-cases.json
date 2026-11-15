@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Deterministic specialist methodology contract fixtures. These describe expected invariants; they do not execute an agent or prove live model reasoning.",
+  "cases": [
+    {
+      "id": "discovery-evidence-attribution",
+      "skill_id": "synthesise-discovery",
+      "scenario": "evidence-attribution",
+      "task": "Produce an expertise record that distinguishes the creator's contribution from the team outcome and labels the result creator-reported until corroborated.",
+      "input_context": "A creator reports leading a team project with a 40% improvement but supplies no report.",
+      "expected_task": "Produce an expertise record that distinguishes the creator's contribution from the team outcome and labels the result creator-reported until corroborated.",
+      "required_invariants": [
+        "creator contribution is separated from team contribution",
+        "result status is creator-reported or unverified",
+        "missing corroboration is visible"
+      ],
+      "reject_if": [
+        "invented independent verification",
+        "causal attribution without support"
+      ]
+    },
+    {
+      "id": "discovery-tacit-method-extraction",
+      "skill_id": "synthesise-discovery",
+      "scenario": "tacit-method-extraction",
+      "task": "Use concrete incident prompts to elicit signals, diagnostic sequence, decision points, exceptions and teach-back examples.",
+      "input_context": "A consultant says they intuitively know how to diagnose onboarding failures.",
+      "expected_task": "Use concrete incident prompts to elicit signals, diagnostic sequence, decision points, exceptions and teach-back examples.",
+      "required_invariants": [
+        "method contains observable steps or explicitly unresolved tacit judgment",
+        "at least one concrete example is requested",
+        "capability is not inferred from confidence alone"
+      ],
+      "reject_if": [
+        "generic biography substituted for method",
+        "invented client outcomes"
+      ]
+    },
+    {
+      "id": "audience-behavioural-segmentation",
+      "skill_id": "synthesise-audience",
+      "scenario": "behavioural-segmentation",
+      "task": "Compare segments using situation, job, behaviour, constraints and buyer/user roles rather than demographic similarity.",
+      "input_context": "Two candidate groups share an age range but have different triggers, workarounds and buying authority.",
+      "expected_task": "Compare segments using situation, job, behaviour, constraints and buyer/user roles rather than demographic similarity.",
+      "required_invariants": [
+        "segments differ on meaningful behavioural context",
+        "user and buyer roles are explicit where distinct",
+        "segment claims have evidence labels"
+      ],
+      "reject_if": [
+        "demographic stereotypes used as segmentation"
+      ]
+    },
+    {
+      "id": "audience-purchase-intent-discipline",
+      "skill_id": "synthesise-audience",
+      "scenario": "purchase-intent-discipline",
+      "task": "Classify statements as interest, stated intent or observed commitment and recommend a discriminating next test.",
+      "input_context": "Interviewees say a proposed product sounds useful but none has paid or changed behaviour.",
+      "expected_task": "Classify statements as interest, stated intent or observed commitment and recommend a discriminating next test.",
+      "required_invariants": [
+        "interest is not reported as willingness to pay",
+        "sample and recruitment limits are recorded",
+        "next test targets the unresolved buying assumption"
+      ],
+      "reject_if": [
+        "hypothetical enthusiasm treated as purchase evidence"
+      ]
+    },
+    {
+      "id": "uvz-canonical-rubric-preservation",
+      "skill_id": "synthesise-uvz",
+      "scenario": "canonical-rubric-preservation",
+      "task": "Score only with the canonical seven dimensions and original weights, then apply the existing sensitivity trigger.",
+      "input_context": "Three opportunity hypotheses have partial evidence and a leading score within four points of the runner-up.",
+      "expected_task": "Score only with the canonical seven dimensions and original weights, then apply the existing sensitivity trigger.",
+      "required_invariants": [
+        "all seven dimensions and weights match uvz-scoring.md",
+        "formula and 1-5 scale are unchanged",
+        "uncertain inputs and sensitivity implications are explained"
+      ],
+      "reject_if": [
+        "new scoring dimension or changed weight",
+        "score presented as demand validation"
+      ]
+    },
+    {
+      "id": "uvz-evidence-sensitive-recommendation",
+      "skill_id": "synthesise-uvz",
+      "scenario": "evidence-sensitive-recommendation",
+      "task": "Explain whether the ranking is robust, identify the cheapest discriminating test and avoid score-only selection.",
+      "input_context": "The highest-scoring opportunity depends on an unverified reachability assumption; a lower-scoring candidate has stronger access evidence.",
+      "expected_task": "Explain whether the ranking is robust, identify the cheapest discriminating test and avoid score-only selection.",
+      "required_invariants": [
+        "ranking rationale includes evidence confidence",
+        "weak reachability assumption is visible",
+        "recommendation can defer selection"
+      ],
+      "reject_if": [
+        "fabricated rating",
+        "automatic selection based only on aggregate"
+      ]
+    },
+    {
+      "id": "market-intelligence-source-triangulation",
+      "skill_id": "synthesise-market-intelligence",
+      "scenario": "source-triangulation",
+      "task": "Separate provider claims from independently verified facts and record pricing scope, currency, billing basis and access date.",
+      "input_context": "A provider landing page claims market leadership and publishes a current list price; no independent performance data is found.",
+      "expected_task": "Separate provider claims from independently verified facts and record pricing scope, currency, billing basis and access date.",
+      "required_invariants": [
+        "provider claims are attributed",
+        "price is not treated as realized transaction price",
+        "market leadership is not repeated as fact without support"
+      ],
+      "reject_if": [
+        "invented market share or revenue"
+      ]
+    },
+    {
+      "id": "market-intelligence-gap-hypothesis",
+      "skill_id": "synthesise-market-intelligence",
+      "scenario": "gap-hypothesis",
+      "task": "Code recurring themes, retain counterexamples and frame a potential underserved need as a hypothesis.",
+      "input_context": "Several public reviews complain about implementation complexity, but the sample is small and self-selected.",
+      "expected_task": "Code recurring themes, retain counterexamples and frame a potential underserved need as a hypothesis.",
+      "required_invariants": [
+        "collection method and sample limitations are stated",
+        "anecdotes are not generalized to prevalence",
+        "gap has a proposed validation step"
+      ],
+      "reject_if": [
+        "review sample represented as market-wide statistic"
+      ]
+    },
+    {
+      "id": "validation-predeclared-experiment",
+      "skill_id": "synthesise-validation",
+      "scenario": "predeclared-experiment",
+      "task": "Design the experiment protocol before launch, including segment, recruitment, denominator, thresholds, stop rule and bias.",
+      "input_context": "A team wants to run a landing-page test but has not set a denominator or success threshold.",
+      "expected_task": "Design the experiment protocol before launch, including segment, recruitment, denominator, thresholds, stop rule and bias.",
+      "required_invariants": [
+        "thresholds are defined before results",
+        "qualified traffic denominator is explicit",
+        "experiment limitations and protocol are recorded"
+      ],
+      "reject_if": [
+        "post-hoc threshold changes hidden"
+      ]
+    },
+    {
+      "id": "validation-evidence-strength",
+      "skill_id": "synthesise-validation",
+      "scenario": "evidence-strength",
+      "task": "Bound the conclusion to stated interest and recommend an experiment that tests actual commitment.",
+      "input_context": "A survey shows high interest but no purchase, deposit or observed behaviour.",
+      "expected_task": "Bound the conclusion to stated interest and recommend an experiment that tests actual commitment.",
+      "required_invariants": [
+        "interest is distinguished from behavioural/payment evidence",
+        "no validated-demand claim is made",
+        "next experiment is matched to willingness-to-pay uncertainty"
+      ],
+      "reject_if": [
+        "survey enthusiasm called validated demand"
+      ]
+    },
+    {
+      "id": "product-architecture-transformation-path",
+      "skill_id": "synthesise-product-architecture",
+      "scenario": "transformation-path",
+      "task": "Rebuild the outline from starting state to observable outcome, milestones, customer actions and acceptance criteria.",
+      "input_context": "A course outline contains 18 topics but no learner actions or completion criteria.",
+      "expected_task": "Rebuild the outline from starting state to observable outcome, milestones, customer actions and acceptance criteria.",
+      "required_invariants": [
+        "each milestone has an observable output",
+        "components map to customer transformation",
+        "promise and exclusions are explicit"
+      ],
+      "reject_if": [
+        "topic volume treated as product value"
+      ]
+    },
+    {
+      "id": "product-architecture-format-selection",
+      "skill_id": "synthesise-product-architecture",
+      "scenario": "format-selection",
+      "task": "Compare formats against outcome complexity, support needs, accessibility, cost and feasibility.",
+      "input_context": "A complex workflow requires individualized feedback; a self-paced course is the creator's preferred format.",
+      "expected_task": "Compare formats against outcome complexity, support needs, accessibility, cost and feasibility.",
+      "required_invariants": [
+        "format rationale follows customer need",
+        "support burden is explicit",
+        "simpler viable alternatives are considered"
+      ],
+      "reject_if": [
+        "format chosen only by creator preference"
+      ]
+    },
+    {
+      "id": "curriculum-objective-assessment-alignment",
+      "skill_id": "synthesise-curriculum",
+      "scenario": "objective-assessment-alignment",
+      "task": "Specify observable performance, aligned practice, feedback and an assessment that elicits diagnosis.",
+      "input_context": "A module objective says learners will diagnose a problem, but assessment is a multiple-choice vocabulary quiz.",
+      "expected_task": "Specify observable performance, aligned practice, feedback and an assessment that elicits diagnosis.",
+      "required_invariants": [
+        "objective uses observable action",
+        "assessment measures the stated performance",
+        "practice and feedback support the objective"
+      ],
+      "reject_if": [
+        "attendance or recall used as proof of mastery"
+      ]
+    },
+    {
+      "id": "curriculum-remediation-and-workload",
+      "skill_id": "synthesise-curriculum",
+      "scenario": "remediation-and-workload",
+      "task": "Identify prerequisite gaps, misconceptions, remediation paths and activity-based workload estimates.",
+      "input_context": "Learners repeatedly fail a prerequisite task and report that the weekly workload is unrealistic.",
+      "expected_task": "Identify prerequisite gaps, misconceptions, remediation paths and activity-based workload estimates.",
+      "required_invariants": [
+        "remediation is actionable",
+        "workload is estimated by activity",
+        "assessment and product promise remain aligned"
+      ],
+      "reject_if": [
+        "extra content added without learning rationale"
+      ]
+    },
+    {
+      "id": "monetization-unit-economics",
+      "skill_id": "synthesise-monetization",
+      "scenario": "unit-economics",
+      "task": "Challenge recurring billing absent continuing value and model only supported unit-economics inputs with explicit assumptions.",
+      "input_context": "A creator proposes a monthly subscription for a one-time toolkit and has not estimated support or payment costs.",
+      "expected_task": "Challenge recurring billing absent continuing value and model only supported unit-economics inputs with explicit assumptions.",
+      "required_invariants": [
+        "recurring value and servicing obligations are required",
+        "revenue is distinguished from contribution/profit",
+        "missing cost inputs remain assumptions"
+      ],
+      "reject_if": [
+        "invented willingness to pay",
+        "subscription chosen without ongoing value"
+      ]
+    },
+    {
+      "id": "monetization-pricing-evidence",
+      "skill_id": "synthesise-monetization",
+      "scenario": "pricing-evidence",
+      "task": "Normalize comparisons and label the proposed price as a hypothesis pending a suitable test.",
+      "input_context": "Competitor prices are published but differ substantially in scope and support; no customer price test exists.",
+      "expected_task": "Normalize comparisons and label the proposed price as a hypothesis pending a suitable test.",
+      "required_invariants": [
+        "currency and billing basis are recorded",
+        "scope/support comparability is addressed",
+        "no price acceptance is claimed without evidence"
+      ],
+      "reject_if": [
+        "unlike offers compared as equivalent"
+      ]
+    },
+    {
+      "id": "launch-readiness-gate",
+      "skill_id": "synthesise-launch",
+      "scenario": "readiness-gate",
+      "task": "Classify readiness blockers and prevent a launch recommendation from hiding critical fulfillment risks.",
+      "input_context": "The sales page is drafted but checkout, onboarding and fulfillment have not been tested.",
+      "expected_task": "Classify readiness blockers and prevent a launch recommendation from hiding critical fulfillment risks.",
+      "required_invariants": [
+        "checkout/onboarding/fulfillment are explicit gates",
+        "blocked items have owners or next actions",
+        "plan and completed launch activity are distinguished"
+      ],
+      "reject_if": [
+        "launch declared ready without critical operations"
+      ]
+    },
+    {
+      "id": "launch-measurement-loop",
+      "skill_id": "synthesise-launch",
+      "scenario": "measurement-loop",
+      "task": "Define funnel metrics with denominators, sources, cadence and post-launch learning questions.",
+      "input_context": "A campaign reports impressions and likes but no qualified leads, purchases or customer outcomes.",
+      "expected_task": "Define funnel metrics with denominators, sources, cadence and post-launch learning questions.",
+      "required_invariants": [
+        "attention metrics are separated from commercial outcomes",
+        "metrics have definitions and owners",
+        "feedback is routed into product/audience/offer iteration"
+      ],
+      "reject_if": [
+        "reach treated as demand"
+      ]
+    },
+    {
+      "id": "project-append-only-decisions",
+      "skill_id": "synthesise-project",
+      "scenario": "append-only-decisions",
+      "task": "Preserve the earlier decision and append a superseding proposal/decision linked to new evidence and approval status.",
+      "input_context": "A new validation result contradicts an earlier approved product decision.",
+      "expected_task": "Preserve the earlier decision and append a superseding proposal/decision linked to new evidence and approval status.",
+      "required_invariants": [
+        "historical decision remains unchanged",
+        "new record references prior decision and evidence",
+        "approval state is explicit"
+      ],
+      "reject_if": [
+        "silent overwrite of approved decision"
+      ]
+    },
+    {
+      "id": "project-evidence-provenance",
+      "skill_id": "synthesise-project",
+      "scenario": "evidence-provenance",
+      "task": "Reuse the evidence ID while preserving original scope, sample, confidence and limitations in every handoff.",
+      "input_context": "One interview note is consumed by Audience, UVZ and Validation; a downstream summary omits its sample size and limitations.",
+      "expected_task": "Reuse the evidence ID while preserving original scope, sample, confidence and limitations in every handoff.",
+      "required_invariants": [
+        "evidence ID remains stable",
+        "sample and limitations are retained",
+        "reuse does not upgrade evidence strength"
+      ],
+      "reject_if": [
+        "evidence silently promoted to verified fact"
+      ]
+    }
+  ]
+}
