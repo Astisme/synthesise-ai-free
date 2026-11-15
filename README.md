@@ -27,7 +27,7 @@ The orchestrator is the default entry point. It selects only the specialists nee
 
 The seven-dimension UVZ scoring rubric remains explicit and consistent across the UVZ specialist, including its established weights, formulas, scales and sensitivity-analysis rules. The system distinguishes evidence from assumptions; a score is not proof of demand and no commercial outcome is guaranteed.
 
-The old monolithic skill and old installer routes are no longer the recommended product or distribution path. They may remain in repository history or as archived material, but the active plugin manifests and installation instructions target modular v2 only.
+The retired monolithic skill and its installer routes have been removed from the active repository tree. The active plugin manifests, evaluator baseline and installation instructions target modular v2 only.
 
 ## Install
 
