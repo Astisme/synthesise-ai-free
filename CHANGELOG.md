@@ -2,7 +2,7 @@
 
 ## v2.0.0 — Modular v2 stable release
 
-- Promote the canonical eleven-skill modular plugin distribution from alpha to beta.
+- Promote the canonical eleven-skill modular plugin distribution to the current stable `2.0.0` release.
 - Record maintainer-reported successful end-to-end use across Claude Code and Codex Desktop, including installation, orchestrator and specialist discovery/invocation, project resume and artifact ownership.
 - Keep deterministic CI and machine-validated host evidence reports distinct; no host logs or environment metadata are represented as captured artifacts in this repository.
 - Preserve the established seven-dimension UVZ rubric, weights, formulas, scales and sensitivity-analysis rules unchanged.
