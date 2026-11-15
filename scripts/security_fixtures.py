@@ -24,11 +24,14 @@ def _safe_fixture_path(root: Path, relative: Any) -> tuple[Path | None, str | No
     """Resolve a fixture only when it remains inside the configured repository root."""
     if not _nonempty_string(relative):
         return None, "fixture path must be a non-empty relative path"
-    candidate = Path(relative)
-    if candidate.is_absolute():
-        return None, "fixture path must be relative to the repository root"
-    resolved_root = root.resolve()
-    resolved = (resolved_root / candidate).resolve()
+    try:
+        candidate = Path(relative)
+        if candidate.is_absolute():
+            return None, "fixture path must be relative to the repository root"
+        resolved_root = root.resolve()
+        resolved = (resolved_root / candidate).resolve()
+    except (OSError, RuntimeError, ValueError) as exc:
+        return None, f"fixture path cannot be resolved: {exc}"
     if not resolved.is_relative_to(resolved_root):
         return None, "fixture path escapes the repository root"
     return resolved, None
