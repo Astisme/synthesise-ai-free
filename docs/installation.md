@@ -68,14 +68,14 @@ For compatible agents that use a skills directory, clone the repository and inst
 ```bash
 git clone https://github.com/Astisme/synthesise-ai-free.git
 cd synthesise-ai-free
-python scripts/install_v2_preview.py --target .agents/skills
-python scripts/install_v2_preview.py --target .agents/skills --verify
+python scripts/install.py --target .agents/skills
+python scripts/install.py --target .agents/skills --verify
 ```
 
-The installer filename and internal manifest name retain historical preview wording, but the installed package set is the canonical modular v2 system. The installer supports individual packages, safe collision refusal, explicit forced replacement, recovery of partial installs, read-only verification and removal. See the command help with:
+The installer installs the canonical modular v2 package and records it in `.synthesise-v2.json`. The installer supports individual packages, safe collision refusal, explicit forced replacement, recovery of partial installs, read-only verification and removal. See the command help with:
 
 ```bash
-python scripts/install_v2_preview.py --help
+python scripts/install.py --help
 ```
 
 ## Package layout
@@ -87,7 +87,7 @@ The canonical plugin manifests live at the repository root:
 - `.agents/plugins/marketplace.json` — Codex repository marketplace catalog.
 - `.claude-plugin/marketplace.json` — Claude Code marketplace catalog.
 
-Both plugin manifests enumerate the orchestrator and all ten specialists. The nested `skills/` preview manifests have been retired; do not register `skills/` as a separate plugin root.
+Both plugin manifests enumerate the orchestrator and all ten specialists. There are no nested plugin manifests; do not register `skills/` as a separate plugin root.
 
 ## Verification and host acceptance
 
