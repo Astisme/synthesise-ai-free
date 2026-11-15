@@ -2,7 +2,7 @@
 
 An independent, open-source modular Agent Skill system for turning expertise into a researched, validated and launch-ready digital product.
 
-**Canonical architecture:** modular v2 · **Current package version:** 2.0.0-alpha.4 · MIT
+**Canonical architecture:** modular v2 · **Current package version:** 2.0.0-beta.1 · MIT
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
@@ -136,7 +136,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 
 ## Next milestones
 
-- **v2.0.0 beta:** complete live Claude Code and Codex Desktop installation/discovery/invocation acceptance; verify end-to-end project resume and artifact ownership in real host sessions.
+- **v2.0.0 beta:** functionally accepted by the maintainer across Claude Code and Codex Desktop, including installation, discovery, invocation, project resume and artifact ownership. CI remains contract-level and does not contain captured host-session logs.
 - **v2.0.0 release candidate:** add repeatable cross-harness smoke tests and migration-safe project fixtures; publish a release checklist with explicit evidence for each supported host.
 - **v2.1:** prototype the local-first product-development workbench described in [the workbench architecture proposal](docs/v2.1-workbench-architecture.md), keeping the modular skill packages as the canonical methodology source.
 
