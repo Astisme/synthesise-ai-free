@@ -1,0 +1,6 @@
+{
+  "id": "product-promise-boundary",
+  "skill": "synthesise-product-architecture",
+  "input": {"validation": "exploratory interviews only", "promise": "guaranteed revenue growth"},
+  "expected": {"unsupported_guarantee_rejected": true, "promise_narrowed_to_evidence": true, "exclusions_and_prerequisites_present": true}
+}
