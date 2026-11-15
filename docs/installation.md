@@ -106,7 +106,7 @@ bash scripts/install.sh --target .agents/skills
 Windows PowerShell:
 
 ```powershell
-.\scripts\install.ps1 -Target .agents\skills
+.\\scripts\\install.ps1 -Target .agents\\skills
 ```
 
 These scripts do not register marketplaces or manage updates. Pull the latest repository and rerun the installer to refresh the copied files. Use `--force` (Bash) or `-Force` (PowerShell) to replace an existing installation. The Bash and PowerShell copy, overwrite-protection and forced-update behaviours are covered by automated regression tests in CI.
@@ -118,7 +118,6 @@ python scripts/validate.py
 ```
 
 The validator checks the canonical skill structure and its local references.
-
 
 ## Modular v2.0.0 alpha preview (separate install channel)
 
@@ -136,6 +135,15 @@ Install one package only:
 python scripts/install_v2_preview.py --target .agents/skills --package synthesise-orchestrator
 ```
 
+Verify a complete installation, or one selected package, without modifying the target:
+
+```bash
+python scripts/install_v2_preview.py --target .agents/skills --verify
+python scripts/install_v2_preview.py --target .agents/skills --package synthesise-orchestrator --verify
+```
+
+Verification checks the install manifest, tracked package directories, skill identities and installed versions. Full verification also rejects untracked v2 package directories and duplicate skill identities. It is read-only and does not inspect or modify the stable v1 package.
+
 The installer writes a `.synthesise-v2-preview.json` manifest, refuses unmanaged destination collisions, detects duplicate skill identities, and can resume a partial installation by rerunning the same command. A managed package at a different version requires `--force` to upgrade. Use `--remove` to remove all preview packages, or combine it with `--package` to remove one package:
 
 ```bash
@@ -144,7 +152,6 @@ python scripts/install_v2_preview.py --target .agents/skills --package synthesis
 ```
 
 The preview installer is cross-platform Python and never deletes or upgrades `synthesise-ai-free/`. The original `scripts/install.sh` and `scripts/install.ps1` remain v1-only. This installer is a local file-copy mechanism; it does not register native plugins, prove that a harness discovers the skills, or enable automatic cross-skill invocation.
-
 
 ## Native modular v2 preview packages
 
