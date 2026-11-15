@@ -59,7 +59,7 @@ required_files = (
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
     "scripts/workflow_integrity.py", "scripts/test_workflow_integrity.py",
-    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py",
+    "scripts/security_fixtures.py", "scripts/test_security_fixtures.py", "scripts/test_install.py",
     "evaluations/workflows/product-lifecycle.json",
     "evaluations/workflows/continuity/resume-preserves-decisions.json",
     "evaluations/workflows/invalid/missing-validation-evidence.json",
