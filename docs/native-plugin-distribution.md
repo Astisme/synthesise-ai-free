@@ -1,10 +1,10 @@
 # Native plugin distribution — canonical modular v2
 
 **Plugin identity:** `synthesise-ai-free`  
-**Package version:** `2.0.0-beta.1`  
+**Package version:** `2.0.0`  
 **Distribution:** one root plugin for Codex-compatible and Claude Code marketplaces.
 
-The modular architecture is the canonical product. The marketplace does not expose a separate legacy monolith or a preview-only alternative. The beta is functionally accepted by maintainer report across Claude Code and Codex Desktop. Deterministic CI remains distinct from captured host evidence; this repository does not claim to contain raw host-session logs.
+The modular architecture is the canonical product. The marketplace does not expose a separate legacy monolith or a preview-only alternative. The stable v2.0.0 release is functionally accepted by maintainer report across Claude Code and Codex Desktop. Deterministic CI remains distinct from captured host evidence; this repository does not claim to contain raw host-session logs.
 
 ## Package layout
 
