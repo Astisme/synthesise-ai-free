@@ -8,7 +8,7 @@ license: MIT
 compatibility: Agent Skills-compatible agents with authorized project filesystem access; otherwise provide templates and recovery guidance.
 metadata:
   author: astisme
-  version: "2.0.0-alpha.2"
+  version: "2.0.0-alpha.3"
 ---
 
 # Synthesise Project Continuity
@@ -54,6 +54,10 @@ Use `templates/PROJECT-BRIEF.md`, `templates/DECISIONS.md` and `templates/PROJEC
 - No file is claimed created/updated unless the authorized filesystem action succeeded.
 - Paths are portable; no hidden persistence assumption is made.
 - Conflicts and missing files are surfaced.
+
+## Progressive methodology reference
+
+Load `references/project-state-and-continuity-methodology.md` whenever performing substantive project work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
 
 ## Handoff
 Return recovered state, files inspected/updated, conflicts, decisions requiring approval and next recommended specialist. If filesystem access is unavailable, provide templates and ask the user to place them in the project; do not claim persistence.
