@@ -1,65 +1,128 @@
 # Installation
 
-The canonical Agent Skill is in skills/synthesise-ai-free/SKILL.md. Keep its supporting folders alongside it.
+Synthesise AI Free has one canonical skill package at `skills/synthesise-ai-free/`. Installation follows the per-agent approach used by mature skill repositories: use each harness's native plugin/marketplace mechanism where available, and use the Skills CLI as a portable fallback.
 
-## Vercel Skills CLI (recommended)
+**Choose one installation route per agent.** Do not install both the native plugin and the standalone skill into the same agent, or the skill may appear twice.
 
-    npx skills add astisme/synthesise-ai-free
+## Claude Code — native plugin marketplace
 
-Select a target explicitly:
+```bash
+claude plugin marketplace add Astisme/synthesise-ai-free
+claude plugin install synthesise-ai-free@synthesise-ai-free
+```
 
-    npx skills add astisme/synthesise-ai-free --agent codex
-    npx skills add astisme/synthesise-ai-free --agent claude-code
-    npx skills add astisme/synthesise-ai-free --agent cursor
-    npx skills add astisme/synthesise-ai-free --agent github-copilot
-    npx skills add astisme/synthesise-ai-free --agent gemini-cli
-    npx skills add astisme/synthesise-ai-free --agent opencode
-    npx skills add astisme/synthesise-ai-free --agent cline
-    npx skills add astisme/synthesise-ai-free --agent roo
-    npx skills add astisme/synthesise-ai-free --agent openhands
+Or run `/plugin marketplace add Astisme/synthesise-ai-free` and then `/plugin install synthesise-ai-free@synthesise-ai-free` inside a Claude Code session.
 
-Agent identifiers and supported targets can change; check npx skills add --help if an identifier is rejected. Global installation depends on the harness.
+Manage it with `claude plugin list`, `claude plugin update synthesise-ai-free@synthesise-ai-free`, and `claude plugin uninstall synthesise-ai-free@synthesise-ai-free`. The plugin marketplace manifest lives in `.claude-plugin/marketplace.json`.
 
-## Harness notes
+## OpenAI Codex — native plugin marketplace
 
-| Harness | Recommended route | Notes |
+```bash
+codex plugin marketplace add Astisme/synthesise-ai-free
+codex plugin add synthesise-ai-free@synthesise-ai-free
+```
+
+Refresh marketplace metadata with `codex plugin marketplace upgrade`; inspect installations with `codex plugin list`. The Codex marketplace catalog is `.agents/plugins/marketplace.json`, and the portable plugin manifest is at the repository root in `plugin.json`.
+
+## GitHub Copilot CLI — native plugin marketplace
+
+```bash
+copilot plugin marketplace add Astisme/synthesise-ai-free
+copilot plugin install synthesise-ai-free@synthesise-ai-free
+```
+
+Update with `copilot plugin update synthesise-ai-free`. Inspect with `copilot plugin list`. Supported VS Code surfaces can also install plugins from a marketplace or source through their plugin UI. Copilot reads the portable root `plugin.json` and the marketplace catalog in `.claude-plugin/marketplace.json`.
+
+## Gemini CLI — native skill install
+
+```bash
+gemini skills install https://github.com/Astisme/synthesise-ai-free.git --path skills/synthesise-ai-free
+```
+
+Run the same command again to update the skill.
+
+## Skills CLI — other compatible agents
+
+For Cursor, OpenCode, Windsurf, and other agents supported by the Vercel Skills CLI:
+
+```bash
+npx skills@latest add Astisme/synthesise-ai-free -a cursor
+```
+
+Replace `cursor` with the relevant agent identifier. Omit `-a` to choose interactively. Agent identifiers and support evolve; check `npx skills@latest add --help` for the current list.
+
+Update installed skills with:
+
+```bash
+npx skills@latest update
+```
+
+Re-run `add` to select newly published skills. If a target is not supported by the CLI, use the manual fallback below.
+
+## Harness compatibility matrix
+
+| Harness | Preferred route | Update approach |
 |---|---|---|
-| OpenAI Codex | Skills CLI --agent codex | Project-local or global discovery, depending on setup. |
-| Claude Code | Skills CLI --agent claude-code | Keep all reference folders. |
-| Claude Desktop | Uploadable skill archive, where supported | Archive the complete skill folder, not only SKILL.md. Desktop UI and archive support may vary by release. |
-| Cursor | Skills CLI --agent cursor | Project scope is useful for repository work. |
-| GitHub Copilot | Skills CLI --agent github-copilot | Confirm the specific Copilot surface supports skills. |
-| Gemini CLI | Skills CLI --agent gemini-cli | Keep relative paths intact. |
-| OpenCode | Skills CLI --agent opencode | Reload session after installation. |
-| Cline | Skills CLI --agent cline | Manual fallback if CLI target is unavailable. |
-| Roo Code | Skills CLI --agent roo | Verify identifier against current CLI help. |
-| OpenHands | Skills CLI --agent openhands | Support depends on deployment. |
-| Windsurf | Manual fallback | Native skills support may vary by version. |
-| Other Markdown agents | Universal fallback | Any agent that can read Markdown can use the package. |
+| OpenAI Codex | Native plugin marketplace | `codex plugin marketplace upgrade`; inspect plugin updates in Codex |
+| Claude Code | Native plugin marketplace | `claude plugin update synthesise-ai-free@synthesise-ai-free` |
+| Claude Desktop | Upload complete skill archive where supported | Re-import updated archive |
+| Cursor | Skills CLI | `npx skills@latest update` |
+| GitHub Copilot CLI | Native plugin marketplace | `copilot plugin update synthesise-ai-free` |
+| Gemini CLI | Native skill install | Re-run `gemini skills install` |
+| OpenCode | Skills CLI | `npx skills@latest update` |
+| Cline | Skills CLI if supported; otherwise manual fallback | Re-run relevant installer / replace copied folder |
+| Roo Code | Skills CLI if supported; otherwise manual fallback | Re-run relevant installer / replace copied folder |
+| OpenHands | Skills CLI if supported; otherwise manual fallback | Re-run relevant installer / replace copied folder |
+| Windsurf | Skills CLI if supported; otherwise manual fallback | Re-run relevant installer / replace copied folder |
+| Other Markdown agents | Manual fallback | Pull latest files and copy skill directory |
 
-These are installation targets, not a guarantee of identical loading behaviour in every product version. Check current harness documentation for version-specific paths.
+This matrix describes intended distribution routes, not a guarantee that every release of each harness has identical feature support. Verify current harness documentation and CLI help before installing.
+
+## Claude Desktop uploadable package
+
+For Claude Desktop versions that support uploaded skills, create an archive containing the complete `skills/synthesise-ai-free/` folder. Preserve `SKILL.md`, `references/`, `workflows/`, `templates/` and `examples/`. Import it through the skill-management interface offered by your version of Claude Desktop. If skill upload is unavailable, use Claude Code or another compatible agent.
 
 ## Manual universal installation
 
-    mkdir -p .agents/skills
-    cp -R skills/synthesise-ai-free .agents/skills/
+For any agent that reads Markdown skills, clone the repository and copy the complete canonical skill directory into its documented skills folder:
 
-Copy the entire folder to the agent's documented skills directory. Preserve references, workflows and templates.
+```bash
+git clone https://github.com/Astisme/synthesise-ai-free.git
+mkdir -p .agents/skills
+cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
+```
 
-## Installer scripts
+The expected result is:
 
-From repository root:
+```text
+.agents/skills/synthesise-ai-free/
+├── SKILL.md
+├── references/
+├── workflows/
+├── templates/
+└── examples/
+```
 
-    bash scripts/install.sh --target .agents/skills
+## Repository installer scripts
+
+The repository also includes simple copy-based installers for environments where the user wants an explicit local install rather than a plugin marketplace:
+
+```bash
+bash scripts/install.sh --target .agents/skills
+```
 
 Windows PowerShell:
 
-    .\scripts\install.ps1 -Target .agents\skills
+```powershell
+.\scripts\install.ps1 -Target .agents\skills
+```
 
-## Claude Desktop archive
-
-Create an archive containing a folder named synthesise-ai-free with SKILL.md and all supporting directories. Import it only through the skill-management interface offered by the current Desktop version. If unavailable, use another supported Agent Skills client. Uploading only SKILL.md loses progressive-disclosure references.
+These scripts do not register marketplaces or manage updates. Pull the latest repository and rerun the installer to refresh the copied files. Use `--force` (Bash) or `-Force` (PowerShell) to replace an existing installation.
 
 ## Verify
 
-    python scripts/validate.py
+```bash
+python scripts/validate.py
+```
+
+The validator checks the canonical skill structure and its local references.
