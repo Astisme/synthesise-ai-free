@@ -3,7 +3,7 @@ name: synthesise-uvz
 description: >
   Generate, compare and rank Unique Value Zone opportunity hypotheses at the
   intersection of creator advantage, audience demand, differentiation,
-  deliverability and commercial logic. Preserves the v1.1.0 weighted scoring
+  deliverability and commercial logic. Preserves the established weighted scoring
   method. Use when selecting or revisiting a product opportunity.
 license: MIT
 compatibility: Agent Skills-compatible agents; supporting scoring reference is canonical.
@@ -18,7 +18,7 @@ Generate a small portfolio of distinct opportunity hypotheses and compare them t
 
 ## Methodology preservation — mandatory
 
-This package extracts the canonical v1.1.0 UVZ methodology. The weights, 1–5 ratings, formula, interpretation bands, treatment of unknown evidence, confidence explanation and sensitivity-analysis rules must not drift without a separately approved methodology change.
+This package extracts the canonical UVZ scoring methodology. The weights, 1–5 ratings, formula, interpretation bands, treatment of unknown evidence, confidence explanation and sensitivity-analysis rules must not drift without a separately approved methodology change.
 
 Use `references/uvz-scoring.md` as the scoring source of truth and `examples/uvz-example.md` for the expected reasoning format.
 
@@ -67,7 +67,7 @@ Include:
 
 ## Progressive methodology reference
 
-Load `references/uvz-advanced-methodology.md` whenever performing substantive uvz work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the frozen v1.1.0 methodology.
+Load `references/uvz-advanced-methodology.md` whenever performing substantive uvz work. Use it to deepen the procedure, decision criteria and quality review; keep this `SKILL.md` as the concise entry point. The reference is additive and does not supersede shared contracts, approved decisions or the established UVZ methodology.
 
 ## Shared evidence and handoff contract
 
