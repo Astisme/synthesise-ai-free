@@ -8,7 +8,7 @@
 
 The existing repository-root plugin remains the stable v1.1.0 package:
 
-- `plugin.json` — stable Codex-compatible plugin manifest
+- `plugin.json` — stable Codex-compatible plugin manifest, now explicitly scoped to `./skills/synthesise-ai-free` so it cannot also expose v2 preview skills
 - `.claude-plugin/plugin.json` — stable Claude Code plugin manifest
 - `skills/synthesise-ai-free/` — canonical v1.1.0 skill
 
