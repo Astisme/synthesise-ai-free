@@ -1,6 +1,6 @@
 # Synthesise v2.0 Skill Catalog
 
-**Status:** v2.0.0-alpha.3 modular preview. All eleven packages (one orchestrator and ten specialists) are present in this revision. Structural validation and deterministic contract fixtures cover package metadata, local references and specialist methodology depth. This is not a stable or default installation release.  
+**Status:** v2.0.0-alpha.4 modular preview. All eleven packages (one orchestrator and ten specialists) are present in this revision. Structural validation and deterministic contract fixtures cover package metadata, local references and specialist methodology depth and eight cross-specialist orchestration scenarios. This is not a stable or default installation release.  
 **Default entry point:** `synthesise-orchestrator`
 
 ## Package conventions
@@ -92,6 +92,10 @@ The catalog describes the packages present in this revision. Package presence do
 - **Inputs:** project root; existing brief, decisions, status, evidence and artifact files; current specialist handoff.
 - **Outputs:** synchronized portable project brief, append-only decision entries, status/milestone updates, artifact inventory and recovery report.
 - **Quality:** never silently rewrite approved decisions; detect conflicts and missing files; keep paths portable; preserve provenance and unresolved questions.
+
+## Orchestration integration
+
+The orchestrator reference [integration contracts](../skills/synthesise-orchestrator/references/integration-contracts.md) defines eight deterministic cross-specialist scenarios. They validate state/handoff invariants, not live agent execution.
 
 ## Shared evidence record
 
