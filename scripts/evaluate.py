@@ -72,6 +72,57 @@ def validate_schema(value, schema, path="$"):
     return errors
 
 
+def validate_scenarios(scenario_dir: Path):
+    """Validate scenario contracts and authored fixture markers without executing agents."""
+    scenario_files = sorted(scenario_dir.glob("*.yaml"))
+    scenario_ids, fixture_failures = set(), []
+    for path in scenario_files:
+        try:
+            scenario = load_json(path)
+            if not isinstance(scenario, dict):
+                raise TypeError("scenario root must be an object")
+            scenario_id = scenario["id"]
+            if not isinstance(scenario_id, str) or not scenario_id.strip():
+                raise TypeError("scenario id must be a non-empty string")
+            if scenario_id in scenario_ids:
+                fixture_failures.append(f"{path.name}: duplicate id {scenario_id}")
+            scenario_ids.add(scenario_id)
+            expected = scenario["expected"]
+            if not isinstance(expected, dict):
+                raise TypeError("expected must be an object")
+            conversation = scenario.get("input_conversation", [])
+            if not isinstance(conversation, list) or not conversation or not all(
+                isinstance(message, dict) and message.get("role") and message.get("content")
+                for message in conversation
+            ):
+                fixture_failures.append(f"{scenario_id}: input_conversation must contain role/content messages")
+            regression = scenario.get("regression_status", {})
+            if not isinstance(regression, dict) or regression.get("introduced_in") != "1.2.0" or regression.get("mode") != "fixture-only":
+                fixture_failures.append(f"{scenario_id}: regression_status must identify the 1.2.0 fixture-only baseline")
+            fixture_output = scenario.get("fixture_output")
+            if not isinstance(fixture_output, str) or not fixture_output:
+                fixture_failures.append(f"{scenario_id}: input and fixture_output are required")
+                fixture = ""
+            else:
+                fixture = fixture_output.casefold()
+            for key in ("required_behaviours", "required_output_elements",
+                        "forbidden_behaviours", "acceptance_criteria"):
+                values = expected.get(key)
+                if not isinstance(values, list) or not values or not all(isinstance(v, str) for v in values):
+                    fixture_failures.append(f"{scenario_id}: expected.{key} must be a non-empty list of strings")
+            for phrase in expected.get("required_output_elements", []):
+                if isinstance(phrase, str) and phrase.casefold() not in fixture:
+                    fixture_failures.append(f"{scenario_id}: fixture missing required marker {phrase!r}")
+            for phrase in expected.get("forbidden_behaviours", []):
+                if isinstance(phrase, str) and phrase.casefold() in fixture:
+                    fixture_failures.append(f"{scenario_id}: fixture contains forbidden marker {phrase!r}")
+            if not scenario.get("input") or not fixture_output:
+                fixture_failures.append(f"{scenario_id}: input and fixture_output are required")
+        except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
+            fixture_failures.append(f"{path.name}: {exc}")
+    return scenario_ids, fixture_failures
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--report", type=Path, help="Write machine-readable report JSON (legacy option)")
@@ -176,37 +227,7 @@ def main():
     except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
         check("security_untrusted_content_and_provenance", False, str(exc))
 
-    scenario_files = sorted(SCENARIOS.glob("*.yaml"))
-    scenario_ids, fixture_failures = set(), []
-    for path in scenario_files:
-        try:
-            scenario = load_json(path)
-            scenario_id = scenario["id"]
-            if scenario_id in scenario_ids:
-                fixture_failures.append(f"{path.name}: duplicate id {scenario_id}")
-            scenario_ids.add(scenario_id)
-            expected = scenario["expected"]
-            conversation = scenario.get("input_conversation", [])
-            regression = scenario.get("regression_status", {})
-            if not conversation or not all(message.get("role") and message.get("content") for message in conversation):
-                fixture_failures.append(f"{scenario_id}: input_conversation must contain role/content messages")
-            if regression.get("introduced_in") != "1.2.0" or regression.get("mode") != "fixture-only":
-                fixture_failures.append(f"{scenario_id}: regression_status must identify the 1.2.0 fixture-only baseline")
-            fixture = scenario["fixture_output"].casefold()
-            for phrase in expected["required_output_elements"]:
-                if phrase.casefold() not in fixture:
-                    fixture_failures.append(f"{scenario_id}: fixture missing required marker {phrase!r}")
-            for phrase in expected["forbidden_behaviours"]:
-                if phrase.casefold() in fixture:
-                    fixture_failures.append(f"{scenario_id}: fixture contains forbidden marker {phrase!r}")
-            for key in ("required_behaviours", "required_output_elements",
-                        "forbidden_behaviours", "acceptance_criteria"):
-                if not isinstance(expected.get(key), list) or not expected[key]:
-                    fixture_failures.append(f"{scenario_id}: expected.{key} must be a non-empty list")
-            if not scenario.get("input") or not scenario.get("fixture_output"):
-                fixture_failures.append(f"{scenario_id}: input and fixture_output are required")
-        except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
-            fixture_failures.append(f"{path.name}: {exc}")
+    scenario_ids, fixture_failures = validate_scenarios(SCENARIOS)
     required = {"discovery", "uvz-analysis", "market-research", "validation",
                 "product-architecture", "monetization", "project-continuity",
                 "security-prompt-injection", "non-triggering"}

@@ -137,6 +137,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 - v1.2.1 — Deterministic QA: parse real PROJECT-BRIEF.md examples, validate extracted sections and publish reproducible JSON/Markdown reports.
 - v1.2.2 — Workflow integrity: test deterministic handoffs from discovery through monetization and preserve project decisions on resume.
 - v1.2.3 — Security hardening: test prompt injection, malicious research documents, fabricated citations and untrusted instructions.
+- v1.2.4 — CI and quality gate completion: harden evaluator input validation and regression-test malformed scenarios, duplicate IDs, baseline-file failures and schema edge cases; keep CI reports and artifacts mandatory.
 - v1.3.0 — Optional live model evaluation: only when explicitly enabled and credentials/budget are available. No provider SDK or API key is required by v1.2.x.
 
 ### Workflow integrity fixtures

@@ -39,3 +39,9 @@
 - Add deterministic checks for trust labels, handling controls, claim-state separation and verified provenance requirements for observed claims.
 - Add negative tests for trusted promotion, missing controls and unverified citations.
 - Security fixtures are never executed; no network calls, API keys or external scanners are required.
+
+## Unreleased — v1.2.4 CI and quality gate completion
+
+- Harden deterministic scenario validation against malformed JSON, non-object roots, duplicate/empty IDs and invalid contract field types.
+- Add evaluator infrastructure unit tests for valid and malformed scenarios, duplicate IDs, missing baseline inputs and schema type edge cases.
+- Keep the existing dependency-free CI pipeline, JSON/Markdown reports and artifact upload; no methodology or canonical skill files are changed.
