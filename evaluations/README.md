@@ -33,3 +33,6 @@ See schemas/model-run.schema.json and fixtures/model-run.example.json. Scores ar
 ## Regression metadata
 
 Every scenario stores a role/content input conversation and a regression_status object. The v1.2.0 scenarios are fixture-only because v1.1.0 did not have captured live-agent outputs; they must not be presented as historical behavioural regressions.
+
+
+The CI model-evaluator smoke test uses an authored sample capture only. It validates the report pipeline and does not execute a model or agent.
