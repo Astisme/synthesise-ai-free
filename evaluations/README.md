@@ -36,3 +36,15 @@ Every scenario stores a role/content input conversation and a regression_status 
 
 
 The CI model-evaluator smoke test uses an authored sample capture only. It validates the report pipeline and does not execute a model or agent.
+
+## v1.2.x API-free execution policy
+
+The v1.2.1, v1.2.2 and v1.2.3 milestones are local/CI-only. They use Python's standard library and controlled fixtures. No model provider SDK, credentials, network calls or paid infrastructure are part of these milestones. v1.3.0 may add explicitly opt-in live Claude/GPT/Gemini evaluation; that is a separate capability and must not be required by ordinary CI.
+
+Run the complete local QA pipeline:
+
+    python scripts/validate.py
+    python -m unittest discover -s scripts -p 'test_*.py' -v
+    python scripts/evaluate.py --report-dir evaluations/reports
+
+The evaluator writes evaluations/reports/deterministic.json and deterministic.md. Reports state that no live agent behaviour was tested and no API calls were made.

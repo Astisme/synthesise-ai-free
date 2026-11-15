@@ -1,0 +1,62 @@
+{
+  "fixture_version": "1.0.0",
+  "before": {
+    "project_id": "proj-01",
+    "status": "validation",
+    "decisions": [
+      {
+        "id": "dec-01",
+        "date": "2026-11-10",
+        "decision": "Focus on independent course creators",
+        "rationale": "Discovery interviews identified this segment",
+        "status": "confirmed"
+      },
+      {
+        "id": "dec-02",
+        "date": "2026-11-12",
+        "decision": "Test a guided channel audit",
+        "rationale": "It maps to demonstrated dashboard capability",
+        "status": "confirmed"
+      }
+    ],
+    "open_questions": [
+      "What support level is required?"
+    ],
+    "next_actions": [
+      "Complete five paid-pilot conversations"
+    ]
+  },
+  "after": {
+    "project_id": "proj-01",
+    "status": "architecture",
+    "decisions": [
+      {
+        "id": "dec-01",
+        "date": "2026-11-10",
+        "decision": "Focus on independent course creators",
+        "rationale": "Discovery interviews identified this segment",
+        "status": "confirmed"
+      },
+      {
+        "id": "dec-02",
+        "date": "2026-11-12",
+        "decision": "Test a guided channel audit",
+        "rationale": "It maps to demonstrated dashboard capability",
+        "status": "confirmed"
+      },
+      {
+        "id": "dec-03",
+        "date": "2026-11-15",
+        "decision": "Draft the product charter",
+        "rationale": "Pilot evidence supports a scoped promise",
+        "status": "confirmed"
+      }
+    ],
+    "open_questions": [
+      "What support level is required?"
+    ],
+    "next_actions": [
+      "Draft the curriculum"
+    ]
+  }
+}

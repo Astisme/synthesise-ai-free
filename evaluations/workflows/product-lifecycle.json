@@ -1,0 +1,88 @@
+{
+  "fixture_version": "1.0.0",
+  "description": "Controlled, deterministic handoff fixture. IDs represent provenance links between workflow stages; it does not simulate or score an LLM.",
+  "stages": {
+    "discovery": {
+      "audience_id": "aud-01",
+      "audience": "Independent course creators",
+      "problem_id": "prob-01",
+      "problem": "Cannot identify acquisition channels producing paying customers",
+      "capability_ids": [
+        "cap-01"
+      ],
+      "evidence_ids": [
+        "ev-01"
+      ],
+      "constraints": [
+        "Six hours per week"
+      ]
+    },
+    "uvz": {
+      "opportunity_id": "opp-01",
+      "audience_id": "aud-01",
+      "problem_id": "prob-01",
+      "creator_capability_ids": [
+        "cap-01"
+      ],
+      "evidence_ids": [
+        "ev-01"
+      ],
+      "unknowns": [
+        "Willingness to pay at target price"
+      ]
+    },
+    "validation": {
+      "opportunity_id": "opp-01",
+      "hypothesis_id": "hyp-01",
+      "hypothesis": "Creators will pay for a guided channel audit",
+      "method": "Paid pilot interviews",
+      "success_threshold": "At least three paid pilot commitments",
+      "failure_threshold": "Zero paid commitments after ten qualified conversations",
+      "status": "completed",
+      "evidence_ids": [
+        "pilot-01"
+      ]
+    },
+    "charter": {
+      "product_id": "prod-01",
+      "opportunity_id": "opp-01",
+      "audience_id": "aud-01",
+      "promise_id": "promise-01",
+      "promise": "Identify the acquisition channel most likely to produce paying customers",
+      "promise_status": "validated",
+      "evidence_ids": [
+        "pilot-01"
+      ]
+    },
+    "curriculum": {
+      "product_id": "prod-01",
+      "modules": [
+        {
+          "id": "mod-01",
+          "supports_promise_id": "promise-01",
+          "learning_outcome": "Map acquisition channels to paying-customer outcomes",
+          "assessment": "Complete a channel attribution worksheet",
+          "deliverable": "Channel evidence map"
+        },
+        {
+          "id": "mod-02",
+          "supports_promise_id": "promise-01",
+          "learning_outcome": "Select a channel based on contribution evidence",
+          "assessment": "Defend a channel decision against alternatives",
+          "deliverable": "Prioritized channel decision"
+        }
+      ]
+    },
+    "monetization": {
+      "product_id": "prod-01",
+      "audience_id": "aud-01",
+      "offer_promise_id": "promise-01",
+      "pricing_status": "hypothesis",
+      "price_hypothesis": "Fixed-price guided audit",
+      "assumptions": [
+        "Target buyers value facilitated interpretation"
+      ],
+      "revenue_guarantee": false
+    }
+  }
+}

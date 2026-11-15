@@ -12,6 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from project_brief import ProjectBriefError, parse_project_brief
+from workflow_integrity import validate_product_lifecycle, validate_project_resume
+from security_fixtures import validate_security_suite
+
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "evaluations/baseline/v1.1.0.json"
 CHECKSUMS = ROOT / "evaluations/baseline/checksums.json"
@@ -69,7 +74,8 @@ def validate_schema(value, schema, path="$"):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--report", type=Path, help="Write machine-readable report JSON")
+    parser.add_argument("--report", type=Path, help="Write machine-readable report JSON (legacy option)")
+    parser.add_argument("--report-dir", type=Path, default=ROOT / "evaluations/reports", help="Directory for deterministic JSON and Markdown reports")
     args = parser.parse_args()
     checks, failures = [], []
 
@@ -110,6 +116,65 @@ def main():
               model_errors or "Captured model-run fixture conforms")
     except (OSError, json.JSONDecodeError) as exc:
         check("project_brief_schema_fixture", False, str(exc))
+
+    # Parse real Markdown project briefs, then validate extracted sections against the schema.
+    try:
+        schema = load_json(SCHEMA)
+        valid_briefs = sorted((ROOT / "fixtures/projects").glob("**/PROJECT-BRIEF.md"))
+        valid_briefs = [path for path in valid_briefs if "invalid" not in path.parts]
+        brief_results = []
+        for path in valid_briefs:
+            try:
+                extracted = parse_project_brief(path.read_text(encoding="utf-8"))
+                schema_errors = validate_schema(extracted, schema)
+                brief_results.append({"path": str(path.relative_to(ROOT)), "status": "passed" if not schema_errors else "failed", "errors": schema_errors})
+            except (OSError, ProjectBriefError) as exc:
+                brief_results.append({"path": str(path.relative_to(ROOT)), "status": "failed", "errors": [str(exc)]})
+        invalid_briefs = sorted((ROOT / "fixtures/projects/invalid").glob("*.md"))
+        negative_results = []
+        for path in invalid_briefs:
+            try:
+                parse_project_brief(path.read_text(encoding="utf-8"))
+                negative_results.append({"path": str(path.relative_to(ROOT)), "status": "failed", "errors": ["Invalid fixture was accepted"]})
+            except ProjectBriefError:
+                negative_results.append({"path": str(path.relative_to(ROOT)), "status": "passed", "errors": []})
+        check("markdown_project_brief_parsing_and_schema", bool(brief_results) and all(item["status"] == "passed" for item in brief_results),
+              brief_results or "No valid Markdown project brief fixtures found")
+        check("invalid_project_brief_rejection", bool(negative_results) and all(item["status"] == "passed" for item in negative_results),
+              negative_results or "No invalid Markdown project brief fixtures found")
+    except (OSError, json.JSONDecodeError) as exc:
+        check("markdown_project_brief_parsing_and_schema", False, str(exc))
+
+    # Verify deterministic handoffs and project-resume invariants using controlled fixtures.
+    workflow_dir = ROOT / "evaluations/workflows"
+    try:
+        lifecycle = load_json(workflow_dir / "product-lifecycle.json")
+        lifecycle_errors = validate_product_lifecycle(lifecycle)
+        check("product_lifecycle_handoffs", not lifecycle_errors,
+              lifecycle_errors or "Discovery → UVZ → validation → charter → curriculum → monetization handoffs are intact")
+        continuity = load_json(workflow_dir / "continuity/resume-preserves-decisions.json")
+        continuity_errors = validate_project_resume(continuity)
+        check("project_resume_preserves_decisions", not continuity_errors,
+              continuity_errors or "Prior decisions and unresolved questions are preserved")
+        negative_cases = [
+            ("invalid/missing-validation-evidence.json", validate_product_lifecycle, "invalid_validation_handoff_rejected"),
+            ("invalid/broken-monetization-handoff.json", validate_product_lifecycle, "invalid_monetization_handoff_rejected"),
+            ("invalid/decision-loss-on-resume.json", validate_project_resume, "decision_loss_on_resume_rejected"),
+        ]
+        for relative, validator, name in negative_cases:
+            errors = validator(load_json(workflow_dir / relative))
+            check(name, bool(errors), errors or "Invalid handoff was unexpectedly accepted")
+    except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
+        check("product_workflow_integrity", False, str(exc))
+
+    # Check adversarial documents as untrusted data and enforce source-provenance contracts.
+    try:
+        security_suite = load_json(ROOT / "evaluations/security/security-cases.json")
+        security_errors = validate_security_suite(security_suite)
+        check("security_untrusted_content_and_provenance", not security_errors,
+              security_errors or "Prompt injection, malicious research, fabricated citations and quoted instructions remain untrusted")
+    except (OSError, KeyError, json.JSONDecodeError, TypeError) as exc:
+        check("security_untrusted_content_and_provenance", False, str(exc))
 
     scenario_files = sorted(SCENARIOS.glob("*.yaml"))
     scenario_ids, fixture_failures = set(), []
@@ -152,7 +217,8 @@ def main():
 
     report = {
         "evaluation_version": "1.0.0",
-        "evaluation_type": "deterministic-fixture-and-baseline",
+        "evaluation_type": "deterministic-fixture-baseline-and-markdown-briefs",
+        "api_calls_made": False,
         "live_agent_behaviour_tested": False,
         "skill_version": baseline.get("skill_version", "unknown"),
         "baseline_commit": baseline.get("source_commit", "unknown"),
@@ -163,10 +229,32 @@ def main():
         "failures": failures
     }
     rendered = json.dumps(report, indent=2) + "\n"
-    print(rendered, end="")
+    markdown = [
+        "# Synthesise deterministic QA report", "",
+        f"- Evaluation version: {report['evaluation_version']}",
+        f"- Skill version: {report['skill_version']}",
+        f"- Baseline commit: {report['baseline_commit']}",
+        f"- Date: {report['evaluation_date']}",
+        "- Live agent behaviour tested: no",
+        "- API calls made: no", "",
+        f"## Result: {'PASS' if not failures else 'FAIL'}", "",
+        f"- Checks passed: {report['results']['passed']}",
+        f"- Checks failed: {len(failures)}", "",
+        "| Check | Status | Details |", "|---|---|---|"
+    ]
+    for item in checks:
+        detail = json.dumps(item["detail"], ensure_ascii=False).replace("|", "\\|").replace("\n", " ")
+        markdown.append(f"| {item['name']} | {item['status'].upper()} | {detail} |")
+    markdown.extend(["", "## Failures", ""])
+    markdown.extend([f"- {name}" for name in failures] or ["None."])
+    markdown.append("")
+    args.report_dir.mkdir(parents=True, exist_ok=True)
+    (args.report_dir / "deterministic.json").write_text(rendered, encoding="utf-8")
+    (args.report_dir / "deterministic.md").write_text("\n".join(markdown), encoding="utf-8")
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(rendered, encoding="utf-8")
+    print(rendered, end="")
     return 1 if failures else 0
 
 
