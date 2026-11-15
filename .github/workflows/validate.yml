@@ -33,13 +33,13 @@ jobs:
             evaluations/reports/deterministic.md
           if-no-files-found: error
 
-  windows-installers:
+  windows-v2-installer:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run PowerShell installer regression tests
+      - name: Run modular v2 installer regression tests
         shell: pwsh
         run: python -m unittest discover -s scripts -p 'test_install*.py' -v
