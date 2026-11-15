@@ -1,0 +1,6 @@
+{
+  "id": "curriculum-backward-design",
+  "skill": "synthesise-curriculum",
+  "input": {"outcome": "publish a tested landing page", "draft_modules": ["research", "copy", "build", "test"]},
+  "expected": {"outcomes_precede_content": true, "assessment_evidence_defined": true, "practice_and_feedback_mapped": true, "modules_support_product_promise": true}
+}
