@@ -112,7 +112,7 @@ The structural validator checks all eleven modular skill packages, root plugin m
 
 GitHub Actions runs two jobs on pushes and pull requests: (1) Ubuntu runs `python scripts/validate.py`, the complete `python -m unittest discover -s scripts -p 'test_*.py' -v` suite, and `python scripts/evaluate.py --report-dir evaluations/reports`, then uploads the deterministic JSON/Markdown reports; (2) Windows runs the modular v2 installer regression suite with `python -m unittest discover -s scripts -p 'test_install_v2.py' -v`. The workflow contract itself is regression-tested so these checks cannot silently disappear while README coverage claims remain. These checks use no API keys or live model calls.
 
-Live Claude Code and Codex Desktop acceptance is recorded separately from CI. Use `fixtures/host-acceptance/incomplete.example.json` and validate completed evidence reports with `python scripts/validate_host_acceptance.py report.json --release-gate`. See [the native-host acceptance procedure](docs/native-plugin-distribution.md#machine-validated-acceptance-reports).
+Live Claude Code and Codex Desktop acceptance is recorded separately from CI. Create one evidence report per host from `fixtures/host-acceptance/incomplete.example.json`. The dual-host release gate is `python scripts/validate_all_host_acceptance.py evidence/claude-code/report.json evidence/codex-desktop/report.json`; it requires all eight checks to pass with evidence on both hosts. See [the native-host acceptance procedure](docs/native-plugin-distribution.md#machine-validated-acceptance-reports).
 
 ## Shared evidence provenance
 

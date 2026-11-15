@@ -87,7 +87,7 @@ if (ROOT / "skills" / "plugin.json").exists() or (ROOT / "skills" / ".claude-plu
 
 required_files = (
     "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/host-acceptance.schema.json",
-    "scripts/validate_host_acceptance.py", "scripts/test_host_acceptance.py", "fixtures/host-acceptance/incomplete.example.json",
+    "scripts/validate_host_acceptance.py", "scripts/test_host_acceptance.py", "scripts/validate_all_host_acceptance.py", "scripts/test_all_host_acceptance.py", "fixtures/host-acceptance/incomplete.example.json",
     "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
