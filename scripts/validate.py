@@ -86,7 +86,8 @@ if (ROOT / "skills" / "plugin.json").exists() or (ROOT / "skills" / ".claude-plu
     fail("Nested plugin manifests must not remain after canonical v2 consolidation")
 
 required_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/host-acceptance.schema.json",
+    "scripts/validate_host_acceptance.py", "scripts/test_host_acceptance.py", "fixtures/host-acceptance/incomplete.example.json",
     "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
     "fixtures/projects/minimal-project-brief.json", "fixtures/model-run.example.json",
     "scripts/project_brief.py", "scripts/test_project_brief.py",
@@ -111,7 +112,8 @@ for relative in required_files:
         fail("Missing evaluation contract file: " + relative)
 
 json_files = (
-    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json",
+    "schemas/project-brief.schema.json", "schemas/model-run.schema.json", "schemas/evidence-record.schema.json", "schemas/host-acceptance.schema.json",
+    "fixtures/host-acceptance/incomplete.example.json",
     "evaluations/baseline/v2.0.0-alpha.4.json", "evaluations/baseline/checksums.json",
     "plugin.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json",
     "evaluations/specialists/methodology-cases.json",
