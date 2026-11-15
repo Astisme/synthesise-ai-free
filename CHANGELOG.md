@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.0-alpha.1 — Orchestrator implementation preview
+
+- Add the first modular package, `synthesise-orchestrator`, with guided/direct/resume modes, minimal-skill routing, dependency-aware planning, progressive disclosure, honest cross-harness loading fallbacks and project continuity rules.
+- Add routing, dependency, orchestration protocol and quality-gate references plus worked routing examples.
+- Add structural validator coverage and unit tests for package metadata, progressive-disclosure links, legacy fallback honesty, parallel-execution constraints and handoff fields.
+- Preserve the canonical v1.1.0 skill, frozen methodology baseline, existing installers and current plugin manifests.
+- This is a development preview, not a complete modular distribution: specialist packages and installer/marketplace integration are not included.
+
 ## v1.2.0 — Evaluation foundation (merged to main)
 
 - Freeze the v1.1.0 canonical skill using Git blob SHA-1 checksums anchored to the merged v1.1.0 commit.

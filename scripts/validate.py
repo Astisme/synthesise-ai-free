@@ -39,6 +39,35 @@ for folder in ("references", "workflows", "templates", "examples"):
     if not (SKILL_DIR / folder).is_dir():
         fail("Missing directory: " + folder)
 
+
+# Validate the first modular v2 orchestrator package without changing the frozen v1.1 skill.
+ORCHESTRATOR_DIR = ROOT / "skills" / "synthesise-orchestrator"
+ORCHESTRATOR = ORCHESTRATOR_DIR / "SKILL.md"
+if not ORCHESTRATOR.is_file():
+    fail("Missing skills/synthesise-orchestrator/SKILL.md")
+else:
+    orchestrator_content = ORCHESTRATOR.read_text(encoding="utf-8")
+    if not orchestrator_content.startswith("---\n") or orchestrator_content.count("---") < 2:
+        fail("Orchestrator SKILL.md must start with terminated YAML frontmatter")
+    else:
+        orchestrator_frontmatter = orchestrator_content.split("---", 2)[1]
+        for key in ("name:", "description:", "license:", "compatibility:"):
+            if not re.search(r"(?m)^" + re.escape(key), orchestrator_frontmatter):
+                fail("Orchestrator frontmatter missing " + key[:-1])
+        if not re.search(r"(?m)^name:\s*synthesise-orchestrator\s*$", orchestrator_frontmatter):
+            fail("Orchestrator frontmatter name must be synthesise-orchestrator")
+    for heading in ("Operating contract", "Modes", "Execution protocol",
+                    "Migration-era package availability", "Project continuity", "Completion response"):
+        if "## " + heading not in orchestrator_content:
+            fail("Orchestrator SKILL.md missing section: " + heading)
+    for ref in re.findall(r"(?:references|workflows|templates|examples)/[A-Za-z0-9_./-]+\.md", orchestrator_content):
+        if not (ORCHESTRATOR_DIR / ref).is_file():
+            fail("Broken orchestrator reference: " + ref)
+
+for folder in ("references", "examples"):
+    if not (ORCHESTRATOR_DIR / folder).is_dir():
+        fail("Missing orchestrator directory: " + folder)
+
 for relative in ("plugin.json", ".claude-plugin/plugin.json",
                  ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json"):
     path = ROOT / relative
