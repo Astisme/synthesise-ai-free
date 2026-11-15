@@ -1,0 +1,20 @@
+{
+  "name": "synthesise-ai-free",
+  "interface": {
+    "displayName": "Synthesise AI Free"
+  },
+  "plugins": [
+    {
+      "name": "synthesise-ai-free",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Astisme/synthesise-ai-free"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
