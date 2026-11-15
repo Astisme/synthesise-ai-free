@@ -2,7 +2,7 @@
 
 An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-**Stable methodology:** v1.1.0 · **Deterministic QA:** v1.2.x · **Modular preview:** v2.0.0-alpha.3 · MIT
+**Stable methodology:** v1.1.0 · **Deterministic QA:** v1.2.x · **Modular preview:** v2.0.0-alpha.4 · MIT
 
 Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
@@ -153,6 +153,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE
 - v1.2.5 — Installation and update regression tests: exercise Bash and PowerShell installers on their native CI platforms, including overwrite protection, forced updates and complete skill copies.
 - v1.2.6 — Security and research provenance hardening: reject malformed security contracts and fixture path escapes; require auditable verification metadata for observed claims.
 - v1.3.0 — Local-first product development workbench: architecture proposal published before implementation; see [the v1.3.0 workbench architecture proposal](docs/v1.3-workbench-architecture.md). Live model evaluation remains an optional, separately gated future capability and is not part of required CI.
+
+### Modular orchestration integration
+
+The v2.0.0-alpha.4 preview adds eight deterministic cross-specialist scenarios: expertise-to-charter lifecycle, capability-gated parallel research, evidence provenance, artifact ownership, approved-decision conflicts, project resume, negative validation and launch readiness. Mutation tests verify that representative contract violations are rejected. These tests validate portable handoff/state invariants; they do not invoke agents or prove live cross-harness execution.
 
 ### Workflow integrity fixtures
 
