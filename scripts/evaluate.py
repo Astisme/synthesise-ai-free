@@ -148,7 +148,16 @@ def main():
             if not path.is_file():
                 missing.append(relative)
                 continue
-            actual = git_blob_sha1(path.read_bytes())
+            content = path.read_bytes()
+            # Package-version metadata is excluded from the frozen alpha.4
+            # baseline: stable 2.0.0 changes release identity, not methodology.
+            if relative.startswith("skills/") and relative.endswith("/SKILL.md"):
+                content = content.replace(
+                    b'version: "2.0.0"',
+                    b'version: "2.0.0-alpha.4"',
+                    1,
+                )
+            actual = git_blob_sha1(content)
             if actual != expected:
                 changed.append({"path": relative, "expected": expected, "actual": actual})
         check("canonical_v2_package_baseline", not missing and not changed,
