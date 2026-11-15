@@ -1,101 +1,108 @@
 # Synthesise AI Free
 
-An open-source, universal AI Agent Skill for turning expertise
-and knowledge into structured digital products.
+An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-Inspired by the publicly described product creation approach
-of [Synthesise AI](https://synthesise.ai/).
+**v1.1.0** · MIT · Canonical skill: \`skills/synthesise-ai-free/\`
+
+Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
 ## What it does
 
-Synthesise AI Free guides creators through:
+1. **Discovery engine** — extract capabilities, experience, proof, assets and constraints.
+2. **UVZ engine** — generate, compare and rank opportunities with transparent weighted scoring.
+3. **Market intelligence** — research customers, competitors, alternatives, positioning and unmet needs.
+4. **Validation engine** — design experiments, pre-sales and paid pilots with explicit decision thresholds.
+5. **Product architect** — generate product charters, curricula, workbooks, templates and delivery plans.
+6. **Commercial strategist** — design positioning, pricing hypotheses, tiers, offers and unit economics.
+7. **Launch strategist** — produce landing-page strategy, campaigns, roadmaps and metrics.
+8. **Project memory** — maintain a portable \`PROJECT-BRIEF.md\` across sessions and harnesses.
 
-1. Expertise discovery
-2. Audience and problem research
-3. Unique Value Zone (UVZ) synthesis
-4. Opportunity validation
-5. Product architecture
-6. Product charter generation
-7. Monetization and packaging
-8. Launch planning
+The system distinguishes evidence from assumptions. A score is not proof of demand, and no commercial outcome is guaranteed.
 
-## Installation
+## Install
 
-Clone the repository:
+Recommended:
 
-```bash
+\`\`\`bash
+npx skills add astisme/synthesise-ai-free
+\`\`\`
+
+Select a harness:
+
+\`\`\`bash
+npx skills add astisme/synthesise-ai-free --agent codex
+npx skills add astisme/synthesise-ai-free --agent claude-code
+npx skills add astisme/synthesise-ai-free --agent cursor
+npx skills add astisme/synthesise-ai-free --agent github-copilot
+npx skills add astisme/synthesise-ai-free --agent gemini-cli
+npx skills add astisme/synthesise-ai-free --agent opencode
+\`\`\`
+
+See [docs/installation.md](docs/installation.md) for Claude Desktop, Cline, Roo Code, OpenHands, Windsurf and manual installation. Agent identifiers and native support can change; check CLI help and current harness documentation.
+
+Manual installation:
+
+\`\`\`bash
 git clone https://github.com/astisme/synthesise-ai-free.git
-```
+cd synthesise-ai-free
+bash scripts/install.sh
+\`\`\`
 
-Copy the skill directory into an agent's skills directory.
+Windows PowerShell:
 
-For example, in an environment using the `.agents/skills` convention:
+\`\`\`powershell
+.\\scripts\\install.ps1
+\`\`\`
 
-```bash
-mkdir -p .agents/skills
-cp -R synthesise-ai-free .agents/skills/
-```
+## Use it
 
-Alternatively, install it globally in an agent's supported
-skills directory.
+- Help me discover my expertise and strongest proof.
+- Generate and rank five UVZ opportunities for this audience.
+- Research competitors and alternatives for this product.
+- Design a validation experiment before I build.
+- Create a complete product charter and course curriculum.
+- Build my pricing tiers and unit economics assumptions.
+- Create a launch plan and landing-page structure.
+- Continue this project from PROJECT-BRIEF.md.
 
-The exact installation path depends on the agent.
-
-## Usage
-
-Ask your agent:
-
-- Help me turn my expertise into a digital product.
-- Discover my Unique Value Zone.
-- Identify problems my audience would pay to solve.
-- Build a complete product charter.
-- Design a transformational online course.
-- Validate this product opportunity.
-- Create a pricing and launch strategy.
+You can start at any stage; a full engagement does not require restarting discovery.
 
 ## Repository structure
 
-```text
-synthesise-ai-free/
+\`\`\`text
+skills/synthesise-ai-free/
 ├── SKILL.md
-├── README.md
-├── LICENSE
 ├── references/
 ├── workflows/
+├── templates/
 └── examples/
-```
+docs/
+scripts/
+.github/workflows/
+\`\`\`
 
-## Design philosophy
+## Validate
 
-The skill uses progressive disclosure.
+Requires Python 3; no third-party dependencies:
 
-`SKILL.md` defines the agent's identity, operating principles
-and core workflow. Supporting documents provide deeper
-methodology and implementation guidance.
+\`\`\`bash
+python scripts/validate.py
+\`\`\`
 
-It distinguishes hypotheses from validated evidence and
-does not promise commercial success.
+GitHub Actions runs the same check on pushes and pull requests.
 
-## Inspiration and independence
+## Project memory
 
-This project is an independent open-source implementation.
+For ongoing work, ask the agent to create/update a \`PROJECT-BRIEF.md\` in your project. It stores audience, evidence, UVZ ranking, decisions, product architecture, commercial assumptions and next actions in portable Markdown. Keep secrets and unnecessary personal data out.
 
-It is inspired by the publicly described concepts on
-https://synthesise.ai/, including the intersection of expertise
-and audience needs (Unique Value Zone) and the generation
-of structured product charters.
+## Design principles
 
-It is not affiliated with, endorsed by or an official release
-of Synthesise AI. It does not reproduce proprietary software,
-private prompts, source code or internal algorithms.
+Evidence before assumptions. Customer outcomes before content volume. Validation before major production investment. Transparent scoring and uncertainty. One canonical skill, multiple compatible harnesses. Ethical marketing and realistic promises.
 
-## Contributing
+## Independence
 
-Contributions are welcome.
+This is an independent open-source implementation inspired by publicly described concepts. It does not reproduce proprietary software, private prompts, source code or internal algorithms and is not an official Synthesise AI release.
 
-Please submit improvements to methodologies, examples,
-validation processes and product architecture.
+## Contributing and license
 
-## License
-
-MIT. See LICENSE.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).
