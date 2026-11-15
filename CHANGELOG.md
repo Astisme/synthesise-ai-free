@@ -6,5 +6,5 @@
 - Added transparent UVZ scoring, market intelligence and research protocol.
 - Added validation, product architecture, curriculum, workbook, commercial and launch workflows.
 - Added portable PROJECT-BRIEF.md methodology.
-- Added installation guidance, shell and PowerShell installers, and structural validator.
+- Added native Claude Code, Codex and GitHub Copilot plugin manifests/marketplaces; Gemini CLI and Skills CLI install routes; shell and PowerShell fallback installers; and manifest-aware structural validation.
 - Added GitHub Actions validation, architecture, methodology, FAQ and contribution guidance.
