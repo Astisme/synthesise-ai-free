@@ -108,7 +108,7 @@ def validate_security_case(case: dict, root: Path = ROOT) -> list[str]:
             errors.append(f"{claim_label} text must be a non-empty string")
 
         state = claim.get("status")
-        if state not in VALID_CLAIM_STATES:
+        if not isinstance(state, str) or state not in VALID_CLAIM_STATES:
             errors.append(f"{claim_label} has invalid claim status {state!r}")
 
         sources = claim.get("sources", [])
