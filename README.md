@@ -1,101 +1,130 @@
 # Synthesise AI Free
 
-An open-source, universal AI Agent Skill for turning expertise
-and knowledge into structured digital products.
+An independent, open-source Agent Skill for turning expertise into a researched, validated and launch-ready digital product.
 
-Inspired by the publicly described product creation approach
-of [Synthesise AI](https://synthesise.ai/).
+**v1.1.0** · MIT · Canonical skill: `skills/synthesise-ai-free/`
+
+Inspired by publicly described product-development concepts, including the Unique Value Zone. This project is not affiliated with or endorsed by Synthesise AI.
 
 ## What it does
 
-Synthesise AI Free guides creators through:
+1. **Discovery engine** — extract capabilities, experience, proof, assets and constraints.
+2. **UVZ engine** — generate, compare and rank opportunities with transparent weighted scoring.
+3. **Market intelligence** — research customers, competitors, alternatives, positioning and unmet needs.
+4. **Validation engine** — design experiments, pre-sales and paid pilots with explicit decision thresholds.
+5. **Product architect** — generate product charters, curricula, workbooks, templates and delivery plans.
+6. **Commercial strategist** — design positioning, pricing hypotheses, tiers, offers and unit economics.
+7. **Launch strategist** — produce landing-page strategy, campaigns, roadmaps and metrics.
+8. **Project memory** — maintain a portable `PROJECT-BRIEF.md` across sessions and harnesses.
 
-1. Expertise discovery
-2. Audience and problem research
-3. Unique Value Zone (UVZ) synthesis
-4. Opportunity validation
-5. Product architecture
-6. Product charter generation
-7. Monetization and packaging
-8. Launch planning
+The system distinguishes evidence from assumptions. A score is not proof of demand, and no commercial outcome is guaranteed.
 
-## Installation
+## Install
 
-Clone the repository:
+Choose **one installation route per agent**. Native plugins provide marketplace-based installation and update flows. The standalone Agent Skill route is available for agents that use the Skills CLI. Installing both into the same agent may create duplicate skills.
+
+### Claude Code
 
 ```bash
-git clone https://github.com/astisme/synthesise-ai-free.git
+claude plugin marketplace add Astisme/synthesise-ai-free
+claude plugin install synthesise-ai-free@synthesise-ai-free
 ```
 
-Copy the skill directory into an agent's skills directory.
+Update from the plugin manager or refresh the marketplace and reinstall/update the plugin. You can also open `/plugin` to browse and manage it.
 
-For example, in an environment using the `.agents/skills` convention:
+### OpenAI Codex
 
 ```bash
+codex plugin marketplace add Astisme/synthesise-ai-free
+codex plugin add synthesise-ai-free@synthesise-ai-free
+```
+
+Use `codex plugin marketplace upgrade` to refresh marketplace metadata and `codex plugin list` to inspect installed plugins. The plugin is packaged with the canonical skill under `skills/`.
+
+### GitHub Copilot CLI
+
+```bash
+copilot plugin marketplace add Astisme/synthesise-ai-free
+copilot plugin install synthesise-ai-free@synthesise-ai-free
+```
+
+Use `copilot plugin update synthesise-ai-free` to update. In supported VS Code surfaces, use the plugin marketplace / install-from-source UI.
+
+### Gemini CLI
+
+```bash
+gemini skills install https://github.com/Astisme/synthesise-ai-free.git --path skills/synthesise-ai-free
+```
+
+Re-run the command to update the installed skill.
+
+### Other Agent Skills-compatible agents
+
+Use the Vercel Skills CLI for Cursor, OpenCode, Windsurf, and other supported agents:
+
+```bash
+npx skills@latest add Astisme/synthesise-ai-free -a cursor
+```
+
+Replace `cursor` with the agent identifier supported by your installed Skills CLI. Omit `-a` to choose interactively. Check `npx skills@latest add --help` for the current supported agent list.
+
+Update installed skills with:
+
+```bash
+npx skills@latest update
+```
+
+Re-run `add` when you want to select newly added skills from the repository.
+
+### Claude Desktop and manual fallback
+
+For Claude Desktop versions that support uploaded skills, package the complete `skills/synthesise-ai-free/` directory (including its references, workflows and templates) as an archive and import it through the skill interface.
+
+For any Markdown-capable agent, clone the repository and copy the canonical folder into its documented skills directory:
+
+```bash
+git clone https://github.com/Astisme/synthesise-ai-free.git
 mkdir -p .agents/skills
-cp -R synthesise-ai-free .agents/skills/
+cp -R synthesise-ai-free/skills/synthesise-ai-free .agents/skills/
 ```
 
-Alternatively, install it globally in an agent's supported
-skills directory.
+See [docs/installation.md](docs/installation.md) for the full harness matrix, update guidance and Windows instructions.
 
-The exact installation path depends on the agent.
+## Use it
 
-## Usage
+- Help me discover my expertise and strongest proof.
+- Generate and rank five UVZ opportunities for this audience.
+- Research competitors and alternatives for this product.
+- Design a validation experiment before I build.
+- Create a complete product charter and course curriculum.
+- Build my pricing tiers and unit economics assumptions.
+- Create a launch plan and landing-page structure.
+- Continue this project from PROJECT-BRIEF.md.
 
-Ask your agent:
+You can start at any stage; a full engagement does not require restarting discovery.
 
-- Help me turn my expertise into a digital product.
-- Discover my Unique Value Zone.
-- Identify problems my audience would pay to solve.
-- Build a complete product charter.
-- Design a transformational online course.
-- Validate this product opportunity.
-- Create a pricing and launch strategy.
+## Validate
 
-## Repository structure
+Requires Python 3; no third-party dependencies:
 
-```text
-synthesise-ai-free/
-├── SKILL.md
-├── README.md
-├── LICENSE
-├── references/
-├── workflows/
-└── examples/
+```bash
+python scripts/validate.py
 ```
 
-## Design philosophy
+GitHub Actions runs the same check on pushes and pull requests.
 
-The skill uses progressive disclosure.
+## Project memory
 
-`SKILL.md` defines the agent's identity, operating principles
-and core workflow. Supporting documents provide deeper
-methodology and implementation guidance.
+For ongoing work, ask the agent to create/update a `PROJECT-BRIEF.md` in your project. It stores audience, evidence, UVZ ranking, decisions, product architecture, commercial assumptions and next actions in portable Markdown. Keep secrets and unnecessary personal data out.
 
-It distinguishes hypotheses from validated evidence and
-does not promise commercial success.
+## Design principles
 
-## Inspiration and independence
+Evidence before assumptions. Customer outcomes before content volume. Validation before major production investment. Transparent scoring and uncertainty. One canonical skill, multiple compatible harnesses. Ethical marketing and realistic promises.
 
-This project is an independent open-source implementation.
+## Independence
 
-It is inspired by the publicly described concepts on
-https://synthesise.ai/, including the intersection of expertise
-and audience needs (Unique Value Zone) and the generation
-of structured product charters.
+This is an independent open-source implementation inspired by publicly described concepts. It does not reproduce proprietary software, private prompts, source code or internal algorithms and is not an official Synthesise AI release.
 
-It is not affiliated with, endorsed by or an official release
-of Synthesise AI. It does not reproduce proprietary software,
-private prompts, source code or internal algorithms.
+## Contributing and license
 
-## Contributing
-
-Contributions are welcome.
-
-Please submit improvements to methodologies, examples,
-validation processes and product architecture.
-
-## License
-
-MIT. See LICENSE.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).

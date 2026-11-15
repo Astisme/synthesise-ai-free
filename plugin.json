@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "synthesise-ai-free",
+  "version": "1.1.0",
+  "description": "An evidence-led end-to-end system for discovering, validating, architecting, pricing and launching digital products.",
+  "author": {
+    "name": "Astisme",
+    "url": "https://github.com/Astisme"
+  },
+  "homepage": "https://github.com/Astisme/synthesise-ai-free",
+  "repository": "https://github.com/Astisme/synthesise-ai-free",
+  "license": "MIT",
+  "keywords": ["product-development", "discovery", "UVZ", "validation", "market-research", "digital-products"],
+  "skills": "./skills/"
+}
