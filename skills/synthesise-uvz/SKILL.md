@@ -9,7 +9,6 @@ license: MIT
 compatibility: Agent Skills-compatible agents; supporting scoring reference is canonical.
 metadata:
   author: astisme
-  version: "2.0.0"
 ---
 
 # Synthesise UVZ
